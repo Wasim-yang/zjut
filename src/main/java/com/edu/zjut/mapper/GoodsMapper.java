@@ -14,7 +14,7 @@ public interface GoodsMapper {
     @Insert("insert into Goods(gname,gcost,gnumber,gean,gdescription,gimage) VALUES (#{name},#{cost},#{number},#{ean},#{description},#{Filepath})")
     int insert(String name, float cost , int number , int ean ,String description ,String Filepath);
 
-    @Select("select gid id,gname name,gcost cost,gnumber number,gean ean,gdescription description from Goods")
+    @Select("select gid id,gname name,gcost cost,gnumber number,gean ean,gdescription description,gimage path from Goods")
     ArrayList<Goods> select();
 
     @Delete("delete from Goods where gid=#{id}")
