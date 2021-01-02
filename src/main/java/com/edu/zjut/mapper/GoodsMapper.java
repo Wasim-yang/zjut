@@ -12,7 +12,8 @@ import java.util.ArrayList;
 @Repository
 public interface GoodsMapper {
     @Insert("insert into Goods(gname,gcost,gnumber,gean,gdescription,gimage) VALUES (#{name},#{cost},#{number},#{ean},#{description},#{Filepath})")
-    int insert(String name, float cost , int number , int ean ,String description ,String Filepath);
+    int insert(@Param("name") String name,@Param("cost") float cost ,@Param("number")int number ,@Param("ean") int ean ,
+               @Param("description") String description ,@Param("Filepath") String Filepath);
 
     @Select("select gid id,gname name,gcost cost,gnumber number,gean ean,gdescription description,gimage path from Goods")
     ArrayList<Goods> select();
@@ -21,5 +22,6 @@ public interface GoodsMapper {
     int delete(int id);
 
     @Update("update Goods set gname=#{name}, gcost=#{cost}, gnumber=#{number}, gdescription=#{description} where gid=#{id}")
-    int update(int id, String name, float cost , int number , int ean ,String description);
+    int update(@Param("id") int id,@Param("name") String name,@Param("cost") float cost ,@Param("number") int number ,
+               @Param("ean") int ean ,@Param("description") String description);
 }

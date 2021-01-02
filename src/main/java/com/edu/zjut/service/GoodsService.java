@@ -1,22 +1,14 @@
 package com.edu.zjut.service;
 
-
 import com.edu.zjut.entity.Goods;
 import com.edu.zjut.entity.Res;
 import com.edu.zjut.mapper.GoodsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ClassUtils;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-import java.io.IOException;
-import java.sql.Blob;
+
 import java.util.ArrayList;
-import java.util.List;
+
 
 @Service
 public class GoodsService {

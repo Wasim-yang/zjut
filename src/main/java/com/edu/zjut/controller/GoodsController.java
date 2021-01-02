@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 public class GoodsController {
     GoodsService goodsService;
+
     @Autowired
     public void setGoodsService(GoodsService goodsService) {
         this.goodsService = goodsService;
@@ -33,6 +34,7 @@ public class GoodsController {
     public Res delete(int id){
         return goodsService.delete(id);
     }
+
     @RequestMapping(path = "/goods/update")
     public Res update(int id, String name, float cost , int number , int ean ,String description){
         return goodsService.update( id, name,cost,number,ean,description);
