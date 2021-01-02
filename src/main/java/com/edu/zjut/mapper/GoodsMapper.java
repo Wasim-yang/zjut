@@ -4,7 +4,6 @@ import com.edu.zjut.entity.Goods;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 
 
@@ -18,10 +17,13 @@ public interface GoodsMapper {
     @Select("select gid id,gname name,gcost cost,gnumber number,gean ean,gdescription description,gimage path from Goods")
     ArrayList<Goods> select();
 
+    @Select("select gid id,gname name,gcost cost,gnumber number,gean ean,gdescription description,gimage path from Goods where gid=${id}")
+    Goods selectid(int id);
+
     @Delete("delete from Goods where gid=#{id}")
     int delete(int id);
 
-    @Update("update Goods set gname=#{name}, gcost=#{cost}, gnumber=#{number}, gdescription=#{description} where gid=#{id}")
+    @Update("update Goods set gname=#{name}, gcost=#{cost}, gnumber=#{number}, gdescription=#{description},gimage=#{path} where gid=#{id}")
     int update(@Param("id") int id,@Param("name") String name,@Param("cost") float cost ,@Param("number") int number ,
-               @Param("ean") int ean ,@Param("description") String description);
+               @Param("ean") int ean ,@Param("description") String description,@Param("path") String path);
 }

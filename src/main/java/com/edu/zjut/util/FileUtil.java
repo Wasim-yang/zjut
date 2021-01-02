@@ -14,7 +14,7 @@ public class FileUtil {
             }
 
             out = new FileOutputStream(target);
-
+            System.out.println(target);
             out.write(file);
             out.close();
         } catch (FileNotFoundException e) {
@@ -22,6 +22,10 @@ public class FileUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public static void deletefile(String filePath,String originpath){
+        File target = new File(filePath + originpath);
+        target.delete();
     }
 }

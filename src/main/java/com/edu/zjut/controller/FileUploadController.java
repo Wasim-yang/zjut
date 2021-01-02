@@ -16,4 +16,9 @@ public class FileUploadController {
     String upload(@RequestParam("upload") MultipartFile file) {
         return filePathService.Upload(file);
     }
+
+    @PostMapping("/upload/update")
+    String update(@RequestParam("upload") MultipartFile file,@RequestParam("originpath") String originpath ){
+        return filePathService.update(file, originpath);
+    }
 }
