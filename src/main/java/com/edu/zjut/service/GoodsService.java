@@ -38,14 +38,17 @@ public class GoodsService {
     }
 
     /*查找*/
-    public Page<Goods> selectall() {
-        ArrayList<Goods> goods = goodsMapper.select();
+    public Page<Goods> selectpage(int currentPage) {
         Page<Goods> goodsPage = new Page<Goods>();
+        int head=currentPage*goodsPage.getPageSize()-4;
+        int tail=currentPage*goodsPage.getPageSize();
+        ArrayList<Goods> goodsArrayList=goodsMapper.selectall();
+        ArrayList<Goods> goods = goodsMapper.selectpage(head,tail);
         if (!goods.isEmpty()) {
-            goodsPage.setCurrentPage(1);
+            goodsPage.setCurrentPage(currentPage);
             goodsPage.setDataList(goods);
-            goodsPage.setTotalRecord(goods.size());
-            goodsPage.setTotalPage((goods.size()+4)/goodsPage.getPageSize());
+            goodsPage.setTotalRecord(goodsArrayList.size());
+            goodsPage.setTotalPage((goodsArrayList.size()+4)/goodsPage.getPageSize());
         }
         else
         {

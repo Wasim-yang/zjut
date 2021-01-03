@@ -24,8 +24,8 @@ public class GoodsController {
         return goodsService.insert(name, cost , number , ean ,description ,path);
     }
     /*查询*/
-    @RequestMapping(path = "/goods/selectall")
-    public Page<Goods> select(){ return goodsService.selectall(); }
+    @RequestMapping(path = "/goods/selectpage")
+    public Page<Goods> select(int currentPage){ return goodsService.selectpage(currentPage); }
 
     /*按id查询*/
     @RequestMapping(path="goods/selectid")
