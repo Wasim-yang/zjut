@@ -6,10 +6,9 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @ServletComponentScan
 @SpringBootApplication
-public class ZjutApplication {
-
+public class ZjutApplication
+{
     public static void main(String[] args) {
         SpringApplication.run(ZjutApplication.class, args);
     }
-
 }
