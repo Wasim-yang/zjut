@@ -45,7 +45,7 @@ public class GoodsService {
             goodsPage.setCurrentPage(1);
             goodsPage.setDataList(goods);
             goodsPage.setTotalRecord(goods.size());
-            goodsPage.setTotalPage((goods.size()/goodsPage.getPageSize())+1);
+            goodsPage.setTotalPage((goods.size()+4)/goodsPage.getPageSize());
         }
         else
         {
