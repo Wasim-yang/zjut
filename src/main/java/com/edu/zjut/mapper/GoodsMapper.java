@@ -1,6 +1,7 @@
 package com.edu.zjut.mapper;
 
 import com.edu.zjut.entity.Goods;
+import com.edu.zjut.entity.Page;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +24,7 @@ public interface GoodsMapper {
     @Delete("delete from Goods where gid=#{id}")
     int delete(int id);
 
-    @Update("update Goods set gname=#{name}, gcost=#{cost}, gnumber=#{number}, gdescription=#{description},gimage=#{path} where gid=#{id}")
+    @Update("update Goods set gname=#{name}, gcost=#{cost}, gnumber=#{number},gean=#{ean},gdescription=#{description},gimage=#{path} where gid=#{id}")
     int update(@Param("id") int id,@Param("name") String name,@Param("cost") float cost ,@Param("number") int number ,
                @Param("ean") int ean ,@Param("description") String description,@Param("path") String path);
 }
