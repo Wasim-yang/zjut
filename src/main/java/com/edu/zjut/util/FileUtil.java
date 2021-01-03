@@ -14,7 +14,6 @@ public class FileUtil {
             }
 
             out = new FileOutputStream(target);
-            System.out.println(target);
             out.write(file);
             out.close();
         } catch (FileNotFoundException e) {
