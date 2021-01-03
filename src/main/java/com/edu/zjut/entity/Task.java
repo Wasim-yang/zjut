@@ -11,7 +11,7 @@ public class Task {
     int tid;
     String tname;
     String tdescription;
-    Float trequirement;
+    float trequirement;
     int taward;
     int ttype;
     Date tdeadline;
