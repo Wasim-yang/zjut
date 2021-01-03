@@ -1,10 +1,12 @@
 package com.edu.zjut.service;
 
 import com.edu.zjut.entity.Res;
+import com.edu.zjut.entity.Task;
 import com.edu.zjut.mapper.TaskMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -24,11 +26,27 @@ public class TaskService {
     /*添加*/
     public Res insert(String tname, String tdescription, float trequirement, int taward, int ttype, Date tdeadline) {
         int result = taskMapper.insert(tname, tdescription, trequirement, taward, ttype, tdeadline);
-        System.out.println("TaskService-------"+ result);
+        System.out.println("TaskService-------" + result);
         if (result == 1) {
-            return new Res("insert success", 200);
+            return new Res("task insert success", 200);
         } else {
-            return new Res("insert failed", 500);
+            return new Res("task insert failed", 500);
+        }
+    }
+
+    /*查找全部*/
+    public ArrayList<Task> selectAll() {
+        System.out.println("TaskService-------selectAll" );
+        return taskMapper.selectAll();
+    }
+
+    public Res delete(int tid) {
+        int result = taskMapper.delete(tid);
+        System.out.println("TaskService-------delete" );
+        if (result == 1) {
+            return new Res("task delete success", 200);
+        } else {
+            return new Res("task delete failed", 500);
         }
     }
 }
