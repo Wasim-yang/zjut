@@ -35,8 +35,6 @@ public class WelfareService {
     /*按id查找*/
     public Welfare selectid(int wid){return (welfareMapper.selectid(wid));}
 
-//    /*查找*/
-//    public ArrayList<Welfare> select() { return (welfareMapper.select()); }
     /*查找*/
     public Page<Welfare> selectpage(int currentPage) {
         Page<Welfare> welfarePage = new Page<Welfare>();
@@ -44,14 +42,23 @@ public class WelfareService {
         int tail=currentPage*welfarePage.getPageSize();
         ArrayList<Welfare> welfareArrayList=welfareMapper.selectall();
         ArrayList<Welfare> welfare = welfareMapper.selectpage(head,tail);
-        if (!welfare.isEmpty()) {
-            welfarePage.setCurrentPage(currentPage);
-            welfarePage.setDataList(welfare);
-            welfarePage.setTotalRecord(welfareArrayList.size());
-            welfarePage.setTotalPage((welfareArrayList.size()+4)/welfarePage.getPageSize());
-        }
-        else
-        {
+        if (!welfareArrayList.isEmpty()) {
+            if (!welfare.isEmpty()) {
+                welfarePage.setCurrentPage(currentPage);
+                welfarePage.setDataList(welfare);
+                welfarePage.setTotalRecord(welfareArrayList.size());
+                welfarePage.setTotalPage((welfareArrayList.size() + 4) / welfarePage.getPageSize());
+            } else {
+                welfarePage.setTotalPage((welfareArrayList.size() + 4) / welfarePage.getPageSize());
+                welfarePage.setTotalRecord(welfareArrayList.size());
+                currentPage=currentPage-1;
+                welfarePage.setCurrentPage(currentPage);
+                head = currentPage * welfarePage.getPageSize() - 4;
+                tail = currentPage * welfarePage.getPageSize();
+                ArrayList<Welfare> tempwelfarePage=welfareMapper.selectpage(head,tail);
+                welfarePage.setDataList(tempwelfarePage);
+            }
+        } else {
             welfarePage.setTotalPage(0);
             welfarePage.setTotalRecord(0);
         }
@@ -60,12 +67,6 @@ public class WelfareService {
 
     /*删除*/
     public Res delete(int wid) {
-//        String path = ClassUtils.getDefaultClassLoader().getResource("").getPath()+"static/";
-//        String filepath=goodsMapper.selectid(id).getPath();
-//        filepath=filepath.replace("http://localhost:8080/","");
-//        /*删除图片文件*/
-//        FileUtil.deletefile(path,filepath);
-//        /*删除数据库数据*/
         int result = welfareMapper.delete(wid);
         if (result == 1) {
             return new Res("delete success", 200);

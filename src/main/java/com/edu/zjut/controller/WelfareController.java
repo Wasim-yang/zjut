@@ -27,15 +27,11 @@ public class WelfareController {
     }
 
     /*查询*/
-//    @RequestMapping(path = "/welfare/select")
-//    public ArrayList<Welfare> select(){ return welfareService.select(); }
-
-    /*查询*/
     @RequestMapping(path = "/welfare/selectpage")
     public Page<Welfare> select(int currentPage){ return welfareService.selectpage(currentPage); }
 
     /*按id查询*/
-    @RequestMapping(path="welfare/selectid")
+    @RequestMapping(path="/welfare/selectid")
     public Welfare selectid(int wid){return welfareService.selectid(wid);}
 
     /*删除*/
