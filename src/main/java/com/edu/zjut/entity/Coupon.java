@@ -1,68 +1,70 @@
 package com.edu.zjut.entity;
 
 public class Coupon {
-    int id;
-    String name;
-    float discount;
-    int expoints;
-    String description;
+    int cid;
+    String cname;
+    float cdiscount;
+    int cexpoints;
+    String cdescription;
 
 public Coupon(){
 }
     public Coupon(int id, String name, float discount, int expoints, String description){
-        this.id = id;
-        this.name = name;
-        this.discount = discount;
-        this.expoints = expoints;
-        this.description = description;
-    }
-    public int getId() {
-        return id;
+        this.cid = cid;
+        this.cname = cname;
+        this.cdiscount = cdiscount;
+        this.cexpoints = cexpoints;
+        this.cdescription = cdescription;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getCid() {
+        return cid;
     }
 
-    public String getName() {
-        return name;
+    public void setCid(int cid) {
+        this.cid = cid;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getCname() {
+        return cname;
     }
 
-    public float getDiscount() {
-        return discount;
+    public void setCname(String cname) {
+        this.cname = cname;
     }
 
-    public void setDiscount(float discount) {
-        this.discount = discount;
+    public float getCdiscount() {
+        return cdiscount;
     }
 
-    public int getExpoints() {
-        return expoints;
+    public void setCdiscount(float cdiscount) {
+        this.cdiscount = cdiscount;
     }
 
-    public void setExpoints(int expoints) {
-        this.expoints = expoints;
+    public int getCexpoints() {
+        return cexpoints;
     }
 
-    public String getDescription() {
-        return description;
+    public void setCexpoints(int cexpoints) {
+        this.cexpoints = cexpoints;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getCdescription() {
+        return cdescription;
     }
+
+    public void setCdescription(String cdescription) {
+        this.cdescription = cdescription;
+    }
+
     @Override
     public String toString() {
         return "Coupons{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", discount=" + discount +
-                ", expoints=" + expoints +
-                ", description='" + description + '\'' +
+                "cid=" + cid +
+                ", cname='" + cname + '\'' +
+                ", cdiscount=" + cdiscount +
+                ", cexpoints=" + cexpoints +
+                ", cdescription='" + cdescription + '\'' +
                 '}';
     }
 }

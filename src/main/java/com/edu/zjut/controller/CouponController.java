@@ -1,5 +1,6 @@
 package com.edu.zjut.controller;
 import com.edu.zjut.entity.Coupon;
+import com.edu.zjut.entity.Page;
 import com.edu.zjut.entity.Res;
 import com.edu.zjut.service.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,11 @@ public class CouponController {
         return couponService.insert(name, discount , expoints ,description);
     }
     /*查询*/
-    @RequestMapping(path = "/coupon/select")
-    public ArrayList<Coupon> select(){ return couponService.select();}
+    @RequestMapping(path = "/coupon/selectpage")
+    public Page<Coupon> select(int currentpage){ return couponService.selectpage(currentpage);}
 
     /*按id查询*/
-    @RequestMapping(path="coupon/selectid")
+    @RequestMapping(path="/coupon/selectid")
     public Coupon selectid(int id){return couponService.selectid(id);}
 
     /*删除*/

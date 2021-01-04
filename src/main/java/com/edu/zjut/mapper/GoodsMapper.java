@@ -18,7 +18,7 @@ public interface GoodsMapper {
     @Select("with t as (select row_number() over(order by gid) r, * from Goods) "+
             "select gid id,gname name,gcost cost,gnumber number,gean ean,gdescription description,gimage path from t "+
             "where r between #{head} and #{tail}")
-    ArrayList<Goods> selectpage(@Param("head") int head,@Param("tail") int tail);
+    ArrayList<Goods> selectpage(@Param("head") int head,@Param("tail") int tail);  //第head条到第tail条
 
     @Select("select gid id,gname name,gcost cost,gnumber number,gean ean,gdescription description,gimage path from Goods")
     ArrayList<Goods> selectall();

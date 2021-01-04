@@ -1,5 +1,6 @@
 package com.edu.zjut.mapper;
 import com.edu.zjut.entity.Coupon;
+import com.edu.zjut.entity.Goods;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
@@ -9,8 +10,12 @@ public interface CouponMapper {
     @Insert("insert into Coupon(cname,cdiscount,cdescription,cexpoints) VALUES (#{name},#{discount},#{description},#{expoints})")
     int insert(@Param("name") String name,@Param("discount") float discount ,@Param("expoints") int expoints , @Param("description") String description);
 
-    @Select("select cid id,cname name,cdiscount discount,cdescription description,cexpoints expoints from Coupon")
-            ArrayList<Coupon> select();
+    @Select("with t as (select row_number() over(order by cid) r, * from Coupon) "+
+            "select cid, cname, cdiscount, cexpoints,cdescription from t "+ "where r between #{head} and #{tail}")
+    ArrayList<Coupon> selectpage(@Param("head") int head, @Param("tail") int tail);  //第head条到第tail条
+
+    @Select("select cid, cname, cdiscount, cexpoints, cdescription from Coupon")
+    ArrayList<Coupon> selectall();
 
     @Select("select cid id,cname name,cdiscount discount,cdescription description,cexpoints expoints from Coupon where cid=${id}")
     Coupon selectid(int id);
