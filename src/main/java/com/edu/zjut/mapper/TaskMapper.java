@@ -1,6 +1,7 @@
 package com.edu.zjut.mapper;
 
 import com.edu.zjut.entity.Task;
+import com.edu.zjut.entity.Task;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -24,14 +25,24 @@ public interface TaskMapper {
     @Select("select * from Task ")
     ArrayList<Task> selectAll();
 
+    /*按页查询*/
+    @Select("with t as (select row_number() over(order by tid) r, * from Task) " +
+            "select * from t " +
+            "where r between #{head} and #{tail}")
+    ArrayList<Task> selectByPage(@Param("head") int head, @Param("tail") int tail);
+    
+    /*查询一个*/
+    @Select("select * from Task where tid=${tid}")
+    Task selectOne(int tid);
+
     /*删除*/
-    @Delete("delete from Task where tid = #{tid} ")
+    @Delete("delete from Task where tid = ${tid} ")
     int delete(int tid);
 
     /*更新*/
     @Update("update Task set tname=#{tname},tdescription=#{tdescription},trequirement=#{trequirement},taward=#{taward},ttype=#{ttype},tdeadline=#{tdeadline} where tid=#{tid}")
     int update(@Param("tname") String tname, @Param("tdescription") String tdescription, @Param("trequirement") float trequirement, @Param("taward") int taward, @Param("ttype") int ttype,
-               @Param("tdeadline") Date tdeadline,@Param("tid") int tid);
+               @Param("tdeadline") Date tdeadline, @Param("tid") int tid);
 }
 
 

@@ -1,5 +1,7 @@
 package com.edu.zjut.controller;
 
+import com.edu.zjut.entity.Goods;
+import com.edu.zjut.entity.Page;
 import com.edu.zjut.entity.Res;
 import com.edu.zjut.entity.Task;
 import com.edu.zjut.service.TaskService;
@@ -33,9 +35,16 @@ public class TaskController {
     /**
      * 查询全部
      */
-    @RequestMapping(path = "/task/selectAll")
-    public ArrayList<Task> selectAll() {
-        return taskService.selectAll();
+    @RequestMapping(path = "/task/selectByPage")
+    public Page<Task> selectByPage(int currentPage) {
+        return taskService.selectByPage(currentPage);
+    }
+    /**
+     * 通过id查询
+     */
+    @RequestMapping(path = "/task/selectOne")
+    public Task selectOne(int tid) {
+        return taskService.selectOne(tid);
     }
 
     /**
