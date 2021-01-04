@@ -17,8 +17,7 @@ public class Task {
     float trequirement;
     int taward;
     int ttype;
-    //@DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     Date tdeadline;
 
     public Task() {
