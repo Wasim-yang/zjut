@@ -19,4 +19,8 @@ class ZjutApplicationTests {
         goodsMapper.insert("ywx",12,12,3213,"123","123");
     }
 
+    @Test
+    public void selectpage(){
+        System.out.println(goodsMapper.selectpage(2,5));
+    }
 }
