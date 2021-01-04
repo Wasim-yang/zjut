@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ClassUtils;
 
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -37,12 +35,14 @@ public class GoodsService {
         return (goodsMapper.selectid(id));
     }
 
-    /*查找*/
+    /*按页查找*/
     public Page<Goods> selectpage(int currentPage) {
         Page<Goods> goodsPage = new Page<Goods>();
-        int head=currentPage*goodsPage.getPageSize()-4;
-        int tail=currentPage*goodsPage.getPageSize();
+        int head=currentPage * goodsPage.getPageSize() - 4;
+        int tail=currentPage * goodsPage.getPageSize();
+        /*先整体查询，取数据表整体数据记录数量与页数*/
         ArrayList<Goods> goodsArrayList=goodsMapper.selectall();
+        /*再按页查询，取该页数据*/
         ArrayList<Goods> goods = goodsMapper.selectpage(head,tail);
         if (!goods.isEmpty()) {
             goodsPage.setCurrentPage(currentPage);
@@ -50,8 +50,7 @@ public class GoodsService {
             goodsPage.setTotalRecord(goodsArrayList.size());
             goodsPage.setTotalPage((goodsArrayList.size()+4)/goodsPage.getPageSize());
         }
-        else
-        {
+        else {
             goodsPage.setTotalPage(0);
             goodsPage.setTotalRecord(0);
         }
@@ -61,7 +60,7 @@ public class GoodsService {
     /*删除*/
     public Res delete(int id) {
         String path = ClassUtils.getDefaultClassLoader().getResource("").getPath() + "static/";
-        String filepath = goodsMapper.selectid(id).getPath();
+        String filepath = goodsMapper.selectid(id).getGimage();
         filepath = filepath.replace("http://localhost:8080/", "");
         /*删除图片文件*/
         FileUtil.deletefile(path, filepath);
