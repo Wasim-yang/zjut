@@ -79,11 +79,11 @@ public class Task {
     public void setTtype(int ttype) {
         this.ttype = ttype;
     }
-
     public Date getTdeadline() {
         return tdeadline;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public void setTdeadline(Date tdeadline) {
         this.tdeadline = tdeadline;
     }
