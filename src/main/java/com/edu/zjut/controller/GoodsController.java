@@ -20,7 +20,7 @@ public class GoodsController {
 
     /*添加*/
     @RequestMapping(path = "/goods/insert")
-    public Res insert(String name, float cost , int number , int ean , String description,String path) {
+    public Res insert(String name, float cost , int number , int ean , String description, String path) {
         return goodsService.insert(name, cost , number , ean ,description ,path);
     }
     /*查询*/

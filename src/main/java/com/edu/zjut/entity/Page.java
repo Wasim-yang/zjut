@@ -2,12 +2,8 @@ package com.edu.zjut.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Page<T> implements Serializable {
-
-    private static final long serialVersionUID = -8741766802354222579L;
-
     private static int pageSize=5; // 每页显示多少条记录
 
     private int currentPage; //当前第几页数据
@@ -17,8 +13,6 @@ public class Page<T> implements Serializable {
     private int totalPage; // 一共多少页记录
 
     private ArrayList<T> dataList; //要显示的数据
-
-
 
     public Page(){
 
