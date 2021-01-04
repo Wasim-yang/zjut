@@ -31,24 +31,27 @@ public class TaskController {
     }
 
     /**
-     * 查询全部*/
+     * 查询全部
+     */
     @RequestMapping(path = "/task/selectAll")
     public ArrayList<Task> selectAll() {
         return taskService.selectAll();
     }
 
     /**
-     * 删除*/
+     * 删除
+     */
     @RequestMapping(path = "/task/delete")
     public Res delete(int tid) {
         return taskService.delete(tid);
     }
 
     /**
-     * 更新*/
+     * 更新
+     */
     @RequestMapping(path = "/task/update")
-    public Res update(String tname, String tdescription, float trequirement, int taward, int ttype, Date tdeadline) {
-        System.out.println("TaskC-------update" );
-        return taskService.update(tname, tdescription, trequirement, taward, ttype, tdeadline);
+    public Res update(int tid, String tname, String tdescription, float trequirement, int taward, int ttype, Date tdeadline) {
+        System.out.println("TaskC-------update");
+        return taskService.update(tid, tname, tdescription, trequirement, taward, ttype, tdeadline);
     }
 }

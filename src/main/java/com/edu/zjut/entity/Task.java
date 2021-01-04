@@ -1,5 +1,7 @@
 package com.edu.zjut.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -14,6 +16,7 @@ public class Task {
     float trequirement;
     int taward;
     int ttype;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date tdeadline;
 
     public Task() {

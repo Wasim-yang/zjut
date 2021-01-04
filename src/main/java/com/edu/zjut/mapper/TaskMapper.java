@@ -29,9 +29,9 @@ public interface TaskMapper {
     int delete(int tid);
 
     /*更新*/
-    @Update("update Task set tname=#{tname},tdescription=#{tdescription},trequirement=#{trequirement},taward=#{taward},ttype=#{ttype},tdeadline=#{tdeadline}")
+    @Update("update Task set tname=#{tname},tdescription=#{tdescription},trequirement=#{trequirement},taward=#{taward},ttype=#{ttype},tdeadline=#{tdeadline} where tid=#{tid}")
     int update(@Param("tname") String tname, @Param("tdescription") String tdescription, @Param("trequirement") float trequirement, @Param("taward") int taward, @Param("ttype") int ttype,
-               @Param("tdeadline") Date tdeadline);
+               @Param("tdeadline") Date tdeadline,@Param("tid") int tid);
 }
 
 

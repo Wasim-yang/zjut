@@ -50,8 +50,8 @@ public class TaskService {
         }
     }
 
-    public Res update(String tname, String tdescription, float trequirement, int taward, int ttype, Date tdeadline) {
-        int result = taskMapper.update(tname, tdescription, trequirement, taward, ttype, tdeadline);
+    public Res update(int tid,String tname, String tdescription, float trequirement, int taward, int ttype, Date tdeadline) {
+        int result = taskMapper.update(tname, tdescription, trequirement, taward, ttype, tdeadline,tid);
         System.out.println("TaskService-------update" );
         if (result == 1) {
             return new Res("task update success", 200);
