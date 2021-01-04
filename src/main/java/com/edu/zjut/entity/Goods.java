@@ -1,95 +1,93 @@
 package com.edu.zjut.entity;
 
-import java.sql.Blob;
-
 public class Goods {
-    int id;
-    String name;
-    float cost;
-    int number;
-    int ean;
-    String description;
-    String path;
+    int gid;
+    String gname;
+    float gcost;
+    int gnumber;
+    int gean;
+    String gdescription;
+    String gimage;
 
     public Goods() {
     }
 
-    public Goods(int id, String name, float cost, int number, int ean, String description, String path) {
-        this.id = id;
-        this.name = name;
-        this.cost = cost;
-        this.number = number;
-        this.ean = ean;
-        this.description = description;
-        this.path = path;
+    public Goods(int gid, String gname, float gcost, int gnumber, int gean, String gdescription, String gimage) {
+        this.gid = gid;
+        this.gname = gname;
+        this.gcost = gcost;
+        this.gnumber = gnumber;
+        this.gean = gean;
+        this.gdescription = gdescription;
+        this.gimage = gimage;
     }
 
-    public String getPath() {
-        return path;
+    public int getGid() {
+        return gid;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setGid(int gid) {
+        this.gid = gid;
     }
 
-    public int getId() {
-        return id;
+    public String getGname() {
+        return gname;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setGname(String gname) {
+        this.gname = gname;
     }
 
-    public String getName() {
-        return name;
+    public float getGcost() {
+        return gcost;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGcost(float gcost) {
+        this.gcost = gcost;
     }
 
-    public float getCost() {
-        return cost;
+    public int getGnumber() {
+        return gnumber;
     }
 
-    public void setCost(float cost) {
-        this.cost = cost;
+    public void setGnumber(int gnumber) {
+        this.gnumber = gnumber;
     }
 
-    public int getNumber() {
-        return number;
+    public int getGean() {
+        return gean;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setGean(int gean) {
+        this.gean = gean;
     }
 
-    public int getEan() {
-        return ean;
+    public String getGdescription() {
+        return gdescription;
     }
 
-    public void setEan(int ean) {
-        this.ean = ean;
+    public void setGdescription(String gdescription) {
+        this.gdescription = gdescription;
     }
 
-    public String getDescription() {
-        return description;
+    public String getGimage() {
+        return gimage;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setGimage(String gimage) {
+        this.gimage = gimage;
     }
 
     @Override
     public String toString() {
         return "Goods{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", cost=" + cost +
-                ", number=" + number +
-                ", ean=" + ean +
-                ", description='" + description + '\'' +
-                ", path='" + path + '\'' +
+                "gid=" + gid +
+                ", gname='" + gname + '\'' +
+                ", gcost=" + gcost +
+                ", gnumber=" + gnumber +
+                ", gean=" + gean +
+                ", gdescription='" + gdescription + '\'' +
+                ", gimage='" + gimage + '\'' +
                 '}';
     }
 }

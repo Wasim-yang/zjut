@@ -37,7 +37,6 @@ public class FilePathService {
                 e.printStackTrace();
             }
 
-
             FilePath biaopath = new FilePath();
             biaopath.setPath("http://localhost:8080/" + fileName);
             return biaopath.getPath();

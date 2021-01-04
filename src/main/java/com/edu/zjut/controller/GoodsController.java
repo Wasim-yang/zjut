@@ -1,6 +1,7 @@
 package com.edu.zjut.controller;
 
 import com.edu.zjut.entity.Goods;
+import com.edu.zjut.entity.Page;
 import com.edu.zjut.entity.Res;
 import com.edu.zjut.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,12 @@ public class GoodsController {
 
     /*添加*/
     @RequestMapping(path = "/goods/insert")
-    public Res insert(String name, float cost , int number , int ean , String description,String path) {
+    public Res insert(String name, float cost , int number , int ean , String description, String path) {
         return goodsService.insert(name, cost , number , ean ,description ,path);
     }
     /*查询*/
-    @RequestMapping(path = "/goods/select")
-    public ArrayList<Goods> select(){ return goodsService.select(); }
+    @RequestMapping(path = "/goods/selectpage")
+    public Page<Goods> select(int currentPage){ return goodsService.selectpage(currentPage); }
 
     /*按id查询*/
     @RequestMapping(path="goods/selectid")
