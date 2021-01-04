@@ -1,5 +1,7 @@
 package com.edu.zjut.service;
 
+import com.edu.zjut.entity.Goods;
+import com.edu.zjut.entity.Page;
 import com.edu.zjut.entity.Welfare;
 import com.edu.zjut.entity.Res;
 import com.edu.zjut.mapper.WelfareMapper;
@@ -33,8 +35,28 @@ public class WelfareService {
     /*按id查找*/
     public Welfare selectid(int wid){return (welfareMapper.selectid(wid));}
 
+//    /*查找*/
+//    public ArrayList<Welfare> select() { return (welfareMapper.select()); }
     /*查找*/
-    public ArrayList<Welfare> select() { return (welfareMapper.select()); }
+    public Page<Welfare> selectpage(int currentPage) {
+        Page<Welfare> welfarePage = new Page<Welfare>();
+        int head=currentPage*welfarePage.getPageSize()-4;
+        int tail=currentPage*welfarePage.getPageSize();
+        ArrayList<Welfare> welfareArrayList=welfareMapper.selectall();
+        ArrayList<Welfare> welfare = welfareMapper.selectpage(head,tail);
+        if (!welfare.isEmpty()) {
+            welfarePage.setCurrentPage(currentPage);
+            welfarePage.setDataList(welfare);
+            welfarePage.setTotalRecord(welfareArrayList.size());
+            welfarePage.setTotalPage((welfareArrayList.size()+4)/welfarePage.getPageSize());
+        }
+        else
+        {
+            welfarePage.setTotalPage(0);
+            welfarePage.setTotalRecord(0);
+        }
+        return welfarePage;
+    }
 
     /*删除*/
     public Res delete(int wid) {

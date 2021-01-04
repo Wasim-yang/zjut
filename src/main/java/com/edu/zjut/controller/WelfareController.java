@@ -1,5 +1,7 @@
 package com.edu.zjut.controller;
 
+
+import com.edu.zjut.entity.Page;
 import com.edu.zjut.entity.Welfare;
 import com.edu.zjut.entity.Res;
 import com.edu.zjut.service.WelfareService;
@@ -23,9 +25,14 @@ public class WelfareController {
     public Res insert(String wname, String wdescription, int wtotal) {
         return welfareService.insert(wname, wdescription, wtotal);
     }
+
     /*查询*/
-    @RequestMapping(path = "/welfare/select")
-    public ArrayList<Welfare> select(){ return welfareService.select(); }
+//    @RequestMapping(path = "/welfare/select")
+//    public ArrayList<Welfare> select(){ return welfareService.select(); }
+
+    /*查询*/
+    @RequestMapping(path = "/welfare/selectpage")
+    public Page<Welfare> select(int currentPage){ return welfareService.selectpage(currentPage); }
 
     /*按id查询*/
     @RequestMapping(path="welfare/selectid")
@@ -38,6 +45,6 @@ public class WelfareController {
     /*更新*/
     @RequestMapping(path = "/welfare/update")
     public Res update(int wid, String wname, String wdescription, int wtotal, int wgain){
-        return welfareService.update( wid, wname, wdescription, wtotal, wgain);
+        return welfareService.update(wid, wname, wdescription, wtotal, wgain);
     }
 }
