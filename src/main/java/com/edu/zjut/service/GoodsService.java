@@ -1,6 +1,7 @@
 package com.edu.zjut.service;
 
 import com.edu.zjut.entity.Goods;
+import com.edu.zjut.entity.Page;
 import com.edu.zjut.entity.Res;
 import com.edu.zjut.mapper.GoodsMapper;
 import com.edu.zjut.util.FileUtil;
@@ -21,6 +22,7 @@ public class GoodsService {
     public void setGoodsMapper(GoodsMapper goodsMapper) {
         this.goodsMapper = goodsMapper;
     }
+
     /*添加*/
     public Res insert(String name, float cost, int number, int ean, String description, String path) {
         int result = goodsMapper.insert(name, cost, number, ean, description, path);
@@ -29,19 +31,40 @@ public class GoodsService {
         } else
             return new Res("insert failed", 500);
     }
+
     /*按id查找*/
-    public Goods selectid(int id){return (goodsMapper.selectid(id));}
+    public Goods selectid(int id) {
+        return (goodsMapper.selectid(id));
+    }
 
     /*查找*/
-    public ArrayList<Goods> select() { return (goodsMapper.select()); }
+    public Page<Goods> selectpage(int currentPage) {
+        Page<Goods> goodsPage = new Page<Goods>();
+        int head=currentPage*goodsPage.getPageSize()-4;
+        int tail=currentPage*goodsPage.getPageSize();
+        ArrayList<Goods> goodsArrayList=goodsMapper.selectall();
+        ArrayList<Goods> goods = goodsMapper.selectpage(head,tail);
+        if (!goods.isEmpty()) {
+            goodsPage.setCurrentPage(currentPage);
+            goodsPage.setDataList(goods);
+            goodsPage.setTotalRecord(goodsArrayList.size());
+            goodsPage.setTotalPage((goodsArrayList.size()+4)/goodsPage.getPageSize());
+        }
+        else
+        {
+            goodsPage.setTotalPage(0);
+            goodsPage.setTotalRecord(0);
+        }
+        return goodsPage;
+    }
 
     /*删除*/
     public Res delete(int id) {
-        String path = ClassUtils.getDefaultClassLoader().getResource("").getPath()+"static/";
-        String filepath=goodsMapper.selectid(id).getPath();
-        filepath=filepath.replace("http://localhost:8080/","");
+        String path = ClassUtils.getDefaultClassLoader().getResource("").getPath() + "static/";
+        String filepath = goodsMapper.selectid(id).getPath();
+        filepath = filepath.replace("http://localhost:8080/", "");
         /*删除图片文件*/
-        FileUtil.deletefile(path,filepath);
+        FileUtil.deletefile(path, filepath);
         /*删除数据库数据*/
         int result = goodsMapper.delete(id);
         if (result == 1) {
@@ -51,7 +74,7 @@ public class GoodsService {
     }
 
     /*更新*/
-    public Res update(int id, String name, float cost, int number, int ean, String description,String path) {
+    public Res update(int id, String name, float cost, int number, int ean, String description, String path) {
         int result = goodsMapper.update(id, name, cost, number, ean, description, path);
         if (result == 1) {
             return new Res("update success", 200);

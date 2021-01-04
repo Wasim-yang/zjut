@@ -11,6 +11,7 @@ public class Goods {
     String description;
     String path;
 
+
     public Goods() {
     }
 
