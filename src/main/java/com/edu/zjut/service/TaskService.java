@@ -38,6 +38,9 @@ public class TaskService {
     /*查找全部*/
     public ArrayList<Task> selectAll() {
         System.out.println("TaskService-------selectAll");
+        ArrayList<Task> tasks = taskMapper.selectAll();
+        Date tdeadline = tasks.get(0).getTdeadline();
+        System.out.println(tdeadline);
         return taskMapper.selectAll();
     }
 
@@ -70,6 +73,9 @@ public class TaskService {
             taskPage.setTotalPage(0);
             taskPage.setTotalRecord(0);
         }
+        ArrayList<Task> dataList = taskPage.getDataList();
+        Date tdeadline = dataList.get(0).getTdeadline();
+        System.out.println(tdeadline);
         return taskPage;
     }
 

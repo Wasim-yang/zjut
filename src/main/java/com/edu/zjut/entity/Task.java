@@ -1,5 +1,6 @@
 package com.edu.zjut.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -16,7 +17,8 @@ public class Task {
     float trequirement;
     int taward;
     int ttype;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     Date tdeadline;
 
     public Task() {
@@ -83,7 +85,6 @@ public class Task {
         return tdeadline;
     }
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public void setTdeadline(Date tdeadline) {
         this.tdeadline = tdeadline;
     }
