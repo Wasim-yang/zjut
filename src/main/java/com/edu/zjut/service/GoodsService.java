@@ -38,23 +38,33 @@ public class GoodsService {
     /*按页查找*/
     public Page<Goods> selectpage(int currentPage) {
         Page<Goods> goodsPage = new Page<Goods>();
-        int head=currentPage * goodsPage.getPageSize() - 4;
-        int tail=currentPage * goodsPage.getPageSize();
+        int head = currentPage * goodsPage.getPageSize() - 4;
+        int tail = currentPage * goodsPage.getPageSize();
         /*先整体查询，取数据表整体数据记录数量与页数*/
-        ArrayList<Goods> goodsArrayList=goodsMapper.selectall();
+        ArrayList<Goods> goodsArrayList = goodsMapper.selectall();
         /*再按页查询，取该页数据*/
-        ArrayList<Goods> goods = goodsMapper.selectpage(head,tail);
-        if (!goods.isEmpty()) {
-            goodsPage.setCurrentPage(currentPage);
-            goodsPage.setDataList(goods);
-            goodsPage.setTotalRecord(goodsArrayList.size());
-            goodsPage.setTotalPage((goodsArrayList.size()+4)/goodsPage.getPageSize());
-        }
-        else {
+        ArrayList<Goods> goods = goodsMapper.selectpage(head, tail);
+        if (!goodsArrayList.isEmpty()) {
+            if (!goods.isEmpty()) {
+                goodsPage.setCurrentPage(currentPage);
+                goodsPage.setDataList(goods);
+                goodsPage.setTotalRecord(goodsArrayList.size());
+                goodsPage.setTotalPage((goodsArrayList.size() + 4) / goodsPage.getPageSize());
+            } else {
+                goodsPage.setTotalPage((goodsArrayList.size() + 4) / goodsPage.getPageSize());
+                goodsPage.setTotalRecord(goodsArrayList.size());
+                currentPage=currentPage-1;
+                goodsPage.setCurrentPage(currentPage);
+                head = currentPage * goodsPage.getPageSize() - 4;
+                tail = currentPage * goodsPage.getPageSize();
+                ArrayList<Goods> tempgoodsPage=goodsMapper.selectpage(head,tail);
+                goodsPage.setDataList(tempgoodsPage);
+            }
+        } else {
             goodsPage.setTotalPage(0);
             goodsPage.setTotalRecord(0);
         }
-        return goodsPage;
+    return goodsPage;
     }
 
     /*删除*/
