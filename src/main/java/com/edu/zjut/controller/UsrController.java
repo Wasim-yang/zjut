@@ -1,13 +1,12 @@
 package com.edu.zjut.controller;
 
+import com.edu.zjut.entity.Page;
 import com.edu.zjut.entity.Res;
 import com.edu.zjut.entity.UsrNoP;
 import com.edu.zjut.service.UsrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
 
 @RestController
 public class UsrController {
@@ -22,8 +21,8 @@ public class UsrController {
 //        return usrService.insert(id, name, password, sex, age, address, cintegral);
 //    }
     /*查询,输出无密码用户信息*/
-    @RequestMapping(path = "/usr/selectNoP")
-    public ArrayList<UsrNoP> select(){ return usrService.selectNoP(); }
+    @RequestMapping(path = "/usr/selectNoPpage")
+    public Page<UsrNoP> selectNoP(int currentPage){ return usrService.selectNoP(currentPage); }
 
     /*按id查询,输出无密码用户信息*/
     @RequestMapping(path = "/usr/selectNoPid")
