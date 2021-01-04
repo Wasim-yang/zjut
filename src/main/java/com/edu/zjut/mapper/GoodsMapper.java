@@ -17,7 +17,7 @@ public interface GoodsMapper {
     @Select("select gid id,gname name,gcost cost,gnumber number,gean ean,gdescription description,gimage path from Goods")
     ArrayList<Goods> select();
 
-    @Select("select gid id,gname name,gcost cost,gnumber number,gean ean,gdescription description,gimage path from Goods where gid=${id}")
+    @Select("select gid id,gname name,gcost cost,gnumber number,gean ean,gdescription description,gimage path from Goods where gid=#{id}")
     Goods selectid(int id);
 
     @Delete("delete from Goods where gid=#{id}")
