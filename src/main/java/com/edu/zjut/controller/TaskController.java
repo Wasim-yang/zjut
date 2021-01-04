@@ -43,4 +43,12 @@ public class TaskController {
     public Res delete(int tid) {
         return taskService.delete(tid);
     }
+
+    /**
+     * 更新*/
+    @RequestMapping(path = "/task/update")
+    public Res update(String tname, String tdescription, float trequirement, int taward, int ttype, Date tdeadline) {
+        System.out.println("TaskC-------update" );
+        return taskService.update(tname, tdescription, trequirement, taward, ttype, tdeadline);
+    }
 }

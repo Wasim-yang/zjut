@@ -49,4 +49,14 @@ public class TaskService {
             return new Res("task delete failed", 500);
         }
     }
+
+    public Res update(String tname, String tdescription, float trequirement, int taward, int ttype, Date tdeadline) {
+        int result = taskMapper.update(tname, tdescription, trequirement, taward, ttype, tdeadline);
+        System.out.println("TaskService-------update" );
+        if (result == 1) {
+            return new Res("task update success", 200);
+        } else {
+            return new Res("task update failed", 500);
+        }
+    }
 }
