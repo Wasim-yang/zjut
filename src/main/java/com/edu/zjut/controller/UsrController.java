@@ -21,6 +21,7 @@ public class UsrController {
     @RequestMapping(path = "/usr/login")
     public Res login(String id, String password, HttpServletRequest request){
         ResUsr resUsr= usrService.login(id,password);
+        System.out.println(request.getSession().getId());
         if(resUsr.getCode()==200){
             request.getSession().setAttribute("uid",resUsr.getUid());
         }
