@@ -13,7 +13,7 @@ public class AdminInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        System.out.println("执行了AdminInterceptor的preHandle方法");
+//        System.out.println("执行了AdminInterceptor的preHandle方法");
         String mid=(String) request.getSession().getAttribute("mid");
         if(mid==null){
             return false;

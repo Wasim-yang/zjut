@@ -14,6 +14,7 @@ public class UsrService {
     @Autowired
     public void setUsrMapper(UsrMapper usrMapper) { this.usrMapper = usrMapper; }
 
+    /*用户登录*/
     public ResUsr login(String id,String password){
         Userlogin userlogin=usrMapper.selectlogin(id,password);
         if(userlogin==null){
@@ -21,6 +22,18 @@ public class UsrService {
         }
         else
             return new ResUsr("登录成功",200,userlogin.getUid());
+    }
+
+    /*用户注册*/
+    public Res register(String id,String password){
+        if(usrMapper.selectNoPid(id) != null)
+            return new Res("该账号已被注册",500);
+        int result=usrMapper.register(id,password);
+        if(result==1){
+            return new Res("注册成功",200);
+        }
+        else
+            return new Res("注册失败",500);
     }
 
     /*添加*/

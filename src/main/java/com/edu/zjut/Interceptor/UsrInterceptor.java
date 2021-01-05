@@ -13,7 +13,7 @@ public class UsrInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        System.out.println("执行了UsrInterceptor的preHandle方法");
+//        System.out.println("执行了UsrInterceptor的preHandle方法");
         String uid=(String) request.getSession().getAttribute("uid");
         if(uid==null){
             return false;
