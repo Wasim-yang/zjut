@@ -27,7 +27,7 @@ public class TaskService {
     /*添加*/
     public Res insert(String tname, String tdescription, float trequirement, int taward, int ttype, Date tdeadline) {
         int result = taskMapper.insert(tname, tdescription, trequirement, taward, ttype, tdeadline);
-        System.out.println("TaskService-------" + result);
+        System.out.println("TaskService-------insert" + result);
         if (result == 1) {
             return new Res("task insert success", 200);
         } else {
@@ -73,9 +73,6 @@ public class TaskService {
             taskPage.setTotalPage(0);
             taskPage.setTotalRecord(0);
         }
-        ArrayList<Task> dataList = taskPage.getDataList();
-        Date tdeadline = dataList.get(0).getTdeadline();
-        System.out.println(tdeadline);
         return taskPage;
     }
 

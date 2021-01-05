@@ -60,7 +60,6 @@ public class TaskController {
      */
     @RequestMapping(path = "/task/update")
     public Res update(int tid, String tname, String tdescription, float trequirement, int taward, int ttype, Date tdeadline) {
-        System.out.println("TaskC-------update");
         return taskService.update(tid, tname, tdescription, trequirement, taward, ttype, tdeadline);
     }
 }
