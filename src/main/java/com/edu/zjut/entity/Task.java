@@ -1,5 +1,8 @@
 package com.edu.zjut.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -11,9 +14,10 @@ public class Task {
     int tid;
     String tname;
     String tdescription;
-    Float trequirement;
+    float trequirement;
     int taward;
     int ttype;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     Date tdeadline;
 
     public Task() {
@@ -76,7 +80,6 @@ public class Task {
     public void setTtype(int ttype) {
         this.ttype = ttype;
     }
-
     public Date getTdeadline() {
         return tdeadline;
     }
