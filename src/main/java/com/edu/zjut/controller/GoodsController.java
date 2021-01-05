@@ -19,24 +19,31 @@ public class GoodsController {
     }
 
     /*添加*/
-    @RequestMapping(path = "/goods/insert")
-    public Res insert(String name, float cost , int number , int ean , String description, String path) {
+    @RequestMapping(path = "/admin/goods/insert")
+    public Res admin_insert(String name, float cost , int number , int ean , String description, String path) {
         return goodsService.insert(name, cost , number , ean ,description ,path);
     }
+
     /*查询*/
-    @RequestMapping(path = "/goods/selectpage")
-    public Page<Goods> select(int currentPage){ return goodsService.selectpage(currentPage); }
+    @RequestMapping(path = "/usr/goods/selectpage")
+    public Page<Goods> usr_select(int currentPage){ return goodsService.selectpage(currentPage); }
+
+    @RequestMapping(path = "/admin/goods/selectpage")
+    public Page<Goods> admin_select(int currentPage){ return goodsService.selectpage(currentPage); }
 
     /*按id查询*/
-    @RequestMapping(path="/goods/selectid")
-    public Goods selectid(int id){return goodsService.selectid(id);}
+    @RequestMapping(path="/admin/goods/selectid")
+    public Goods admin_selectid(int id){return goodsService.selectid(id);}
+
+    @RequestMapping(path="/usr/goods/selectid")
+    public Goods usr_selectid(int id){return goodsService.selectid(id);}
 
     /*删除*/
-    @RequestMapping(path = "/goods/delete")
-    public Res delete(int id){ return goodsService.delete(id); }
+    @RequestMapping(path = "/admin/goods/delete")
+    public Res admin_delete(int id){ return goodsService.delete(id); }
 
     /*更新*/
-    @RequestMapping(path = "/goods/update")
+    @RequestMapping(path = "/admin/goods/update")
     public Res update(int id, String name, float cost , int number , int ean ,String description,String path){
         return goodsService.update( id, name, cost, number, ean, description, path);
     }
