@@ -1,6 +1,7 @@
 package com.edu.zjut.mapper;
 
 import com.edu.zjut.entity.Goods;
+import com.edu.zjut.entity.Userlogin;
 import com.edu.zjut.entity.UsrNoP;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -16,6 +17,9 @@ public interface UsrMapper {
 
 //    @Select("select * from Usr")
 //    ArrayList<Usr> select();
+
+    @Select("select uid ,upassword,uname  ,usex ,uage ,uaddress ,ucintegral from Usr where uid=#{uid} and upassword=#{upassword}")
+    Userlogin selectlogin(@Param("uid") String uid,@Param("upassword") String upassword);
 
     @Select("with t as (select row_number() over(order by uid) r, * from Usr) "+
             "select uid, uname, usex, uage, uaddress, ucintegral from t "+

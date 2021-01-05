@@ -12,12 +12,12 @@ public class FileUploadController {
     @Autowired
     private FilePathService filePathService;
 
-    @PostMapping("/upload")
+    @PostMapping("/admin/upload")
     String upload(@RequestParam("upload") MultipartFile file) {
         return filePathService.Upload(file);
     }
 
-    @PostMapping("/upload/update")
+    @PostMapping("/admin/upload/update")
     String update(@RequestParam("upload") MultipartFile file,@RequestParam("originpath") String originpath ){
         return filePathService.update(file, originpath);
     }

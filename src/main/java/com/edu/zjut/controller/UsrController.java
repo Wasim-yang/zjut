@@ -2,11 +2,14 @@ package com.edu.zjut.controller;
 
 import com.edu.zjut.entity.Page;
 import com.edu.zjut.entity.Res;
+import com.edu.zjut.entity.ResUsr;
 import com.edu.zjut.entity.UsrNoP;
 import com.edu.zjut.service.UsrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class UsrController {
@@ -15,6 +18,14 @@ public class UsrController {
     @Autowired
     public void setUsrService(UsrService usrService) { this.usrService = usrService; }
 
+    @RequestMapping(path = "/usr/login")
+    public Res login(String id, String password, HttpServletRequest request){
+        ResUsr resUsr= usrService.login(id,password);
+        if(resUsr.getCode()==200){
+            request.getSession().setAttribute("uid",resUsr.getUid());
+        }
+        return new Res(resUsr.getMessage(),resUsr.getCode());
+    }
     /*添加*/
 //    @RequestMapping(path = "/usr/insert")
 //    public Res insert(String id,String name, String password, int sex, int age, String address, int cintegral) {
