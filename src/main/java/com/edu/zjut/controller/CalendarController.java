@@ -1,6 +1,7 @@
 package com.edu.zjut.controller;
 
 import com.edu.zjut.entity.Calendar;
+import com.edu.zjut.entity.Res;
 import com.edu.zjut.service.CalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +20,13 @@ public class CalendarController {
     CalendarService calendarService;
 
     @RequestMapping("/cal/selectAll")
-    public ArrayList<Calendar> selectAll(String uid, int year, int month){
-        System.out.println(uid);
-        System.out.println(year);
-        System.out.println(month);
+    public ArrayList<Calendar> selectAll(String uid, int year, int month) {
         return calendarService.selectAll(uid, year, month);
     }
+
+    @RequestMapping("/cal/addCalendar")
+    public Res selectAll(String uid, int year, int month, int day) {
+        return calendarService.addCal(uid,year,month,day);
+    }
+
 }
