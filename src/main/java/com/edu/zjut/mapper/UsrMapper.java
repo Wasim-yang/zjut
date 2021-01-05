@@ -1,5 +1,6 @@
 package com.edu.zjut.mapper;
 
+import com.edu.zjut.entity.Goods;
 import com.edu.zjut.entity.UsrNoP;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -16,8 +17,13 @@ public interface UsrMapper {
 //    @Select("select * from Usr")
 //    ArrayList<Usr> select();
 
+    @Select("with t as (select row_number() over(order by uid) r, * from Usr) "+
+            "select uid, uname, usex, uage, uaddress, ucintegral from t "+
+            "where r between #{head} and #{tail}")
+    ArrayList<UsrNoP> selectNoPpage(@Param("head") int head, @Param("tail") int tail);
+
     @Select("select uid ,uname  ,usex ,uage ,uaddress ,ucintegral from Usr")
-    ArrayList<UsrNoP> selectNoP();
+    ArrayList<UsrNoP> selectNoPall();
 
     @Select("select uid ,uname  ,usex ,uage ,uaddress ,ucintegral from Usr where uid=#{uid}")
     UsrNoP selectNoPid(String uid);

@@ -28,7 +28,7 @@ public class GoodsController {
     public Page<Goods> select(int currentPage){ return goodsService.selectpage(currentPage); }
 
     /*按id查询*/
-    @RequestMapping(path="goods/selectid")
+    @RequestMapping(path="/goods/selectid")
     public Goods selectid(int id){return goodsService.selectid(id);}
 
     /*删除*/
