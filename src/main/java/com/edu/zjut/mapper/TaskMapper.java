@@ -27,8 +27,7 @@ public interface TaskMapper {
 
     /*按页查询*/
     @Select("with t as (select row_number() over(order by tid) r, * from Task) " +
-            "select * from t " +
-            "where r between #{head} and #{tail}")
+            "select * from t where r between #{head} and #{tail}")
     ArrayList<Task> selectByPage(@Param("head") int head, @Param("tail") int tail);
     
     /*查询一个*/

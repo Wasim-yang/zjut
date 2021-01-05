@@ -1,6 +1,5 @@
 package com.edu.zjut.controller;
 
-import com.edu.zjut.entity.Goods;
 import com.edu.zjut.entity.Page;
 import com.edu.zjut.entity.Res;
 import com.edu.zjut.entity.Task;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -26,7 +24,9 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    /*添加任务*/
+    /**
+     * 添加任务
+     */
     @RequestMapping(path = "/task/insert")
     public Res insert(String tname, String tdescription, float trequirement, int taward, int ttype, Date tdeadline) {
         return taskService.insert(tname, tdescription, trequirement, taward, ttype, tdeadline);

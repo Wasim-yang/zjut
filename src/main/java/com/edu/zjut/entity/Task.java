@@ -80,11 +80,25 @@ public class Task {
     public void setTtype(int ttype) {
         this.ttype = ttype;
     }
+
     public Date getTdeadline() {
         return tdeadline;
     }
 
     public void setTdeadline(Date tdeadline) {
         this.tdeadline = tdeadline;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "tid=" + tid +
+                ", tname='" + tname + '\'' +
+                ", tdescription='" + tdescription + '\'' +
+                ", trequirement=" + trequirement +
+                ", taward=" + taward +
+                ", ttype=" + ttype +
+                ", tdeadline=" + tdeadline +
+                '}';
     }
 }
