@@ -14,7 +14,7 @@ public class Task {
     int tid;
     String tname;
     String tdescription;
-    float trequirement;
+    Float trequirement;
     int taward;
     int ttype;
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
