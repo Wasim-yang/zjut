@@ -14,18 +14,20 @@ import java.util.ArrayList;
 public class CouponService {
     CouponMapper couponMapper;
     @Autowired
-    public void setCouponMapper(CouponMapper couponMapper) {this.couponMapper = couponMapper;
-    }
+    public void setCouponMapper(CouponMapper couponMapper) {this.couponMapper = couponMapper; }
+
     /*添加*/
     public Res insert(String name, float discount, int expoints, String description) {
         int result = couponMapper.insert(name, discount, expoints, description);
         if (result == 1) {
-            return new Res("添加成功！",200);
+            return new Res("insert success",200);
         } else
-            return new Res("添加失败！",500 );
+            return new Res("insert failed",500 );
     }
+
     /*按id查找*/
     public Coupon selectid(int id){return (couponMapper.selectid(id));}
+
     /*按页查找*/
     public Page<Coupon> selectpage(int currentPage) {
         Page<Coupon> couponPage = new Page<Coupon>();
@@ -57,21 +59,22 @@ public class CouponService {
         }
         return couponPage;
     }
+
     /*删除*/
     public Res delete(int id) {
         /*删除数据库数据*/
         int result = couponMapper.delete(id);
         if (result == 1) {
-            return new Res("删除成功！", 200);
+            return new Res("delete success", 200);
         } else
-            return new Res("删除失败！", 500);
+            return new Res("delete failed", 500);
     }
     /*更新*/
     public Res update(int id, String name, float discount, int expoints, String description) {
         int result = couponMapper.update(id, name, discount, expoints, description);
         if (result == 1) {
-            return new Res("更新成功！", 200);
+            return new Res("update success", 200);
         } else
-            return new Res("更新失败！", 500);
+            return new Res("update failed", 500);
     }
 }

@@ -17,7 +17,7 @@ public interface CouponMapper {
     @Select("select cid, cname, cdiscount, cexpoints, cdescription from Coupon")
     ArrayList<Coupon> selectall();
 
-    @Select("select cid id,cname name,cdiscount discount,cdescription description,cexpoints expoints from Coupon where cid=${id}")
+    @Select("select cid, cname, cdiscount, cdescription, cexpoints from Coupon where cid=${id}")
     Coupon selectid(int id);
 
     @Delete("delete from Coupon where cid=#{id}")
