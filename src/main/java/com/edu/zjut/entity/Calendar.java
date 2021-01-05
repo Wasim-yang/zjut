@@ -8,19 +8,19 @@ package com.edu.zjut.entity;
 public class Calendar {
     String uid;
     int caid;
-    int caYear;
-    int caMonth;
-    int caDay;
+    int cayear;
+    int camonth;
+    int caday;
 
     public Calendar() {
     }
 
-    public Calendar(String uid, int caid, int caYear, int caMonth, int caDay) {
+    public Calendar(String uid, int caid, int cayear, int camonth, int caday) {
         this.uid = uid;
         this.caid = caid;
-        this.caYear = caYear;
-        this.caMonth = caMonth;
-        this.caDay = caDay;
+        this.cayear = cayear;
+        this.camonth = camonth;
+        this.caday = caday;
     }
 
     public String getUid() {
@@ -39,27 +39,27 @@ public class Calendar {
         this.caid = caid;
     }
 
-    public int getCaYear() {
-        return caYear;
+    public int getCayear() {
+        return cayear;
     }
 
-    public void setCaYear(int caYear) {
-        this.caYear = caYear;
+    public void setCayear(int cayear) {
+        this.cayear = cayear;
     }
 
-    public int getCaMonth() {
-        return caMonth;
+    public int getCamonth() {
+        return camonth;
     }
 
-    public void setCaMonth(int caMonth) {
-        this.caMonth = caMonth;
+    public void setCamonth(int camonth) {
+        this.camonth = camonth;
     }
 
-    public int getCaDay() {
-        return caDay;
+    public int getCaday() {
+        return caday;
     }
 
-    public void setCaDay(int caDay) {
-        this.caDay = caDay;
+    public void setCaday(int caday) {
+        this.caday = caday;
     }
 }

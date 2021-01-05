@@ -17,8 +17,12 @@ import java.util.ArrayList;
 public class CalendarController {
     @Autowired
     CalendarService calendarService;
+
     @RequestMapping("/cal/selectAll")
     public ArrayList<Calendar> selectAll(String uid, int year, int month){
+        System.out.println(uid);
+        System.out.println(year);
+        System.out.println(month);
         return calendarService.selectAll(uid, year, month);
     }
 }
