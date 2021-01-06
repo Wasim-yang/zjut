@@ -35,5 +35,16 @@ public interface WelfareMapper {
     int update(@Param("wid")int wid, @Param("wname") String wname, @Param("wdescription") String wdescription,
                @Param("wtotal") int wtotal, @Param("wgain") int wgain);
 
+    @Update("begin transaction T1" +
+            "update Welfare " +
+            "set wgain=case when #{wgain}+#{wdonate}>#{wtotal} then #{wtotal} " +
+            "else #{wgain}+#{wdonate} end " +
+            "where wid=#{wid} and #{wtotal}>#{wgain}" +
+            "update Usr" +
+            "set ucintegral=case when (#{ucintegral}-#{wdonate})>0 then #{ucintegral}-#{wdonate}" +
+            "else ucintegral end" +
+            "commit transaction")
+    int update_user(@Param("wid")int wid,@Param("uid")String uid, @Param("wgain")int wgain,
+                    @Param("wtotal") int wtotal,@Param("wdonate") int wdonate);
 
 }

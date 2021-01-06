@@ -60,11 +60,6 @@ public class WelfareService {
 
     /*删除*/
     public Res delete(int wid) {
-//        String path = ClassUtils.getDefaultClassLoader().getResource("").getPath()+"static/";
-//        String filepath=goodsMapper.selectid(id).getPath();
-//        filepath=filepath.replace("http://localhost:8080/","");
-//        /*删除图片文件*/
-//        FileUtil.deletefile(path,filepath);
 //        /*删除数据库数据*/
         int result = welfareMapper.delete(wid);
         if (result == 1) {
@@ -76,10 +71,22 @@ public class WelfareService {
     /*更新*/
     public Res update(int wid, String wname, String wdescription, int wtotal, int wgain) {
         int result = welfareMapper.update(wid, wname, wdescription, wtotal, wgain );
+        System.out.println(result);
         if (result == 1) {
             return new Res("update success", 200);
         } else
             return new Res("update failed", 500);
     }
+    /* 用户捐赠积分的更新*/
+    public Res update_user(int wid,String uid,int wgain,int wtotal,int wdonate) {
+        int result=welfareMapper.update_user(wid,uid,wgain,wtotal,wdonate);
+        System.out.println(result);
+        if(result==1)
+        {
+            return new Res("donate success",200);
+        }
+        else
+            return new Res("donate failed",500);
 
+    }
 }
