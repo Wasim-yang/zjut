@@ -38,4 +38,10 @@ public interface UsrMapper {
             " uaddress=#{uaddress},ucintegral=#{ucintegral} where uid=#{uid}")
     int updateNoP(@Param("uid") String uid, @Param("uname") String uname, @Param("usex") int usex, @Param("uage") int uage,
                @Param("uaddress") String uaddress, @Param("ucintegral") int ucintegral);
+
+    /**
+     *  用户提交里程时，给用户增加碳积分
+     */
+    @Update("update usr set ucintegral = ucintegral + #{mileage} where uid=#{uid}")
+    int updateAddCintegral(@Param("uid") String uid, @Param("mileage") int tmileage);
 }
