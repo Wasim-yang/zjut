@@ -20,7 +20,7 @@ public class GoodsController {
 
     /*添加*/
     @RequestMapping(path = "/goods/insert")
-    public Res insert(String name, float cost , int number , int ean , String description,String path) {
+    public Res insert(String name, float cost , int number , int ean , String description, String path) {
         return goodsService.insert(name, cost , number , ean ,description ,path);
     }
     /*查询*/
@@ -28,7 +28,7 @@ public class GoodsController {
     public Page<Goods> select(int currentPage){ return goodsService.selectpage(currentPage); }
 
     /*按id查询*/
-    @RequestMapping(path="goods/selectid")
+    @RequestMapping(path="/goods/selectid")
     public Goods selectid(int id){return goodsService.selectid(id);}
 
     /*删除*/

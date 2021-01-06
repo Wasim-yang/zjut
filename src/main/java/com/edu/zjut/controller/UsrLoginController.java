@@ -1,4 +1,4 @@
 package com.edu.zjut.controller;
 
-public class UserController {
+public class UsrLoginController {
 }

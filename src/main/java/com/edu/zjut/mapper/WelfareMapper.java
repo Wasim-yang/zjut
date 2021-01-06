@@ -16,17 +16,14 @@ public interface WelfareMapper {
     int insert(@Param("wname") String wname, @Param("wdescription") String wdescription ,
                @Param("wtotal") int wtotal);
 
-//    @Select("select wid wid,wname wname,wdescription wdescription,wtotal wtotal,wgain wgain from Welfare")
-//    ArrayList<Welfare> select();
     @Select("with t as (select row_number() over(order by wid) r, * from Welfare) "+
-        "select wid wid,wname wname,wtotal wtotal,wgain wgain,wdescription wdescription  from t "+
-        "where r between #{head} and #{tail}")
+        "select *  from t where r between #{head} and #{tail}")
     ArrayList<Welfare> selectpage(@Param("head") int head, @Param("tail") int tail);
 
-    @Select("select wid wid,wname wname,wtotal wtotal,wdescription wdescription from Welfare")
+    @Select("select * from Welfare")
     ArrayList<Welfare> selectall();
 
-    @Select("select wid wid,wname wname,wtotal wtotal,wgain wgain ,wdescription wdescription from Welfare where wid=${wid}")
+    @Select("select * from Welfare where wid=${wid}")
     Welfare selectid(int wid);
 
     @Delete("delete from Welfare where wid=#{wid}")
