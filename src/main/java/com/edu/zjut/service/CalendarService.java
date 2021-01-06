@@ -32,4 +32,8 @@ public class CalendarService {
             return new Res("insertcal failed", 500);
         }
     }
+
+    public ArrayList<Calendar> selectMyform(String uid) {
+        return calendarMapper.selectMyform(uid);
+    }
 }

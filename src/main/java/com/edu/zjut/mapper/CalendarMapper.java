@@ -20,6 +20,10 @@ public interface CalendarMapper {
 
     @Update("update Usr set ucintegral = ucintegral + 1 where uid = #{uid} ")
     int addAward(String uid);
+
     @Insert("insert into Calendar(uid,cayear,camonth,caday) values(#{uid},#{cayear},#{camonth} ,#{caday} ) ")
-    int insertCal(@Param("uid") String uid,@Param("cayear") int cayear,@Param("camonth") int camonth,@Param("caday") int caday);
+    int insertCal(@Param("uid") String uid, @Param("cayear") int cayear, @Param("camonth") int camonth, @Param("caday") int caday);
+
+    @Select("select * from Calendar where uid=#{uid}")
+    ArrayList<Calendar> selectMyform(String uid);
 }

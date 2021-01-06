@@ -29,4 +29,8 @@ public class CalendarController {
         return calendarService.addCal(uid,year,month,day);
     }
 
+    @RequestMapping("/cal/selectMyform")
+    public ArrayList<Calendar> selectMyform(String uid) {
+        return calendarService.selectMyform(uid);
+    }
 }
