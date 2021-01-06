@@ -49,8 +49,8 @@ public class WelfareController {
     }
     /* 用户捐赠积分的更新*/
     @RequestMapping(path = "/welfare/update_user")
-    public Res update_user(int wid,String uid,int wgain,int wtotal,int wdonate)
+    public Res update_c(int wid,String uid,int ucintegral,int wgain,int wtotal,int wdonate)
     {
-        return welfareService.update_user(wid,uid,wgain,wtotal,wdonate);
+        return welfareService.update_c(wid,uid,ucintegral,wgain,wtotal,wdonate);
     }
 }

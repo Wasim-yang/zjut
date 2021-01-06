@@ -4,6 +4,7 @@ import com.edu.zjut.entity.Goods;
 import com.edu.zjut.entity.Welfare;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
@@ -35,16 +36,20 @@ public interface WelfareMapper {
     int update(@Param("wid")int wid, @Param("wname") String wname, @Param("wdescription") String wdescription,
                @Param("wtotal") int wtotal, @Param("wgain") int wgain);
 
-    @Update("begin transaction T1" +
-            "update Welfare " +
-            "set wgain=case when #{wgain}+#{wdonate}>#{wtotal} then #{wtotal} " +
-            "else #{wgain}+#{wdonate} end " +
-            "where wid=#{wid} and #{wtotal}>#{wgain}" +
-            "update Usr" +
-            "set ucintegral=case when (#{ucintegral}-#{wdonate})>0 then #{ucintegral}-#{wdonate}" +
-            "else ucintegral end" +
-            "commit transaction")
-    int update_user(@Param("wid")int wid,@Param("uid")String uid, @Param("wgain")int wgain,
-                    @Param("wtotal") int wtotal,@Param("wdonate") int wdonate);
+
+    @Update("update Welfare set wgain = #{wgain}+#{wdonate} where wid=#{wid}")
+    int update_welfare(@Param("wid")int wid, @Param("wgain")int wgain, @Param("wdonate") int wdonate);
+
+    @Update("update Welfare set wgain = #{wtotal} where wid=#{wid}")
+    int update_welfare_total(@Param("wid")int wid, @Param("wgain")int wgain,
+                       @Param("wtotal") int wtotal);
+
+    @Update("update Usr set ucintegral = #{ucintegral}-#{wdonate} where uid=#{uid}")
+    int update_user(@Param("uid")String uid,
+                    @Param("ucintegral") int ucintegral,
+                    @Param("wdonate") int wdonate);
+
+
+
 
 }

@@ -8,6 +8,7 @@ import com.edu.zjut.mapper.WelfareMapper;
 import com.edu.zjut.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ClassUtils;
 
 
@@ -24,34 +25,36 @@ public class WelfareService {
     public void setWelfareMapper(WelfareMapper welfareMapper) {
         this.welfareMapper = welfareMapper;
     }
+
     /*添加*/
-    public Res insert( String wname, String wdescription,int wtotal) {
+    public Res insert(String wname, String wdescription, int wtotal) {
         int result = welfareMapper.insert(wname, wdescription, wtotal);
         if (result == 1) {
             return new Res("insert success", 200);
         } else
             return new Res("insert failed", 500);
     }
-    /*按id查找*/
-    public Welfare selectid(int wid){return (welfareMapper.selectid(wid));}
 
-//    /*查找*/
+    /*按id查找*/
+    public Welfare selectid(int wid) {
+        return (welfareMapper.selectid(wid));
+    }
+
+    //    /*查找*/
 //    public ArrayList<Welfare> select() { return (welfareMapper.select()); }
     /*查找*/
     public Page<Welfare> selectpage(int currentPage) {
         Page<Welfare> welfarePage = new Page<Welfare>();
-        int head=currentPage*welfarePage.getPageSize()-4;
-        int tail=currentPage*welfarePage.getPageSize();
-        ArrayList<Welfare> welfareArrayList=welfareMapper.selectall();
-        ArrayList<Welfare> welfare = welfareMapper.selectpage(head,tail);
+        int head = currentPage * welfarePage.getPageSize() - 4;
+        int tail = currentPage * welfarePage.getPageSize();
+        ArrayList<Welfare> welfareArrayList = welfareMapper.selectall();
+        ArrayList<Welfare> welfare = welfareMapper.selectpage(head, tail);
         if (!welfare.isEmpty()) {
             welfarePage.setCurrentPage(currentPage);
             welfarePage.setDataList(welfare);
             welfarePage.setTotalRecord(welfareArrayList.size());
-            welfarePage.setTotalPage((welfareArrayList.size()+4)/welfarePage.getPageSize());
-        }
-        else
-        {
+            welfarePage.setTotalPage((welfareArrayList.size() + 4) / welfarePage.getPageSize());
+        } else {
             welfarePage.setTotalPage(0);
             welfarePage.setTotalRecord(0);
         }
@@ -70,23 +73,41 @@ public class WelfareService {
 
     /*更新*/
     public Res update(int wid, String wname, String wdescription, int wtotal, int wgain) {
-        int result = welfareMapper.update(wid, wname, wdescription, wtotal, wgain );
+        int result = welfareMapper.update(wid, wname, wdescription, wtotal, wgain);
         System.out.println(result);
         if (result == 1) {
             return new Res("update success", 200);
         } else
             return new Res("update failed", 500);
     }
+
     /* 用户捐赠积分的更新*/
-    public Res update_user(int wid,String uid,int wgain,int wtotal,int wdonate) {
-        int result=welfareMapper.update_user(wid,uid,wgain,wtotal,wdonate);
-        System.out.println(result);
-        if(result==1)
-        {
-            return new Res("donate success",200);
+    @Transactional
+    public Res update_c(int wid, String uid, int ucintegral, int wgain, int wtotal, int wdonate) {
+        //用户积分>捐赠积分且不为0；捐赠积分与累积之和不大于启动条件
+        if ((ucintegral - wdonate) > 0 && ucintegral > 0 && (wdonate + wgain) < wtotal) {
+            welfareMapper.update_welfare(wid,  wgain,  wdonate);
+            int result = welfareMapper.update_user(uid,ucintegral,wdonate);
+            if (result == 1) {
+                return new Res("donate success", 200);
+            } else
+                return new Res("donate failed", 500);
+        }
+        //捐赠积分与累积之和大于启动条件
+        else if ((wdonate + wgain) > wtotal && wdonate<ucintegral) {
+            int result = welfareMapper.update_welfare_total(wid, wgain, wtotal);
+            if (result == 1) {
+                return new Res("您已成功捐赠，多余的积分已经返还您的账户余额", 200);
+            } else
+                return new Res("donate failed", 500);
+        }
+        //用户积分不足
+        else if ((ucintegral - wdonate) < 0) {
+            return new Res("积分不足", 500);
         }
         else
-            return new Res("donate failed",500);
+            return new Res("捐赠失败",200);
+
 
     }
 }
