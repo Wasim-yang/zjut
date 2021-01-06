@@ -96,4 +96,13 @@ public class UsrService {
         } else
             return new Res("update failed", 500);
     }
+
+//    点击按钮获取用户碳积分
+    public int selectUsrUcintegral(String id){
+        int res = usrMapper.selectUsrUcintegral(id);
+        System.out.println(res);
+        return  res;
+    }
+
 }
+
