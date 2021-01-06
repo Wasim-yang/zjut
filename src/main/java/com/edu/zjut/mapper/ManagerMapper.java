@@ -11,10 +11,10 @@ public interface ManagerMapper {
     @Insert("insert into Manager(mid,mpassword) VALUES (#{mid},#{mpassword})")
     int register(@Param("mid") String mid,@Param("mpassword") String mpassword);
 
-    @Insert("insert into Manager(mid,mname,mpassword) VALUES (#{mid},#{mname},#{mpassword})")
+    @Insert("insert into Manager VALUES (#{mid},#{mname},#{mpassword})")
     int insert(@Param("mid") String mid,@Param("mname") String mname,@Param("mpassword") String mpassword);
 
-    @Select("select mid,mname,mpassword from Manager where mid=#{mid} and mpassword=#{mpassword}")
+    @Select("select * from Manager where mid=#{mid} and mpassword=#{mpassword}")
     Manager selectlogin(@Param("mid") String mid,@Param("mpassword") String mpassword );
 
     @Update("update Manager set mpassword=#{mpassword},mname=#{mname} where mid=#{mid}")

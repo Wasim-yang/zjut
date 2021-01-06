@@ -1,5 +1,8 @@
 package com.edu.zjut.entity;
 
+/**
+ * 管理员账号类
+ */
 public class Manager {
     String mid;
     String mname;
@@ -28,5 +31,14 @@ public class Manager {
 
     public void setMpassword(String mpassword) {
         this.mpassword = mpassword;
+    }
+
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "mid='" + mid + '\'' +
+                ", mname='" + mname + '\'' +
+                ", mpassword='" + mpassword + '\'' +
+                '}';
     }
 }

@@ -19,9 +19,27 @@ public class LoginConfig implements WebMvcConfigurer {
                 "/**/*.js",              //js静态资源
                 "/**/*.css"              //css静态资源
         );
-        InterceptorRegistration registration1 = registry.addInterceptor(new UsrInterceptor());
-        registration1.addPathPatterns("/usr/**");
+        InterceptorRegistration registration1 = registry.addInterceptor(new BusinessInterceptor());
+        registration1.addPathPatterns("/business/**");
         registration1.excludePathPatterns(         //添加不拦截路径
+                "/**/login",
+                "/**/register",
+                "/**/authorization",
+                "/**/*.js",              //js静态资源
+                "/**/*.css"            //css静态资源
+        );
+        InterceptorRegistration registration2 = registry.addInterceptor(new PleaderInterceptor());
+        registration2.addPathPatterns("/pleader/**");
+        registration2.excludePathPatterns(         //添加不拦截路径
+                "/**/login",
+                "/**/register",
+                "/**/authorization",
+                "/**/*.js",              //js静态资源
+                "/**/*.css"            //css静态资源
+        );
+        InterceptorRegistration registration3 = registry.addInterceptor(new UsrInterceptor());
+        registration3.addPathPatterns("/usr/**");
+        registration3.excludePathPatterns(         //添加不拦截路径
                 "/**/login",
                 "/**/register",
                 "/**/authorization",

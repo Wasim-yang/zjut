@@ -1,7 +1,6 @@
 package com.edu.zjut.controller;
 
 import com.edu.zjut.entity.ResManager;
-import com.edu.zjut.entity.ResUsr;
 import com.edu.zjut.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +15,7 @@ public class ManagerController {
     @Autowired
     public void setManagerService(ManagerService managerService){this.managerService=managerService;}
 
+    /*管理员登录*/
     @RequestMapping(path = "/admin/login")
     public ResManager login(String id, String password, HttpServletRequest request){
         ResManager resManager=managerService.login(id,password);
