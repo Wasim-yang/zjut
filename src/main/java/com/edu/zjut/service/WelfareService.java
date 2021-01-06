@@ -1,9 +1,6 @@
 package com.edu.zjut.service;
 
-import com.edu.zjut.entity.Goods;
-import com.edu.zjut.entity.Page;
-import com.edu.zjut.entity.Welfare;
-import com.edu.zjut.entity.Res;
+import com.edu.zjut.entity.*;
 import com.edu.zjut.mapper.WelfareMapper;
 import com.edu.zjut.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +71,6 @@ public class WelfareService {
     /*更新*/
     public Res update(int wid, String wname, String wdescription, int wtotal, int wgain) {
         int result = welfareMapper.update(wid, wname, wdescription, wtotal, wgain);
-        System.out.println(result);
         if (result == 1) {
             return new Res("update success", 200);
         } else
@@ -84,30 +80,59 @@ public class WelfareService {
     /* 用户捐赠积分的更新*/
     @Transactional
     public Res update_c(int wid, String uid, int ucintegral, int wgain, int wtotal, int wdonate) {
+
         //用户积分>捐赠积分且不为0；捐赠积分与累积之和不大于启动条件
         if ((ucintegral - wdonate) > 0 && ucintegral > 0 && (wdonate + wgain) < wtotal) {
-            welfareMapper.update_welfare(wid,  wgain,  wdonate);
-            int result = welfareMapper.update_user(uid,ucintegral,wdonate);
-            if (result == 1) {
-                return new Res("donate success", 200);
-            } else
-                return new Res("donate failed", 500);
+            Usr_Welfare usr_welfare = welfareMapper.select_Usr_Welfare(uid, wid);
+            if (usr_welfare == null) {
+                int wcount = wdonate;
+                welfareMapper.update_welfare(wid, wgain, wdonate);
+                welfareMapper.update_user(uid, ucintegral, wdonate);
+                int result = welfareMapper.insert_Usr_Welfare(uid, wid, wcount);
+                if (result == 1) {
+                    return new Res("donate success", 200);
+                } else
+                    return new Res("donate failed", 500);
+            } else {
+                int wcount = usr_welfare.getWcount();
+                welfareMapper.update_welfare(wid, wgain, wdonate);
+                welfareMapper.update_user(uid, ucintegral, wdonate);
+                int result=welfareMapper.update_Usr_Welfare(uid, wid,wdonate, wcount);
+                if (result == 1) {
+                    return new Res("donate success", 200);
+                } else
+                    return new Res("donate failed", 500);
+            }
         }
         //捐赠积分与累积之和大于启动条件
-        else if ((wdonate + wgain) > wtotal && wdonate<ucintegral) {
-            int result = welfareMapper.update_welfare_total(wid, wgain, wtotal);
-            if (result == 1) {
-                return new Res("您已成功捐赠，多余的积分已经返还您的账户余额", 200);
-            } else
-                return new Res("donate failed", 500);
-        }
+        else if ((wdonate + wgain) > wtotal && wdonate < ucintegral) {
+            Usr_Welfare usr_welfare = welfareMapper.select_Usr_Welfare(uid, wid);
+            if (usr_welfare == null) {
+                int wcount = wdonate - (wtotal - wgain);
+                welfareMapper.update_welfare_total(wid, wgain, wtotal);
+                welfareMapper.update_user_total(uid, ucintegral, wtotal, wgain);
+                int result = welfareMapper.insert_Usr_Welfare(uid, wid, wcount);
+                if (result == 1) {
+                    return new Res("donate success", 200);
+                } else
+                    return new Res("donate failed", 500);
+            }else{
+                int wcount = usr_welfare.getWcount();
+                String left = String.valueOf(wdonate - (wtotal - wgain));
+                welfareMapper.update_welfare_total(wid, wgain, wtotal);
+                welfareMapper.update_user_total(uid, ucintegral, wtotal, wgain);
+                int result=welfareMapper.update_Usr_Welfare(uid, wid,wdonate, wcount);
+                if (result == 1) {
+                    return new Res("您已成功捐赠，多余的" + left + "积分已经返还您的账户余额", 200);
+                } else
+                    return new Res("donate failed", 500);
+            }
+            }
         //用户积分不足
         else if ((ucintegral - wdonate) < 0) {
             return new Res("积分不足", 500);
-        }
-        else
-            return new Res("捐赠失败",200);
-
-
+        } else
+            return new Res("捐赠失败", 200);
     }
+
 }
