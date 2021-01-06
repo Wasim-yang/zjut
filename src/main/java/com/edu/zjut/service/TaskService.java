@@ -96,4 +96,10 @@ public class TaskService {
             return new Res("update failed", 500);
         }
     }
+
+//    用户领取任务奖励后更新
+    public Res update_user(int tid,int taward,int ucintegral){
+
+    }
+
 }

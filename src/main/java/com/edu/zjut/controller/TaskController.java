@@ -62,4 +62,10 @@ public class TaskController {
     public Res update(int tid, String tname, String tdescription, float trequirement, int taward, int ttype, Date tdeadline) {
         return taskService.update(tid, tname, tdescription, trequirement, taward, ttype, tdeadline);
     }
+
+//    用户领取任务奖励后，更新
+    @RequestMapping(path = "/task/update_user")
+    public Res update(int tid,int taward,int ucintegral){
+        return taskService.update_user(tid,taward,ucintegral);
+    }
 }

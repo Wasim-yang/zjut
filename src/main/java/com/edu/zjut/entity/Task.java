@@ -19,11 +19,24 @@ public class Task {
     int ttype;
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     Date tdeadline;
+    float tgain;
+
+    public float getTgain() {
+        return tgain;
+    }
+
+    public void setTgain(float tgain) {
+        this.tgain = tgain;
+    }
 
     public Task() {
     }
 
-    public Task(int tid, String tname, String tdescription, float trequirement, int taward, int ttype, Date tdeadline) {
+    public void setTrequirement(Float trequirement) {
+        this.trequirement = trequirement;
+    }
+
+    public Task(int tid, String tname, String tdescription, float trequirement, int taward, int ttype, Date tdeadline, float tgain) {
         this.tid = tid;
         this.tname = tname;
         this.tdescription = tdescription;
@@ -31,6 +44,7 @@ public class Task {
         this.taward = taward;
         this.ttype = ttype;
         this.tdeadline = tdeadline;
+        this.tgain=tgain;
     }
 
     public int getTid() {
@@ -99,6 +113,7 @@ public class Task {
                 ", taward=" + taward +
                 ", ttype=" + ttype +
                 ", tdeadline=" + tdeadline +
+                ",tgain=" + tgain +
                 '}';
     }
 }
