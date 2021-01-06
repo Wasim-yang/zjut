@@ -1,12 +1,11 @@
 package com.edu.zjut.service;
 
-import com.edu.zjut.entity.Coupon;
-import com.edu.zjut.entity.Goods;
-import com.edu.zjut.entity.Page;
-import com.edu.zjut.entity.Res;
+import com.edu.zjut.entity.*;
 import com.edu.zjut.mapper.CouponMapper;
+import com.edu.zjut.mapper.UsrMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
@@ -16,6 +15,7 @@ public class CouponService {
     @Autowired
     public void setCouponMapper(CouponMapper couponMapper) {this.couponMapper = couponMapper;
     }
+
     /*添加*/
     public Res insert(String name, float discount, int expoints, String description) {
         int result = couponMapper.insert(name, discount, expoints, description);
@@ -24,8 +24,62 @@ public class CouponService {
         } else
             return new Res("添加失败！",500 );
     }
+
+    /*用户拥有优惠券兑换*/
+    @Transactional
+    public Res usr_exchange(int uid, int cid,int cexpoints, String ctime) {
+        int upoints = couponMapper.usr_selectpoints();
+        {
+            if (upoints < cexpoints) {
+                return new Res("您的积分余额不足!", 500);
+            }else {
+                int result1 = couponMapper.usr_insert(uid, cid, ctime);
+                int result2 = couponMapper.usr_updatepoints(cid, cexpoints);
+                if (result1 == 1 && result2 == 1) {
+                    return new Res("兑换成功！", 200);
+                } else
+                    return new Res("兑换失败！", 500);
+            }
+        }
+
+    }
+    /*用户查询自己的优惠券*/
+    public Page<Coupon> usr_selectmycoupons(int usrmycurrentPage) {
+        Page<Coupon> usrmycouponPage = new Page<Coupon>();
+        int head=usrmycurrentPage*usrmycouponPage.getusrPageSize()-4;
+        int tail=usrmycurrentPage*usrmycouponPage.getusrPageSize();
+        /*先整体查询，取数据表整体数据记录数量与页数*/
+        ArrayList<Coupon> usrmycouponsArrayList=couponMapper.usr_selectmycoupons();
+        /*再按页查询，取该页数据*/
+        ArrayList<Coupon> usr_mycoupons = couponMapper.usr_selectmypage(head,tail);
+        if (!usrmycouponsArrayList.isEmpty()) {
+            if(!usr_mycoupons.isEmpty()){
+                usrmycouponPage.setusrcurrentPage(usrmycurrentPage);
+                usrmycouponPage.setDataList(usr_mycoupons);
+                usrmycouponPage.setusrtotalRecord(usrmycouponsArrayList.size());
+                usrmycouponPage.setusrtotalPage((usrmycouponsArrayList.size() + 4) / usrmycouponPage.getusrPageSize());
+            }else{
+                usrmycouponPage.setusrtotalPage((usrmycouponsArrayList.size() + 4) / usrmycouponPage.getusrPageSize());
+                usrmycouponPage.setusrtotalRecord(usrmycouponsArrayList.size());
+                usrmycurrentPage=usrmycurrentPage-1;
+                usrmycouponPage.setusrcurrentPage(usrmycurrentPage);
+                head = usrmycurrentPage * usrmycouponPage.getusrPageSize() - 4;
+                tail = usrmycurrentPage *usrmycouponPage.getusrPageSize();
+                ArrayList<Coupon> tempcouponPage=couponMapper.usr_selectpage(head,tail);
+                usrmycouponPage.setDataList(tempcouponPage);
+            }
+        } else {
+            usrmycouponPage.setusrtotalPage(0);
+            usrmycouponPage.setusrtotalRecord(0);
+        }
+        return usrmycouponPage;
+    }
+    /*用户显示当前碳积分*/
+    public int selectpoints(){return(couponMapper.usr_selectpoints());}
     /*按id查找*/
     public Coupon selectid(int id){return (couponMapper.selectid(id));}
+    /*按name查找*/
+    public Coupon selectname(String name){return (couponMapper.selectname(name));}
     /*按页查找*/
     public Page<Coupon> selectpage(int currentPage) {
         Page<Coupon> couponPage = new Page<Coupon>();
@@ -56,6 +110,37 @@ public class CouponService {
         couponPage.setTotalRecord(0);
         }
         return couponPage;
+    }
+    /*兑换后取该页数据*/
+    public Page<Coupon> usr_selectpage(int usrcurrentPage) {
+        Page<Coupon> usrcouponPage = new Page<Coupon>();
+        int head=usrcurrentPage*usrcouponPage.getusrPageSize()-4;
+        int tail=usrcurrentPage*usrcouponPage.getusrPageSize();
+        /*先整体查询，取数据表整体数据记录数量与页数*/
+        ArrayList<Coupon> usrcouponsArrayList=couponMapper.usr_selectall();
+        /*再按页查询，取该页数据*/
+        ArrayList<Coupon> usr_coupons = couponMapper.usr_selectpage(head,tail);
+        if (!usrcouponsArrayList.isEmpty()) {
+            if(!usr_coupons.isEmpty()){
+                usrcouponPage.setusrcurrentPage(usrcurrentPage);
+                usrcouponPage.setDataList(usr_coupons);
+                usrcouponPage.setusrtotalRecord(usrcouponsArrayList.size());
+                usrcouponPage.setusrtotalPage((usrcouponsArrayList.size() + 4) / usrcouponPage.getusrPageSize());
+            }else{
+                usrcouponPage.setusrtotalPage((usrcouponsArrayList.size() + 4) / usrcouponPage.getusrPageSize());
+                usrcouponPage.setusrtotalRecord(usrcouponsArrayList.size());
+                usrcurrentPage=usrcurrentPage-1;
+                usrcouponPage.setusrcurrentPage(usrcurrentPage);
+                head = usrcurrentPage * usrcouponPage.getusrPageSize() - 4;
+                tail = usrcurrentPage *usrcouponPage.getusrPageSize();
+                ArrayList<Coupon> tempcouponPage=couponMapper.usr_selectpage(head,tail);
+                usrcouponPage.setDataList(tempcouponPage);
+            }
+        } else {
+            usrcouponPage.setusrtotalPage(0);
+            usrcouponPage.setusrtotalRecord(0);
+        }
+        return usrcouponPage;
     }
     /*删除*/
     public Res delete(int id) {
