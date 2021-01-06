@@ -33,6 +33,17 @@ public class UsrController {
     public Res register(String id, String password){
         return usrService.register(id,password);
     }
+
+    /*用户——登出*/
+    @RequestMapping(path = "/usr/logout")
+    public Res logout(HttpServletRequest request){
+        request.getSession().removeAttribute("uid");
+        if(request.getSession().getAttribute("uid") == null)
+            return new Res("登出成功",200);
+        else
+            return new Res("登出失败",500);
+    }
+
     /*添加*/
 //    @RequestMapping(path = "/usr/insert")
 //    public Res insert(String id,String name, String password, int sex, int age, String address, int cintegral) {

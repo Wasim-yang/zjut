@@ -1,5 +1,6 @@
 package com.edu.zjut.controller;
 
+import com.edu.zjut.entity.Res;
 import com.edu.zjut.entity.ResBusiness;
 import com.edu.zjut.service.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class BusinessController {
         this.businessService = businessService;
     }
 
-    /*商家登录*/
+    /*商家——登录*/
     @RequestMapping(path = "/business/login")
     public ResBusiness login(String id, String password, HttpServletRequest request){
         ResBusiness resBusiness=businessService.login(id,password);
@@ -28,6 +29,16 @@ public class BusinessController {
         else {
             return new ResBusiness("登录失败",500,null);
         }
+    }
+
+    /*商家——登出*/
+    @RequestMapping(path = "/business/logout")
+    public Res logout(HttpServletRequest request){
+        request.getSession().removeAttribute("bid");
+        if(request.getSession().getAttribute("bid") == null)
+            return new Res("登出成功",200);
+        else
+            return new Res("登出失败",500);
     }
 
 }
