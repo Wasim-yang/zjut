@@ -3,6 +3,7 @@ package com.edu.zjut.controller;
 import com.edu.zjut.entity.Goods;
 import com.edu.zjut.entity.Page;
 import com.edu.zjut.entity.Res;
+import com.edu.zjut.entity.UsrPage;
 import com.edu.zjut.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,11 +26,11 @@ public class GoodsController {
     }
 
     /*查询*/
-    @RequestMapping(path = "/usr/goods/selectpage")
-    public Page<Goods> usr_select(int currentPage){ return goodsService.selectpage(currentPage); }
-
     @RequestMapping(path = "/admin/goods/selectpage")
     public Page<Goods> admin_select(int currentPage){ return goodsService.selectpage(currentPage); }
+
+    @RequestMapping(path = "/usr/goods/selectpage")
+    public UsrPage<Goods> usr_select(int currentPage){ return goodsService.selectUsrpage(currentPage); }
 
     /*按id查询*/
     @RequestMapping(path="/admin/goods/selectid")

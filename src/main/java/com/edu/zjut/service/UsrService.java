@@ -1,6 +1,7 @@
 package com.edu.zjut.service;
 
 import com.edu.zjut.entity.*;
+import com.edu.zjut.mapper.GoodsMapper;
 import com.edu.zjut.mapper.UsrMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,4 +84,8 @@ public class UsrService {
         } else
             return new Res("update failed", 500);
     }
+
+//    public ResUGC selectUGC(String uid,int gid){
+//
+//    }
 }

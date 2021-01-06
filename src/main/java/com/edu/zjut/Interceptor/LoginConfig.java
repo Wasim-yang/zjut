@@ -12,12 +12,16 @@ public class LoginConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         //注册TestInterceptor拦截器
         InterceptorRegistration registration = registry.addInterceptor(new AdminInterceptor());
-        registration.addPathPatterns("/admin/**");                      //所有路径都被拦截
+        registration.addPathPatterns("/admin/**");                      //添加拦截路径
         registration.excludePathPatterns(       //添加不拦截路径
                 "/**/login",
                 "/**/authorization",
+                "/**/static",
                 "/**/*.js",              //js静态资源
-                "/**/*.css"              //css静态资源
+                "/**/*.css",              //css静态资源
+                "/**/*.jpg",
+                "/**/*.png",
+                "/**/*.jpeg"
         );
         InterceptorRegistration registration1 = registry.addInterceptor(new UsrInterceptor());
         registration1.addPathPatterns("/usr/**");
@@ -25,7 +29,10 @@ public class LoginConfig implements WebMvcConfigurer {
                 "/**/login",
                 "/**/authorization",
                 "/**/*.js",              //js静态资源
-                "/**/*.css"            //css静态资源
+                "/**/*.css",         //css静态资源
+                "/**/*.jpg",
+                "/**/*.png",
+                "/**/*.jpeg"
         );
     }
 }

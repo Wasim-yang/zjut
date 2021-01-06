@@ -1,9 +1,6 @@
 package com.edu.zjut.controller;
 
-import com.edu.zjut.entity.Page;
-import com.edu.zjut.entity.Res;
-import com.edu.zjut.entity.ResUsr;
-import com.edu.zjut.entity.UsrNoP;
+import com.edu.zjut.entity.*;
 import com.edu.zjut.service.UsrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,4 +45,9 @@ public class UsrController {
     public Res updateNoP(String id, String name, int sex, int age, String address, int cintegral){
         return usrService.updateNoP(id, name, sex, age, address, cintegral);
     }
+
+//    @RequestMapping(path="/usr/selectNGC")
+//    public ResUGC selectNGC(String uid,int gid){
+//
+//    }
 }

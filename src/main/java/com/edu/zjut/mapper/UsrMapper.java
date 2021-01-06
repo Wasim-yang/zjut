@@ -1,6 +1,7 @@
 package com.edu.zjut.mapper;
 
 import com.edu.zjut.entity.Goods;
+import com.edu.zjut.entity.ResUGC;
 import com.edu.zjut.entity.Userlogin;
 import com.edu.zjut.entity.UsrNoP;
 import org.apache.ibatis.annotations.*;
@@ -39,4 +40,7 @@ public interface UsrMapper {
             " uaddress=#{uaddress},ucintegral=#{ucintegral} where uid=#{uid}")
     int updateNoP(@Param("uid") String uid, @Param("uname") String uname, @Param("usex") int usex, @Param("uage") int uage,
                @Param("uaddress") String uaddress, @Param("ucintegral") int ucintegral);
+
+//    @Select("select gnumber,cid,cname,cdiscount,cdescription from Usr_Coupon,Goods where gid=#{gid}")
+//    ResUGC selectUGC(@Param("uid") String uid,@Param("gid") int gid);
 }
