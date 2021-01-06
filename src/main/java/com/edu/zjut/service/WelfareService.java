@@ -82,7 +82,7 @@ public class WelfareService {
     public Res update_c(int wid, String uid, int ucintegral, int wgain, int wtotal, int wdonate) {
 
         //用户积分>捐赠积分且不为0；捐赠积分与累积之和不大于启动条件
-        if ((ucintegral - wdonate) > 0 && ucintegral > 0 && (wdonate + wgain) < wtotal) {
+        if ((ucintegral - wdonate) >=0 && ucintegral > 0 &&  wtotal>=(wdonate + wgain) ) {
             Usr_Welfare usr_welfare = welfareMapper.select_Usr_Welfare(uid, wid);
             if (usr_welfare == null) {
                 int wcount = wdonate;
