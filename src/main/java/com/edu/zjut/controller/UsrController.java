@@ -55,4 +55,11 @@ public class UsrController {
     public Res admin_updateNoP(String id, String name, int sex, int age, String address, int cintegral){
         return usrService.updateNoP(id, name, sex, age, address, cintegral);
     }
+
+    /*用户——点击按钮获取用户碳积分信息*/
+    @RequestMapping(path = "/user/usr/selectUsrUcintegral")
+    public int selectUsrUcintegral(String uid){
+        return usrService.selectUsrUcintegral(uid);
+    }
+
 }
