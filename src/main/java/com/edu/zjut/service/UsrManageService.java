@@ -27,4 +27,8 @@ public class UsrManageService {
     public Userlogin selectAll(String uid) {
         return usrManageMapper.selectAll(uid);
     }
+
+    public int getCouponNum(String uid) {
+        return usrManageMapper.getCouponNum(uid);
+    }
 }

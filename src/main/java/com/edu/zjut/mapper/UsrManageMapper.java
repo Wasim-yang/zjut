@@ -15,10 +15,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsrManageMapper {
     /*个人中心*/
+
     @Update("update Usr set umoney = umoney+10 where uid=#{uid}")
     int topupMoney(String uid);
 
     @Select("select * from Usr where uid=#{uid} ")
     Userlogin selectAll(String uid);
 
+    @Select("select count(*) from Usr_Coupon where uid=#{uid} ")
+    int getCouponNum(String uid);
 }

@@ -26,4 +26,10 @@ public class UsrManageController {
     public Userlogin selectAll (String uid){
         return usrManageService.selectAll(uid);
     }
+    /*获取优惠券个数*/
+    @RequestMapping(path = "/usr/getCouponNum")
+    public int getCouponNum (String uid){
+        return usrManageService.getCouponNum(uid);
+    }
+
 }
