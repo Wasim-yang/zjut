@@ -1,9 +1,6 @@
 package com.edu.zjut.service;
 
-import com.edu.zjut.entity.Goods;
-import com.edu.zjut.entity.Page;
-import com.edu.zjut.entity.Res;
-import com.edu.zjut.entity.UsrNoP;
+import com.edu.zjut.entity.*;
 import com.edu.zjut.mapper.UsrMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,7 +84,7 @@ public class UsrService {
         }
     }
 
-/*    public User selectAll(String uid) {
-
-    }*/
+    public Userlogin selectAll(String uid) {
+        return usrMapper.selectAll(uid);
+    }
 }

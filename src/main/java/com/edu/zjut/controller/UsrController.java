@@ -1,9 +1,6 @@
 package com.edu.zjut.controller;
 
-import com.edu.zjut.entity.Page;
-import com.edu.zjut.entity.Res;
-import com.edu.zjut.entity.ResUsr;
-import com.edu.zjut.entity.UsrNoP;
+import com.edu.zjut.entity.*;
 import com.edu.zjut.service.UsrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +16,7 @@ public class UsrController {
     public void setUsrService(UsrService usrService) { this.usrService = usrService; }
 
     /*用户——登录*/
-    @RequestMapping(path = "/usr/login")
+/*    @RequestMapping(path = "/usr/login")
     public Res login(String id, String password, HttpServletRequest request){
         ResUsr resUsr= usrService.login(id,password);
         if(resUsr.getCode()==200){
@@ -28,11 +25,11 @@ public class UsrController {
         return new Res(resUsr.getMessage(),resUsr.getCode());
     }
 
-    /*用户——注册*/
+    *//*用户——注册*//*
     @RequestMapping(path = "/usr/register")
     public Res register(String id, String password){
         return usrService.register(id,password);
-    }
+    }*/
 
     /*用户——登出*/
     @RequestMapping(path = "/usr/logout")
@@ -72,8 +69,8 @@ public class UsrController {
     public Res topupMoney (String uid){
         return usrService.topupMoney(uid);
     }
-/*    @RequestMapping(path = "/Usr/selectAll")
-    public Res selectAll (String uid){
+    @RequestMapping(path = "/Usr/selectAll")
+    public Userlogin selectAll (String uid){
         return usrService.selectAll(uid);
-    }*/
+    }
 }

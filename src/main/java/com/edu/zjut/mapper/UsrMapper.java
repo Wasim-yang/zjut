@@ -1,5 +1,6 @@
 package com.edu.zjut.mapper;
 
+import com.edu.zjut.entity.Userlogin;
 import com.edu.zjut.entity.UsrNoP;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -36,6 +37,9 @@ public interface UsrMapper {
                   @Param("uaddress") String uaddress, @Param("ucintegral") int ucintegral);
 
     /*个人中心*/
-    @Update("update usr set umoney = umoney+10 where uid=#{uid}")
+    @Update("update Usr set umoney = umoney+10 where uid=#{uid}")
     int topupMoney(String uid);
+
+    @Select("select * from Usr")
+    Userlogin selectAll(String uid);
 }
