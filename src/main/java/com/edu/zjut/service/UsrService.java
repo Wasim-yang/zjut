@@ -11,17 +11,24 @@ import java.util.ArrayList;
 @Service
 public class UsrService {
     UsrMapper usrMapper;
+    GoodsMapper goodsMapper;
 
     @Autowired
-    public void setUsrMapper(UsrMapper usrMapper) { this.usrMapper = usrMapper; }
+    public void setUsrMapper(UsrMapper usrMapper) {
+        this.usrMapper = usrMapper;
+    }
 
-    public ResUsr login(String id,String password){
-        Userlogin userlogin=usrMapper.selectlogin(id,password);
-        if(userlogin==null){
-            return new ResUsr("登陆失败",500,null);
-        }
-        else
-            return new ResUsr("登录成功",200,userlogin.getUid());
+    @Autowired
+    public void setGoodsMapper(GoodsMapper goodsMapper) {
+        this.goodsMapper = goodsMapper;
+    }
+
+    public ResUsr login(String id, String password) {
+        Userlogin userlogin = usrMapper.selectlogin(id, password);
+        if (userlogin == null) {
+            return new ResUsr("登陆失败", 500, null);
+        } else
+            return new ResUsr("登录成功", 200, userlogin.getUid());
     }
 
     /*添加*/
@@ -33,7 +40,9 @@ public class UsrService {
 //            return new Res("insert failed", 500);
 //    }
     /*按id查找,输出无密码用户信息*/
-    public UsrNoP selectNoPid(String id){return (usrMapper.selectNoPid(id));}
+    public UsrNoP selectNoPid(String id) {
+        return (usrMapper.selectNoPid(id));
+    }
 
     /*按页查找,输出无密码用户信息*/
     public Page<UsrNoP> selectNoP(int currentPage) {
@@ -53,11 +62,11 @@ public class UsrService {
             } else {
                 usrNoPPage.setTotalPage((usrNoPArrayList.size() + 4) / usrNoPPage.getPageSize());
                 usrNoPPage.setTotalRecord(usrNoPArrayList.size());
-                currentPage=currentPage-1;
+                currentPage = currentPage - 1;
                 usrNoPPage.setCurrentPage(currentPage);
                 head = currentPage * usrNoPPage.getPageSize() - 4;
                 tail = currentPage * usrNoPPage.getPageSize();
-                ArrayList<UsrNoP> tempusrNoPPage=usrMapper.selectNoPpage(head,tail);
+                ArrayList<UsrNoP> tempusrNoPPage = usrMapper.selectNoPpage(head, tail);
                 usrNoPPage.setDataList(tempusrNoPPage);
             }
         } else {
@@ -85,7 +94,8 @@ public class UsrService {
             return new Res("update failed", 500);
     }
 
-//    public ResUGC selectUGC(String uid,int gid){
-//
-//    }
+    public ResUGC selectUGC(String uid, int gid) {
+        Goods goods = goodsMapper.selectid(gid);
+
+    }
 }

@@ -50,7 +50,10 @@ public class UsrController {
         return usrService.updateNoP(id, name, sex, age, address, cintegral);
     }
 
-
+    @RequestMapping(path="/usr/goods/readybuy")
+    public ResUGC selectUGC(String uid,String gid){
+        return usrService.selectUGC(uid,gid);
+    }
 //    @RequestMapping(path="/usr/selectNGC")
 //    public ResUGC selectNGC(String uid,int gid){
 //
