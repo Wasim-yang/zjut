@@ -39,6 +39,11 @@ public interface UsrMapper {
     int updateNoP(@Param("uid") String uid, @Param("uname") String uname, @Param("usex") int usex, @Param("uage") int uage,
                @Param("uaddress") String uaddress, @Param("ucintegral") int ucintegral);
 
+
+    //点击按钮获取用户碳积分
+    @Select("select ucintegral from Usr where uid=#{uid}")
+    int  selectUsrUcintegral(String uid);
+
     /**
      *  用户提交里程时，给用户增加碳积分
      */

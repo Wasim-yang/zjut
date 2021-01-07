@@ -61,9 +61,19 @@ public class UsrController {
     @RequestMapping(path = "/admin/usr/delete")
     public Res admin_delete(String id){ return usrService.delete(id); }
 
+
     /*管理员——更新用户信息*/
     @RequestMapping(path = "/admin/usr/updateNoP")
     public Res admin_updateNoP(String id, String name, int sex, int age, String address, int cintegral){
         return usrService.updateNoP(id, name, sex, age, address, cintegral);
     }
+
+
+    //点击按钮获取用户碳积分
+    @RequestMapping(path = "usr/selectUsrUcintegral")
+    public int selectUsrUcintegral(String uid){
+        return usrService.selectUsrUcintegral(uid);
+    }
+
+
 }
