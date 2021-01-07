@@ -54,13 +54,13 @@ public class CouponController {
     }
     /*用户兑换优惠券*/
     @RequestMapping(path = "/usr/coupon/exchange")
-    public Res exchange(int uid,int cid,String cname,float cdiscount,String cdescription,int cexpoints,String ctime){
+    public Res exchange(String uid,int cid,String cname,float cdiscount,String cdescription,int cexpoints,String ctime){
         return couponService.usr_exchange(uid,cid,cname,cdiscount,cdescription,cexpoints,ctime);
     }
     /*用户查询当前碳积分*/
     @RequestMapping(path = "/usr/coupon/selectpoints")
-    public int selectpoints(){
-        return couponService.selectpoints();
+    public int selectpoints(String uid){
+        return couponService.selectpoints(uid);
     }
     /*用户查看拥有的优惠券*/
     @RequestMapping(path = "/usr/coupon/selectmycoupons")

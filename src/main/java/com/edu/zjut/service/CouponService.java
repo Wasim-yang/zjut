@@ -13,8 +13,7 @@ import java.util.ArrayList;
 public class CouponService {
     CouponMapper couponMapper;
     @Autowired
-    public void setCouponMapper(CouponMapper couponMapper) {this.couponMapper = couponMapper;
-    }
+    public void setCouponMapper(CouponMapper couponMapper) {this.couponMapper = couponMapper; }
 
     /*添加*/
     public Res insert(String name, float discount, int expoints, String description) {
@@ -27,20 +26,21 @@ public class CouponService {
 
     /*用户拥有优惠券兑换*/
     @Transactional
-    public Res usr_exchange(int uid, int cid, String cname,float cdiscount,String cdescription,int cexpoints, String ctime) {
-        int upoints = couponMapper.usr_selectpoints();
-        {
-            if (upoints < cexpoints) {
-                return new Res("您的积分余额不足!", 500);
-            }else {
-                int result1 = couponMapper.usr_insert(uid, cid,cname,cdiscount,cdescription,ctime);
-                int result2 = couponMapper.usr_updatepoints(cid, cexpoints);
-                if (result1 == 1 && result2 == 1) {
-                    return new Res("兑换成功！", 200);
-                } else
-                    return new Res("兑换失败！", 500);
-            }
+    public Res usr_exchange(String uid, int cid, String cname,float cdiscount,String cdescription,int cexpoints, String ctime) {
+        int upoints = couponMapper.usr_selectpoints(uid); //获取用户碳积分
+        if (upoints < cexpoints) {
+            return new Res("您的积分余额不足!", 500);
+        }else {
+            //将优惠券加入用户优惠券表
+            int result1 = couponMapper.usr_insert(uid, cid,cname,cdiscount,cdescription,ctime);
+            //减去用户碳积分
+            int result2 = couponMapper.usr_updatepoints(uid, cid, cexpoints);
+            if (result1 == 1 && result2 == 1) {
+                return new Res("兑换成功！", 200);
+            } else
+                return new Res("兑换失败！", 500);
         }
+
 
     }
     /*用户查询自己的优惠券*/
@@ -75,7 +75,7 @@ public class CouponService {
         return usrmycouponPage;
     }
     /*用户显示当前碳积分*/
-    public int selectpoints(){return(couponMapper.usr_selectpoints());}
+    public int selectpoints(String uid){return(couponMapper.usr_selectpoints(uid));}
     /*按id查找*/
     public Coupon selectid(int id){return (couponMapper.selectid(id));}
     /*按name查找*/
@@ -98,18 +98,18 @@ public class CouponService {
             couponPage.setTotalRecord(couponsArrayList.size());
             couponPage.setTotalPage((couponsArrayList.size() + 4) / couponPage.getPageSize());
         }else{
-        couponPage.setTotalPage((couponsArrayList.size() + 4) / couponPage.getPageSize());
-        couponPage.setTotalRecord(couponsArrayList.size());
-        currentPage=currentPage-1;
-        couponPage.setCurrentPage(currentPage);
-        head = currentPage * couponPage.getPageSize() - 4;
-        tail = currentPage *couponPage.getPageSize();
-        ArrayList<Coupon> tempcouponPage=couponMapper.selectpage(head,tail);
-        couponPage.setDataList(tempcouponPage);
+            couponPage.setTotalPage((couponsArrayList.size() + 4) / couponPage.getPageSize());
+            couponPage.setTotalRecord(couponsArrayList.size());
+            currentPage=currentPage-1;
+            couponPage.setCurrentPage(currentPage);
+            head = currentPage * couponPage.getPageSize() - 4;
+            tail = currentPage *couponPage.getPageSize();
+            ArrayList<Coupon> tempcouponPage=couponMapper.selectpage(head,tail);
+            couponPage.setDataList(tempcouponPage);
        }
        } else {
-        couponPage.setTotalPage(0);
-        couponPage.setTotalRecord(0);
+            couponPage.setTotalPage(0);
+            couponPage.setTotalRecord(0);
         }
         return couponPage;
     }
