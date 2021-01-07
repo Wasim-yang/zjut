@@ -24,7 +24,6 @@ public class GoodsController {
     public Res admin_insert(String name, float cost , int number , int ean , String description, String path) {
         return goodsService.insert(name, cost , number , ean ,description ,path);
     }
-
     /*查询*/
     @RequestMapping(path = "/admin/goods/selectpage")
     public Page<Goods> admin_select(int currentPage){ return goodsService.selectpage(currentPage); }
