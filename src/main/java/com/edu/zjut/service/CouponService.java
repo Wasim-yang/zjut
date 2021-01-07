@@ -80,6 +80,8 @@ public class CouponService {
     public Coupon selectid(int id){return (couponMapper.selectid(id));}
     /*按name查找*/
     public Coupon selectname(String name){return (couponMapper.selectname(name));}
+    /*用户拥有优惠券按name查找*/
+    public Coupon selectmycname(String name){return (couponMapper.selectmycname(name));}
     /*按页查找*/
     public Page<Coupon> selectpage(int currentPage) {
         Page<Coupon> couponPage = new Page<Coupon>();

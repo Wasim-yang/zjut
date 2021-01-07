@@ -39,6 +39,10 @@ public class CouponController {
     @RequestMapping(path = "/usr/coupon/selectname")
     public Coupon selectname(String name){return couponService.selectname(name);}
 
+    /*用户拥有优惠券按name查找*/
+    @RequestMapping(path = "/usr/coupon/selectmycname")
+    public Coupon selectmycname(String name){return  couponService.selectmycname(name);}
+
     /*删除*/
     @RequestMapping(path = "/coupon/delete")
     public Res delete(int id){ return couponService.delete(id); }

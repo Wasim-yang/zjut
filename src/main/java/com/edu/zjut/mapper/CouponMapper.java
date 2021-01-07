@@ -41,6 +41,9 @@ public interface CouponMapper {
     @Select("select cid,cname,cdiscount,cexpoints,cdescription from Coupon where not exists (select cid from Usr_Coupon where Coupon.cid=Usr_Coupon.cid and uid=1)and cname=$#{name}")
     Coupon selectname(String name);
 
+    @Select("select cname,cdiscount,cexpoints,cdescription,ctime from Usr_Coupon where cname=$#{name}")
+    Coupon selectmycname(String name);
+
     @Delete("delete from Coupon where cid=#{id}")
     int delete(int id);
 
