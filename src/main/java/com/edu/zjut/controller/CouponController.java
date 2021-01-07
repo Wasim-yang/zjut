@@ -29,7 +29,7 @@ public class CouponController {
 
    /* 用户兑换完后刷新*/
    @RequestMapping(path = "/usr/coupon/selectpage")
-   public Page<Coupon> usr_select(int usrcurrentPage){ return couponService.usr_selectpage(usrcurrentPage);}
+   public Page<Coupon> usr_select(int usrcurrentPage,String uid){ return couponService.usr_selectpage(usrcurrentPage,uid);}
 
     /*按id查询*/
     @RequestMapping(path="/coupon/selectid")
@@ -37,11 +37,13 @@ public class CouponController {
 
     /*按name查询*/
     @RequestMapping(path = "/usr/coupon/selectname")
-    public Coupon selectname(String name){return couponService.selectname(name);}
+    public Page<Coupon> selectname(int usrcurrentPage,String uid, String name){return couponService.selectname(usrcurrentPage,uid,name);}
 
     /*用户拥有优惠券按name查找*/
     @RequestMapping(path = "/usr/coupon/selectmycname")
-    public Coupon selectmycname(String name){return  couponService.selectmycname(name);}
+    public Page<Coupon> selectmycname(int usrmycurrentPage,String uid,String name){
+        return  couponService.selectmycname(usrmycurrentPage,uid,name);
+    }
 
     /*删除*/
     @RequestMapping(path = "/coupon/delete")
@@ -64,6 +66,8 @@ public class CouponController {
     }
     /*用户查看拥有的优惠券*/
     @RequestMapping(path = "/usr/coupon/selectmycoupons")
-    public Page<Coupon> usr_selectmycoupons(int usrmycurrentPage){return couponService.usr_selectmycoupons(usrmycurrentPage);}
+    public Page<Coupon> usr_selectmycoupons(int usrmycurrentPage,String uid){
+        return couponService.usr_selectmycoupons(usrmycurrentPage,uid);
+    }
 
 }
