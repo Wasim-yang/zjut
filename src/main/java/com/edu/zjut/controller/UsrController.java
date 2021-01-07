@@ -1,12 +1,15 @@
 package com.edu.zjut.controller;
 
 import com.edu.zjut.entity.*;
+import com.edu.zjut.entity.Res;
+import com.edu.zjut.entity.UsrNoP;
 import com.edu.zjut.service.UsrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 
 @RestController
 public class UsrController {
@@ -23,6 +26,7 @@ public class UsrController {
         }
         return new Res(resUsr.getMessage(),resUsr.getCode());
     }
+
     /*添加*/
 //    @RequestMapping(path = "/usr/insert")
 //    public Res insert(String id,String name, String password, int sex, int age, String address, int cintegral) {
@@ -46,8 +50,10 @@ public class UsrController {
         return usrService.updateNoP(id, name, sex, age, address, cintegral);
     }
 
+
 //    @RequestMapping(path="/usr/selectNGC")
 //    public ResUGC selectNGC(String uid,int gid){
 //
 //    }
+
 }

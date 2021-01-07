@@ -22,8 +22,16 @@ public interface GoodsMapper {
     @Select("select gid, gname, gcost, gnumber, gean, gdescription, gimage from Goods")
     ArrayList<Goods> selectall();
 
+    @Select("select gid, gname, gcost, gnumber, gean, gdescription, gimage from Goods where gname like #{name}")
+    ArrayList<Goods> selectnameall(String name);
+
     @Select("select gid, gname, gcost, gnumber, gean, gdescription, gimage from Goods where gid=${gid}")
     Goods selectid(int gid);
+
+    @Select("with t as (select row_number() over(order by gid) r, * from Goods) "+
+            "select gid, gname, gcost, gnumber, gean, gdescription, gimage from t "+
+            "where r between #{head} and #{tail} and gname like #{name}")
+    ArrayList<Goods> selectnamepage(@Param("head") int head,@Param("tail") int tail,@Param("name") String name);
 
     @Delete("delete from Goods where gid=#{gid}")
     int delete(int gid);

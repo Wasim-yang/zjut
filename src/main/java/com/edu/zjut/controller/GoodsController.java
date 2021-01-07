@@ -48,4 +48,9 @@ public class GoodsController {
     public Res update(int id, String name, float cost , int number , int ean ,String description,String path){
         return goodsService.update( id, name, cost, number, ean, description, path);
     }
+
+    @RequestMapping(path = "/usr/goods/selectname")
+    public UsrPage<Goods> usr_selectname(String name,int currentPage){
+        return goodsService.selectnamepage(name,currentPage);
+    }
 }

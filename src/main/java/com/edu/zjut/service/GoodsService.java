@@ -122,4 +122,38 @@ public class GoodsService {
         } else
             return new Res("update failed", 500);
     }
+
+    /*按名字模糊查找*/
+    public UsrPage<Goods> selectnamepage(String name,int currentPage){
+        name="%"+name+"%";
+        UsrPage<Goods> goodsPage=new UsrPage();
+        int head = currentPage * goodsPage.getPageSize() - goodsPage.getPageSize()+1;
+        int tail = currentPage * goodsPage.getPageSize();
+        /*先整体查询，取数据表整体数据记录数量与页数*/
+        ArrayList<Goods> goodsArrayList = goodsMapper.selectnameall(name);
+        /*再按页查询，取该页数据*/
+        ArrayList<Goods> goods = goodsMapper.selectnamepage(head,tail,name);
+        if (!goodsArrayList.isEmpty()) {
+            if (!goods.isEmpty()) {
+                goodsPage.setCurrentPage(currentPage);
+                goodsPage.setDataList(goods);
+                goodsPage.setTotalRecord(goodsArrayList.size());
+                goodsPage.setTotalPage((goodsArrayList.size() + goodsPage.getPageSize()-1) / goodsPage.getPageSize());
+            } else {
+                goodsPage.setTotalPage((goodsArrayList.size() + goodsPage.getPageSize()-1) / goodsPage.getPageSize());
+                goodsPage.setTotalRecord(goodsArrayList.size());
+                currentPage=currentPage-1;
+                goodsPage.setCurrentPage(currentPage);
+                head = currentPage * goodsPage.getPageSize() - goodsPage.getPageSize()+1;
+                tail = currentPage * goodsPage.getPageSize();
+                ArrayList<Goods> tempgoodsPage=goodsMapper.selectnamepage(head,tail,name);
+                goodsPage.setDataList(tempgoodsPage);
+            }
+        } else {
+            goodsPage.setTotalPage(0);
+            goodsPage.setTotalRecord(0);
+        }
+        return goodsPage;
+
+    }
 }
