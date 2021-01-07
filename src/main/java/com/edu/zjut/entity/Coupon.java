@@ -7,9 +7,9 @@ public class Coupon {
     int cexpoints;
     String cdescription;
 
-public Coupon(){
-}
-    public Coupon(int id, String name, float discount, int expoints, String description){
+    public Coupon() {}
+
+    public Coupon(int id, String name, float discount, int expoints, String description) {
         this.cid = cid;
         this.cname = cname;
         this.cdiscount = cdiscount;

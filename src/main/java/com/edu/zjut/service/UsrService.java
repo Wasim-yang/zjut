@@ -87,7 +87,7 @@ public class UsrService {
         }
     }
 
-    public User selectAll(String uid) {
+/*    public User selectAll(String uid) {
 
-    }
+    }*/
 }

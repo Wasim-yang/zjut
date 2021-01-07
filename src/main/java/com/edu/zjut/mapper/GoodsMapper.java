@@ -10,7 +10,7 @@ import java.util.ArrayList;
 @Mapper
 @Repository
 public interface GoodsMapper {
-    @Insert("insert into Goods(gname,gcost,gnumber,gean,gdescription,gimage) VALUES (#{gname},#{gcost},#{gnumber},#{gean},#{gdescription},#{gimage})")
+    @Insert("insert into Goods(gname,gcost,gnumber,gean,gdescription,gimage,bid) VALUES (#{gname},#{gcost},#{gnumber},#{gean},#{gdescription},#{gimage},8888)")
     int insert(@Param("gname") String gname,@Param("gcost") float gcost ,@Param("gnumber")int gnumber ,@Param("gean") int gean ,
                @Param("gdescription") String gdescription ,@Param("gimage") String Filepath);
 

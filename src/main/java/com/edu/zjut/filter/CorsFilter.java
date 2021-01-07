@@ -21,8 +21,9 @@ public class CorsFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpServletRequest req = (HttpServletRequest) request;
-        resp.addHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
-        resp.addHeader("Access-Control-Allow-Credentials", "true");
+        resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
+        resp.setHeader("Access-Control-Allow-Credentials", "true");
+        resp.setHeader("Access-Control-Max-Age", "3600");
         HttpSession session = req.getSession();
         chain.doFilter(request, response);
     }
