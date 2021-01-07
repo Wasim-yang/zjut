@@ -74,17 +74,4 @@ public class UsrService {
         } else
             return new Res("update failed", 500);
     }
-
-    public Res topupMoney(String uid) {
-        int result = usrMapper.topupMoney(uid);
-        if (result == 1) {
-            return new Res("充值成功！", 200);
-        } else{
-            return new Res("充值失败，请重试", 500);
-        }
-    }
-
-    public Userlogin selectAll(String uid) {
-        return usrMapper.selectAll(uid);
-    }
 }

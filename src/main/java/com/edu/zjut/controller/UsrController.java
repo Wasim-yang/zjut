@@ -64,13 +64,4 @@ public class UsrController {
         return usrService.updateNoP(id, name, sex, age, address, cintegral);
     }
 
-    /*个人中心*/
-    @RequestMapping(path = "/usr/topupMoney")
-    public Res topupMoney (String uid){
-        return usrService.topupMoney(uid);
-    }
-    @RequestMapping(path = "/Usr/selectAll")
-    public Userlogin selectAll (String uid){
-        return usrService.selectAll(uid);
-    }
 }

@@ -22,7 +22,7 @@ public class TravellogService {
         this.usrMapper = usrMapper;
     }
 
-    /*用户出行里程记录添加*/
+    //用户出行里程记录添加
     @Transactional
     public Res insert(String uid, int type, float mileage){
         Date time = new Date();

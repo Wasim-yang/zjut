@@ -36,10 +36,11 @@ public interface UsrMapper {
     int updateNoP(@Param("uid") String uid, @Param("uname") String uname, @Param("usex") int usex, @Param("uage") int uage,
                   @Param("uaddress") String uaddress, @Param("ucintegral") int ucintegral);
 
-    /*个人中心*/
-    @Update("update Usr set umoney = umoney+10 where uid=#{uid}")
-    int topupMoney(String uid);
+    /**
+     * 用户提交里程时，给用户增加碳积分
+     */
+    @Update("update usr set ucintegral = ucintegral + #{mileage} where uid=#{uid}")
+    int updateAddCintegral(@Param("uid") String uid, @Param("mileage") int tmileage);
 
-    @Select("select * from Usr")
-    Userlogin selectAll(String uid);
+
 }

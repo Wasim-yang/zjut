@@ -8,6 +8,7 @@ public class Userlogin {
     int uage;
     String uaddress;
     int ucintegral;
+    int umoney;
 
     public Userlogin() {
     }
@@ -20,6 +21,14 @@ public class Userlogin {
         this.uage = uage;
         this.uaddress = uaddress;
         this.ucintegral = ucintegral;
+    }
+
+    public int getUmoney() {
+        return umoney;
+    }
+
+    public void setUmoney(int umoney) {
+        this.umoney = umoney;
     }
 
     public String getUpassword() {
