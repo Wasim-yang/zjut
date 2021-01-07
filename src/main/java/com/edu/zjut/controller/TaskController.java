@@ -65,7 +65,7 @@ public class TaskController {
 
 //    用户领取任务奖励后，更新
     @RequestMapping(path = "/task/update_user")
-    public Res update(int tid,int taward,int ucintegral){
-        return taskService.update_user(tid,taward,ucintegral);
+    public Res update(int tid,int taward,String uid,int ucintegral){
+        return taskService.update_user(tid,taward,uid,ucintegral);
     }
 }
