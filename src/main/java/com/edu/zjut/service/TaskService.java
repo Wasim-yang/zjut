@@ -101,6 +101,7 @@ public class TaskService {
 //    用户领取任务奖励后更新
     public Res update_user(int tid,int taward,String uid,int ucintegral){
         int result =taskMapper.update_user(tid,taward,uid,ucintegral);
+        System.out.println(result);
         if (result == 1) {
             return new Res("领取成功", 200);
         } else {
