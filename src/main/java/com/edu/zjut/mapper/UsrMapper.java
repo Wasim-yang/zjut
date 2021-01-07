@@ -1,6 +1,5 @@
 package com.edu.zjut.mapper;
 
-import com.edu.zjut.entity.Goods;
 import com.edu.zjut.entity.UsrNoP;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -17,8 +16,8 @@ public interface UsrMapper {
 //    @Select("select * from Usr")
 //    ArrayList<Usr> select();
 
-    @Select("with t as (select row_number() over(order by uid) r, * from Usr) "+
-            "select uid, uname, usex, uage, uaddress, ucintegral from t "+
+    @Select("with t as (select row_number() over(order by uid) r, * from Usr) " +
+            "select uid, uname, usex, uage, uaddress, ucintegral from t " +
             "where r between #{head} and #{tail}")
     ArrayList<UsrNoP> selectNoPpage(@Param("head") int head, @Param("tail") int tail);
 
@@ -34,5 +33,9 @@ public interface UsrMapper {
     @Update("update usr set uname=#{uname}, usex=#{usex}, uage=#{uage}," +
             " uaddress=#{uaddress},ucintegral=#{ucintegral} where uid=#{uid}")
     int updateNoP(@Param("uid") String uid, @Param("uname") String uname, @Param("usex") int usex, @Param("uage") int uage,
-               @Param("uaddress") String uaddress, @Param("ucintegral") int ucintegral);
+                  @Param("uaddress") String uaddress, @Param("ucintegral") int ucintegral);
+
+    /*个人中心*/
+    @Update("update usr set umoney = umoney+10 where uid=#{uid}")
+    int topupMoney(String uid);
 }
