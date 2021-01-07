@@ -28,17 +28,25 @@ public class TaskController {
      * 添加任务
      */
     @RequestMapping(path = "/task/insert")
-    public Res insert(String tname, String tdescription, float trequirement, int taward, int ttype, Date tdeadline) {
-        return taskService.insert(tname, tdescription, trequirement, taward, ttype, tdeadline);
+    public Res insert(String tname, String tdescription, float trequirement, int taward, int ttype, Date tstartime,Date tdeadline) {
+        return taskService.insert(tname, tdescription, trequirement, taward, ttype, tstartime,tdeadline);
     }
 
     /**
-     * 查询全部
+     * 管理员查询全部
      */
     @RequestMapping(path = "/task/selectByPage")
     public Page<Task> selectByPage(int currentPage) {
         return taskService.selectByPage(currentPage);
     }
+    /**
+     * 用户查询全部
+     */
+    @RequestMapping(path = "/task/selectByPageUser")
+    public Page<Task> selectByPageUser(int currentPage) {
+        return taskService.selectByPageUser(currentPage);
+    }
+
     /**
      * 通过id查询
      */
@@ -65,7 +73,7 @@ public class TaskController {
 
 //    用户领取任务奖励后，更新
     @RequestMapping(path = "/task/update_user")
-    public Res update(int tid,int taward,String uid,int ucintegral){
-        return taskService.update_user(tid,taward,uid,ucintegral);
+    public Res update_user(String uid,int taward,int tid){
+        return taskService.update_user(uid,taward,tid);
     }
 }
