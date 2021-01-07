@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+
 @RestController
 public class CouponController {
     CouponService couponService;
@@ -48,8 +50,8 @@ public class CouponController {
     }
     /*用户兑换优惠券*/
     @RequestMapping(path = "/usr/coupon/exchange")
-    public Res exchange(int uid,int cid, int cexpoints,String ctime){
-        return couponService.usr_exchange(uid,cid,cexpoints,ctime);
+    public Res exchange(int uid,int cid,String cname,float cdiscount,String cdescription,int cexpoints,String ctime){
+        return couponService.usr_exchange(uid,cid,cname,cdiscount,cdescription,cexpoints,ctime);
     }
     /*用户查询当前碳积分*/
     @RequestMapping(path = "/usr/coupon/selectpoints")
@@ -58,6 +60,6 @@ public class CouponController {
     }
     /*用户查看拥有的优惠券*/
     @RequestMapping(path = "/usr/coupon/selectmycoupons")
-    public Page<Coupon> usr_selectmycoupons(int usrcurrentPage){return couponService.usr_selectmycoupons(usrcurrentPage);}
+    public Page<Coupon> usr_selectmycoupons(int usrmycurrentPage){return couponService.usr_selectmycoupons(usrmycurrentPage);}
 
 }

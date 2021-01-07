@@ -11,8 +11,8 @@ public interface CouponMapper {
     int insert(@Param("name") String name,@Param("discount") float discount ,@Param("expoints") int expoints , @Param("description") String description);
 
     /*用户插入用户优惠券表*/
-    @Insert("insert into Usr_Coupon(uid,cid,ctime) VALUES (#{uid},#{cid},#{ctime})")
-    int usr_insert(@Param("uid") int uid,@Param("cid") int cid ,@Param("ctime") String ctime);
+    @Insert("insert into Usr_Coupon(uid,cid,cname,cdiscount,cdescription,ctime) VALUES (#{uid},#{cid},#{cname},#{cdiscount},#{cdescription},#{ctime})")
+    int usr_insert(@Param("uid") int uid,@Param("cid") int cid ,@Param("cname") String cname,@Param("cdiscount") float cdiscount,@Param("cdescription") String cdescription,@Param("ctime") String ctime);
 
     @Select("with t as (select row_number() over(order by cid) r, * from Coupon) "+
             "select cid, cname, cdiscount, cexpoints,cdescription from t "+ "where r between #{head} and #{tail}")
@@ -28,10 +28,9 @@ public interface CouponMapper {
     @Select("select cid,cname,cdiscount,cexpoints,cdescription from Coupon where not exists (select cid from Usr_Coupon where Coupon.cid=Usr_Coupon.cid and uid=1)")
     ArrayList<Coupon> usr_selectall();
 
-    @Select("with t as (select row_number() over(order by cid) r, * from Coupon) "+
-            "select  cname, cdiscount, cexpoints,cdescription from t "+ "where r between #{head} and #{tail}")
+    @Select("with t as (select row_number() over(order by cid) r, * from Usr_Coupon) "+
+            "select cname,cdiscount,cdescription,ctime from t "+ "where r between #{head} and #{tail}")
     ArrayList<Coupon> usr_selectmypage(@Param("head") int head, @Param("tail") int tail);  //第head条到第tail条
-
 
     @Select("select cname,cdiscount,cexpoints,cdescription from Coupon where cid in(select cid from Usr_Coupon where Coupon.cid=Usr_Coupon.cid and uid=1)")
     ArrayList<Coupon> usr_selectmycoupons();

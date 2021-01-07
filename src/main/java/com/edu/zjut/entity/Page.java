@@ -8,11 +8,19 @@ public class Page<T> implements Serializable {
 
     private static int usrpageSize=5;//用户界面每页多少条记录
 
+    private static int usrmypageSize=5;//用户优惠券界面每页多少条记录
+
     private int usrcurrentPage; //用户界面当前第几页数据
 
     private int usrtotalRecord; // 用户一共多少条记录
 
-    private int usrtotalPage; // 一共多少页记录
+    private int usrtotalPage; // 用户界面一共多少页记录
+
+    private int usrmycurrentPage; //用户优惠券界面当前第几页数据
+
+    private int usrmytotalRecord; // 用户优惠券界面一共多少条记录
+
+    private int usrmytotalPage; // 用户优惠券界面一共多少页记录
 
     private int currentPage; //当前第几页数据
 
@@ -24,7 +32,9 @@ public class Page<T> implements Serializable {
 
     public Page(){ }
 
-    public Page(int currentPage,int usrcurrentPage, int totalRecord,int usrtotalRecord, int totalPage,int usrtotalPage, ArrayList<T> dataList) {
+
+    public Page(int currentPage, int usrcurrentPage, int totalRecord, int usrtotalRecord, int totalPage, int usrtotalPage,
+                int usrmycurrentPage,int usrmytotalRecord,int usrmytotalPage, ArrayList<T> dataList) {
         this.currentPage = currentPage;
         this.totalRecord = totalRecord;
         this.totalPage = totalPage;
@@ -32,6 +42,9 @@ public class Page<T> implements Serializable {
         this.usrcurrentPage = usrcurrentPage;
         this.usrtotalPage = usrtotalPage;
         this.usrtotalRecord=usrtotalRecord;
+        this.usrmycurrentPage = usrmycurrentPage;
+        this.usrmytotalRecord = usrmytotalRecord;
+        this.usrmytotalPage = usrmytotalPage;
     }
 
     public int getPageSize() {
@@ -96,4 +109,35 @@ public class Page<T> implements Serializable {
         this.usrpageSize = usrpageSize;
     }
 
+    public int getusrmypageSize() {
+        return usrmypageSize;
+    }
+
+    public void setusrmypageSize(int usrmypageSize) {
+        this.usrmypageSize = usrmypageSize;
+    }
+
+    public int getusrmycurrentPage() {
+        return usrmycurrentPage;
+    }
+
+    public void setusrmycurrentPage(int usrmycurrentPage) {
+        this.usrmycurrentPage = usrmycurrentPage;
+    }
+
+    public int getusrmytotalRecord() {
+        return usrmytotalRecord;
+    }
+
+    public void setusrmytotalRecord(int usrmytotalRecord) {
+        this.usrmytotalRecord = usrmytotalRecord;
+    }
+
+    public int getusrmytotalPage() {
+        return usrmytotalPage;
+    }
+
+    public void setusrmytotalPage(int usrmytotalPage) {
+        this.usrmytotalPage = usrmytotalPage;
+    }
 }
