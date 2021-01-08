@@ -1,11 +1,14 @@
 package com.edu.zjut.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Usr_Goods {
     String uid;
     int gid;
     int gstate;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     Date gtime;
     int ugnumber;
     float ugcost;

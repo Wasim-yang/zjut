@@ -69,7 +69,7 @@ public interface GoodsMapper {
     int delete_Usr_Goods(@Param("uid") String uid, @Param("gid") int gid, @Param("gtime") Date gtime);
 
     //用户退货后商品库存+1
-    @Update("update Goods where gnumber=gnumber+#{number} and gid=#{gid}")
+    @Update("update Goods set gnumber=gnumber+#{number} where gid=#{gid}")
     int update_Goods_gnumber(@Param("gid") int gid, @Param("number") int nummber);
 
     //用户退货后商家的钱返还
