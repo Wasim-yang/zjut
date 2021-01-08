@@ -74,7 +74,7 @@ public interface GoodsMapper {
 
     //用户退货后商家的钱返还
     @Update("update Business set bmoney=bmoney-#{gcost} where bid=#{bid}")
-    int update_Business_bmoney(@Param("gcost") float gcost, @Param("bid") int bid);
+    int update_Business_bmoney(@Param("gcost") float gcost, @Param("bid") String bid);
 
     //用户退货后用户的钱返还
     @Update("update Usr set umoney=umoney+#{gcost} where uid=#{uid}")

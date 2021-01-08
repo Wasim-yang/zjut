@@ -182,4 +182,22 @@ public class UsrService {
         }
         return goodsPage;
     }
+
+    @Transactional
+    public Res rejectgoods(String uid,int gid,int number,Date gtime,float gcost){
+        //查找商家
+        String bid=goodsMapper.selectid(gid).getBid();
+        //用户退货后删除购买记录
+        goodsMapper.delete_Usr_Goods(uid,gid,gtime);
+        //用户退货后商品库存+1
+        goodsMapper.update_Goods_gnumber(gid,number);
+        //用户退货后商家的钱返还
+        goodsMapper.update_Business_bmoney(gcost,bid);
+        //用户退货后用户的钱返还
+        int result = goodsMapper.update_Usr_umoney(uid,gcost);
+        if (result == 1) {
+            return new Res("退货成功", 200);
+        } else
+            return new Res("退货失败", 500);
+    }
 }
