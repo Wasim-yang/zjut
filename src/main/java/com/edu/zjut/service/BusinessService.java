@@ -5,6 +5,8 @@ import com.edu.zjut.mapper.BusinessMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -173,8 +175,8 @@ public class BusinessService {
     }
 
     /*更新发货状态*/
-    public Res updateDeliver(String uid, int gid) {
-        int result = businessMapper.updateDeliver(uid,gid,1);
+    public Res updateDeliver(String uid, int gid,Date gtime) {
+        int result = businessMapper.updateDeliver(uid,gid,1,gtime);
         if (result == 1) {
             return new Res("发货成功", 200);
         } else {

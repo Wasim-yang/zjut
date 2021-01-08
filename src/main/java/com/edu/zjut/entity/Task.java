@@ -19,6 +19,7 @@ public class Task {
     int ttype;
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     Date tdeadline;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     Date tstartime;
     float tgain;
 

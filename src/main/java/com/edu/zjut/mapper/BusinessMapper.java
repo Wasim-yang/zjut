@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Mapper
 @Repository
@@ -114,7 +115,7 @@ public interface BusinessMapper {
      */
     @Update("update Usr_Goods set gstate=#{gstate} where uid=#{uid} and gid=#{gid}")
     int updateDeliver(@Param("uid") String uid,@Param("gid") int gid,
-                      @Param("gstate") int gstate);
+                      @Param("gstate") int gstate,@Param("gtime") Date gtime);
 
     /**
      * 删除 该商家 用户配送单信息

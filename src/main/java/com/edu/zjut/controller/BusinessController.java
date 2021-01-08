@@ -3,10 +3,15 @@ package com.edu.zjut.controller;
 import com.edu.zjut.entity.*;
 import com.edu.zjut.service.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @RestController
 public class BusinessController {
@@ -15,6 +20,12 @@ public class BusinessController {
     @Autowired
     public void setBusinessService(BusinessService businessService) {
         this.businessService = businessService;
+    }
+
+    /*处理表单日期数据导入异常*/
+    @InitBinder
+    public void init(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"), true));
     }
 
     /*商家——登录*/
@@ -60,8 +71,8 @@ public class BusinessController {
 
     /*更新发货状态*/
     @RequestMapping(path = "/business/updateDeliver")
-    public Res updateDeliver(String uid, int gid) {
-        return businessService.updateDeliver(uid,gid);
+    public Res updateDeliver(String uid, int gid, Date gtime) {
+        return businessService.updateDeliver(uid,gid,gtime);
     }
 
     /*查询商家收款*/

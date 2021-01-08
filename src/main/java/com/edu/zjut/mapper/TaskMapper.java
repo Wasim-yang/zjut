@@ -19,8 +19,8 @@ public interface TaskMapper {
     @Insert("insert into Task(tname,tdescription,trequirement,taward,ttype,tstartime,tdeadline) VALUES (#{tname},#{tdescription},#{trequirement},#{taward},#{ttype},#{tstartime},#{tdeadline})")
     int insert(@Param("tname") String tname, @Param("tdescription") String tdescription,
                @Param("trequirement") float trequirement, @Param("taward") int taward,
-               @Param("ttype") int ttype, @Param("tdeadline") Date tdeadline,
-               @Param("tstartime") Date tstartime);
+               @Param("ttype") int ttype,@Param("tstartime") Date tstartime,
+               @Param("tdeadline") Date tdeadline);
 
     /*管理员查询所有*/
     @Select("select * from Task")
