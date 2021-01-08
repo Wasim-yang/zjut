@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -117,14 +118,15 @@ public class UsrService {
         Goods goods = goodsMapper.selectid(gid);
         UsrNoP usrNoP = usrMapper.selectNoPid(uid);
         float cost = 0;
-        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String date = formatter.format(new Date());
+        System.out.println(date);
         if (goods.getGnumber() < number) {
             return new Res("库存不足", 500);
         } else {
             if (cid != 0) {
                 Coupon coupon = couponMapper.Usr_selectmycoupon(uid, cid);
                 cost = goods.getGcost() * number * coupon.getCdiscount();
-                System.out.println(coupon);
                 if (usrNoP.getUmoney() < cost) {
                     return new Res("余额不足", 400);
                 } else {
@@ -158,8 +160,6 @@ public class UsrService {
         int tail = currentPage * goodsPage.getPageSize();
         ArrayList<Usr_Goods> goodsArrayList = usrMapper.selectmypagegoods(uid, head, tail);
         ArrayList<Usr_Goods> allmygoods = usrMapper.selectallmygoods(uid);
-        System.out.println(head);
-        System.out.println(tail);
         if (!allmygoods.isEmpty()) {
             if (!goodsArrayList.isEmpty()) {
                 goodsPage.setCurrentPage(currentPage);
@@ -184,7 +184,8 @@ public class UsrService {
     }
 
     @Transactional
-    public Res rejectgoods(String uid,int gid,int number,Date gtime,float gcost){
+    public Res rejectgoods(String uid,int gid,int number,String gtime,float gcost){
+        System.out.println(gtime);
         //查找商家
         String bid=goodsMapper.selectid(gid).getBid();
         //用户退货后删除购买记录

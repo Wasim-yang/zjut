@@ -8,7 +8,7 @@ public class Usr_Goods {
     String uid;
     int gid;
     int gstate;
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone="GMT+8")
     Date gtime;
     int ugnumber;
     float ugcost;

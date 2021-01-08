@@ -85,7 +85,7 @@ public class UsrController {
     }
 
     @RequestMapping(path = "usr/goods/rejected")
-    public Res rejectgoods(String uid, int gid, int number, Date gtime, float gcost){
+    public Res rejectgoods(String uid, int gid, int number, String gtime, float gcost){
         return usrService.rejectgoods(uid,gid,number,gtime,gcost);
     }
 }

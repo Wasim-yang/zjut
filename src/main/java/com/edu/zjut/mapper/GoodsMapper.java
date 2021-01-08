@@ -20,7 +20,7 @@ public interface GoodsMapper {
     //添加用户购买记录接口
     @Insert("insert into Usr_Goods(uid,gid,gtime,ugnumber,ugcost,gimage,gname,gdescription,gstate)" +
             " VALUES  (#{uid},#{gid},#{gtime},#{ugnumber},#{ugcost},#{gimage},#{gname},#{gdescription},#{gstate})")
-    int insertUG(@Param("uid") String uid, @Param("gid") int gid, @Param("gtime") Date gtime,
+    int insertUG(@Param("uid") String uid, @Param("gid") int gid, @Param("gtime") String gtime,
                  @Param("ugnumber") int ugnumber, @Param("ugcost") float ugcost, @Param("gimage") String gimage,
                  @Param("gname") String gname, @Param("gdescription") String gdescription, @Param("gstate") int gstate);
 
@@ -66,7 +66,7 @@ public interface GoodsMapper {
 
     //用户退货后删除购买记录
     @Delete("delete from Usr_Goods where uid=#{uid} and gid=#{gid} and gtime=#{gtime}")
-    int delete_Usr_Goods(@Param("uid") String uid, @Param("gid") int gid, @Param("gtime") Date gtime);
+    int delete_Usr_Goods(@Param("uid") String uid, @Param("gid") int gid, @Param("gtime") String gtime);
 
     //用户退货后商品库存+1
     @Update("update Goods set gnumber=gnumber+#{number} where gid=#{gid}")
