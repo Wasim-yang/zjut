@@ -68,12 +68,10 @@ public class UsrController {
         return usrService.updateNoP(id, name, sex, age, address, cintegral);
     }
 
-
-    //点击按钮获取用户碳积分
-    @RequestMapping(path = "usr/selectUsrUcintegral")
+    /*用户——点击按钮获取用户碳积分信息*/
+    @RequestMapping(path = "/user/usr/selectUsrUcintegral")
     public int selectUsrUcintegral(String uid){
         return usrService.selectUsrUcintegral(uid);
     }
-
 
 }
