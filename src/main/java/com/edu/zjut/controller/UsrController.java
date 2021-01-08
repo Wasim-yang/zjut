@@ -79,8 +79,8 @@ public class UsrController {
 
     /*管理员——更新用户信息*/
     @RequestMapping(path = "/admin/usr/updateNoP")
-    public Res admin_updateNoP(String id, String name, int sex, int age, String address, int cintegral){
-        return usrService.updateNoP(id, name, sex, age, address, cintegral);
+    public Res admin_updateNoP(String id, String name, int sex, int age, String address, int cintegral,float money){
+        return usrService.updateNoP(id, name, sex, age, address, cintegral,money);
     }
 
     /*用户——点击按钮获取用户碳积分信息*/

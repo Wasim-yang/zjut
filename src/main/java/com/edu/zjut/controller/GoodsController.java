@@ -32,8 +32,6 @@ public class GoodsController {
     @RequestMapping(path = "/admin/goods/selectpage")
     public Page<Goods> admin_select(int currentPage){ return goodsService.selectpage(currentPage); }
 
-    @RequestMapping(path = "/usr/goods/selectpage")
-    public UsrPage<Goods> usr_select(int currentPage){ return goodsService.selectUsrpage(currentPage); }
 
     /*按id查询*/
     @RequestMapping(path="/admin/goods/selectid")

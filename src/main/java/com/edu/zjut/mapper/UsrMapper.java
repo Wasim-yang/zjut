@@ -23,7 +23,7 @@ public interface UsrMapper {
 //    ArrayList<Usr> select();
 
     @Select("with t as (select row_number() over(order by uid) r, * from Usr) " +
-            "select uid, uname, usex, uage, uaddress, ucintegral from t " +
+            "select * from t " +
             "where r between #{head} and #{tail}")
     ArrayList<UsrNoP> selectNoPpage(@Param("head") int head, @Param("tail") int tail);
 

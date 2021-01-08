@@ -11,8 +11,12 @@ import java.util.ArrayList;
 @Service
 public class CouponService {
     CouponMapper couponMapper;
+
     @Autowired
-    public void setCouponMapper(CouponMapper couponMapper) {this.couponMapper = couponMapper; }
+    public void setCouponMapper(CouponMapper couponMapper) {
+        this.couponMapper = couponMapper;
+    }
+
 
     /*添加*/
     public Res insert(String name, float discount, int expoints, String description) {

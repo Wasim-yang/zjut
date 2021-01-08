@@ -12,11 +12,11 @@ import java.util.ArrayList;
 @RestController
 public class CouponController {
     CouponService couponService;
-
     @Autowired
     public void setCouponService(CouponService couponService) {
         this.couponService = couponService;
     }
+
     /*添加*/
     @RequestMapping(path = "/coupon/insert")
     public Res insert(String name, float discount , int expoints ,  String description) {
@@ -65,6 +65,7 @@ public class CouponController {
         return couponService.selectpoints(uid);
     }
     /*用户查看拥有的优惠券*/
+
     @RequestMapping(path = "/usr/coupon/selectmycoupons")
     public Page<Coupon> usr_selectmycoupons(int usrmycurrentPage,String uid){
         return couponService.usr_selectmycoupons(usrmycurrentPage,uid);

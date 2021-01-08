@@ -111,8 +111,8 @@ public class UsrService {
     }
 
     /*更新,无密码用户信息*/
-    public Res updateNoP(String id, String name, int sex, int age, String address, int cintegral, float umoney) {
-        int result = usrMapper.updateNoP(id, name, sex, age, address, cintegral, umoney);
+    public Res updateNoP(String id, String name, int sex, int age, String address, int cintegral, float money) {
+        int result = usrMapper.updateNoP(id, name, sex, age, address, cintegral, money);
         if (result == 1) {
             return new Res("update success", 200);
         } else
