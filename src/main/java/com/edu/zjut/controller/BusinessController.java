@@ -1,7 +1,6 @@
 package com.edu.zjut.controller;
 
-import com.edu.zjut.entity.Res;
-import com.edu.zjut.entity.ResBusiness;
+import com.edu.zjut.entity.*;
 import com.edu.zjut.service.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +38,36 @@ public class BusinessController {
             return new Res("登出成功",200);
         else
             return new Res("登出失败",500);
+    }
+
+    /*按页搜索 该商家 所有用户配送单信息*/
+    @RequestMapping(path = "/business/selectByPage")
+    public Page<Business_deliver> selectByPage(int currentPage,String bid) {
+        return businessService.selectByPage(currentPage,bid);
+    }
+
+    /*根据gid按页搜索 该商家 所有用户配送单信息*/
+    @RequestMapping(path = "/business/selectByGidPage")
+    public Page<Business_deliver> selectByGidPage(int currentPage,int gid,String bid,int type) {
+            return businessService.selectByGidPage(currentPage,gid,bid,type);
+    }
+
+    /*根据商品名按页搜索 该商家 所有用户配送单信息-模糊查询*/
+    @RequestMapping(path = "/business/selectByNamePage")
+    public Page<Business_deliver> selectByNamePage(int currentPage,String gname,String bid,int type) {
+        return businessService.selectByNamePage(currentPage,gname,bid,type);
+    }
+
+    /*更新发货状态*/
+    @RequestMapping(path = "/business/updateDeliver")
+    public Res updateDeliver(String uid, int gid) {
+        return businessService.updateDeliver(uid,gid);
+    }
+
+    /*查询商家收款*/
+    @RequestMapping(path = "/business/selectMoney")
+    public float updateDeliver(String bid) {
+        return businessService.selectMoney(bid);
     }
 
 }
