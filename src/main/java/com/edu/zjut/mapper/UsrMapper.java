@@ -10,18 +10,15 @@ import java.util.ArrayList;
 @Mapper
 @Repository
 public interface UsrMapper {
-
-    @Insert("insert into Usr(uid,upassword) VALUES (#{uid},#{upassword})")
-    int register(@Param("uid") String uid, @Param("upassword") String upassword);
+//    @Insert("insert into Usr VALUES (#{usrNoP.uid},#{usrNoP.uname},#{usrNoP.upassword},#{usrNoP.usex}," +
+//            "#{usrNoP.uage},#{usrNoP.uaddress},#{usrNoP.ucintegral})")
+//    int insert(UsrNoP usrNoP);
 
 //    @Select("select * from Usr")
 //    ArrayList<Usr> select();
 
-    @Select("select uid ,upassword, uname, usex ,uage ,uaddress ,ucintegral from Usr where uid=#{uid} and upassword=#{upassword}")
-    Userlogin selectlogin(@Param("uid") String uid,@Param("upassword") String upassword);
-
-    @Select("with t as (select row_number() over(order by uid) r, * from Usr) "+
-            "select uid, uname, usex, uage, uaddress, ucintegral from t "+
+    @Select("with t as (select row_number() over(order by uid) r, * from Usr) " +
+            "select uid, uname, usex, uage, uaddress, ucintegral from t " +
             "where r between #{head} and #{tail}")
     ArrayList<UsrNoP> selectNoPpage(@Param("head") int head, @Param("tail") int tail);
 
@@ -43,11 +40,13 @@ public interface UsrMapper {
     @Update("update usr set uname=#{uname}, usex=#{usex}, uage=#{uage}," +
             " uaddress=#{uaddress},ucintegral=#{ucintegral} where uid=#{uid}")
     int updateNoP(@Param("uid") String uid, @Param("uname") String uname, @Param("usex") int usex, @Param("uage") int uage,
-               @Param("uaddress") String uaddress, @Param("ucintegral") int ucintegral);
+                  @Param("uaddress") String uaddress, @Param("ucintegral") int ucintegral);
 
     /**
-     *  用户提交里程时，给用户增加碳积分
+     * 用户提交里程时，给用户增加碳积分
      */
     @Update("update usr set ucintegral = ucintegral + #{mileage} where uid=#{uid}")
     int updateAddCintegral(@Param("uid") String uid, @Param("mileage") int tmileage);
+
+
 }
