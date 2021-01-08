@@ -26,6 +26,8 @@ public class TaskService {
     public void setTaskMapper(TaskMapper taskMapper) {
         this.taskMapper = taskMapper;
     }
+    @Autowired
+    public void setUsrMapper(UsrMapper usrMapper){this.usrMapper = usrMapper;}
 
     /*添加*/
     public Res insert(String tname, String tdescription, float trequirement, int taward, int ttype,Date tstartime, Date tdeadline) {
@@ -138,20 +140,37 @@ public class TaskService {
         }
     }
 
-//    用户领取任务奖励后更新
+        //    用户领取任务奖励后更新
     @Transactional
     public Res update_user(String uid,int taward,int tid){
         //更新用户积分
         taskMapper.update_user(uid,taward);
-        //更新Usr_Task表
-        int result = taskMapper.update_Usr_Task(uid,tid);
-//  String ucintegral = String.valueOf(usrMapper.selectUsrUcintegral(uid));
-        if (result == 1) {
-            return new Res("领取成功", 200);
-        } else {
-            return new Res("领取失败", 500);
+        //查询Usr_Task表是否存在该任务
+        int state =taskMapper.select_Usr_Task(uid,tid);
+
+       // 存在该任务，对任务状态进行更新
+        if (state>0){
+            int result = taskMapper.update_Usr_Task(uid,tid);
+            System.out.println(result);
+            //获取用户碳积分余额
+            String ucintegral = String.valueOf(usrMapper.selectUsrUcintegral(uid));
+            if (result == 1) {
+                return new Res("成功领取"+taward+"积分,当前账户余额："+ucintegral, 200);
+            } else {
+                return new Res("领取失败", 500);
+            }
         }
-
+        //不存在该任务，将该任务插入Usr_Task表且将任务状态置为1
+        else
+        {
+            int insertresult = taskMapper.insert_Usr_Task(uid,tid);
+            //获取用户碳积分余额
+            String ucintegral = String.valueOf(usrMapper.selectUsrUcintegral(uid));
+            if (insertresult == 1) {
+                return new Res("成功领取"+taward+"积分,当前账户余额："+ucintegral, 200);
+            } else {
+                return new Res("领取失败", 500);
+            }
+        }
     }
-
 }
