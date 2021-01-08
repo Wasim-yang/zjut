@@ -28,8 +28,8 @@ public class CouponController {
     public Page<Coupon> select(int currentpage){ return couponService.selectpage(currentpage);}
 
    /* 用户兑换完后刷新*/
-   @RequestMapping(path = "/usr/coupon/selectpage")
-   public Page<Coupon> usr_select(int usrcurrentPage){ return couponService.usr_selectpage(usrcurrentPage);}
+//   @RequestMapping(path = "/usr/coupon/selectpage")
+//   public Page<Coupon> usr_select(int usrcurrentPage){ return couponService.usr_selectpage(usrcurrentPage);}
 
     /*按id查询*/
     @RequestMapping(path="/coupon/selectid")
@@ -63,7 +63,7 @@ public class CouponController {
         return couponService.selectpoints();
     }
     /*用户查看拥有的优惠券*/
-    @RequestMapping(path = "/usr/coupon/selectmycoupons")
-    public Page<Coupon> usr_selectmycoupons(int usrmycurrentPage){return couponService.usr_selectmycoupons(usrmycurrentPage);}
+//    @RequestMapping(path = "/usr/coupon/selectmycoupons")
+//    public Page<Coupon> usr_selectmycoupons(int usrmycurrentPage){return couponService.usr_selectmycoupons(usrmycurrentPage);}
 
 }

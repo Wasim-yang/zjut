@@ -16,15 +16,17 @@ public class UsrController {
     UsrService usrService;
 
     @Autowired
-    public void setUsrService(UsrService usrService) { this.usrService = usrService; }
+    public void setUsrService(UsrService usrService) {
+        this.usrService = usrService;
+    }
 
     @RequestMapping(path = "/usr/login")
-    public Res login(String id, String password, HttpServletRequest request){
-        ResUsr resUsr= usrService.login(id,password);
-        if(resUsr.getCode()==200){
-            request.getSession().setAttribute("uid",resUsr.getUid());
+    public Res login(String id, String password, HttpServletRequest request) {
+        ResUsr resUsr = usrService.login(id, password);
+        if (resUsr.getCode() == 200) {
+            request.getSession().setAttribute("uid", resUsr.getUid());
         }
-        return new Res(resUsr.getMessage(),resUsr.getCode());
+        return new Res(resUsr.getMessage(), resUsr.getCode());
     }
 
     /*添加*/
@@ -34,29 +36,40 @@ public class UsrController {
 //    }
     /*查询,输出无密码用户信息*/
     @RequestMapping(path = "/usr/selectNoPpage")
-    public Page<UsrNoP> selectNoP(int currentPage){ return usrService.selectNoP(currentPage); }
+    public Page<UsrNoP> selectNoP(int currentPage) {
+        return usrService.selectNoP(currentPage);
+    }
 
     /*按id查询,输出无密码用户信息*/
     @RequestMapping(path = "/usr/selectNoPid")
-    public UsrNoP selectNoPid(String id){return usrService.selectNoPid(id);}
+    public UsrNoP selectNoPid(String id) {
+        return usrService.selectNoPid(id);
+    }
 
     /*删除*/
     @RequestMapping(path = "/usr/delete")
-    public Res delete(String id){ return usrService.delete(id); }
+    public Res delete(String id) {
+        return usrService.delete(id);
+    }
 
     /*更新*/
     @RequestMapping(path = "/usr/updateNoP")
-    public Res updateNoP(String id, String name, int sex, int age, String address, int cintegral){
-        return usrService.updateNoP(id, name, sex, age, address, cintegral);
+    public Res updateNoP(String id, String name, int sex, int age, String address, int cintegral, float umoney) {
+        return usrService.updateNoP(id, name, sex, age, address, cintegral, umoney);
     }
 
-    @RequestMapping(path="/usr/goods/readybuy")
-    public ResUGC selectUGC(String uid,String gid){
-        return usrService.selectUGC(uid,gid);
+    @RequestMapping(path = "/usr/goods/readybuy")
+    public ResUGC selectUGC(String uid, int gid) {
+        return usrService.selectUGC(uid, gid);
     }
-//    @RequestMapping(path="/usr/selectNGC")
-//    public ResUGC selectNGC(String uid,int gid){
-//
-//    }
 
+    @RequestMapping(path = "usr/goods/buy")
+    public Res buygoods(String uid, int gid, int cid, int number) {
+        return usrService.buygoods(uid, gid, cid, number);
+    }
+
+    @RequestMapping(path = "usr/goods/selectmygoods")
+    public Page<Usr_Goods> selectmygoods(String uid, int currentPage) {
+        return usrService.selectmypagegoods(uid, currentPage);
+    }
 }

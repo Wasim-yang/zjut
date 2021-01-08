@@ -8,17 +8,18 @@ public class UsrNoP {
     int uage;
     String uaddress;
     int ucintegral;
-
+    float umoney;
     public UsrNoP() {
     }
 
-    public UsrNoP(String uid, String uname, int usex, int uage, String uaddress, int ucintegral) {
+    public UsrNoP(String uid, String uname, int usex, int uage, String uaddress, int ucintegral, float umoney) {
         this.uid = uid;
         this.uname = uname;
         this.usex = usex;
         this.uage = uage;
         this.uaddress = uaddress;
         this.ucintegral = ucintegral;
+        this.umoney = umoney;
     }
 
     public String getUid() {
@@ -69,6 +70,14 @@ public class UsrNoP {
         this.ucintegral = ucintegral;
     }
 
+    public float getUmoney() {
+        return umoney;
+    }
+
+    public void setUmoney(float umoney) {
+        this.umoney = umoney;
+    }
+
     @Override
     public String toString() {
         return "UsrNoP{" +
@@ -78,6 +87,7 @@ public class UsrNoP {
                 ", uage=" + uage +
                 ", uaddress='" + uaddress + '\'' +
                 ", ucintegral=" + ucintegral +
+                ", umoney=" + umoney +
                 '}';
     }
 }
