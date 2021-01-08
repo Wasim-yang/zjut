@@ -36,8 +36,8 @@ public interface TaskMapper {
             "select * from t where r between #{head} and #{tail}")
     ArrayList<Task> selectByPage(@Param("head") int head, @Param("tail") int tail);
 
-    /*按页查询*/
-    @Select("with t as (select row_number() over(order by tid) r, * from Usr_Task_View) " +
+    /*用户按页查询*/
+    @Select("with t as (select row_number() over(order by tid) r, * from Usr_Task_View where not exists (select * from Usr_Task where Usr_Task_View.tid = Usr_Task.tid and Usr_Task.tstate=1 )) " +
             "select * from t where r between #{head} and #{tail}")
     ArrayList<Task> selectByPageUser(@Param("head") int head, @Param("tail") int tail);
 

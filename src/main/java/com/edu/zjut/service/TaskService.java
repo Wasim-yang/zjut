@@ -82,7 +82,7 @@ public class TaskService {
         return taskPage;
     }
 
-    /*按页查找*/
+    /*用户按页查找*/
     public Page<Task> selectByPageUser(int currentPage) {
         Page<Task> taskPage = new Page<Task>();
         int head = currentPage * taskPage.getPageSize() - 4;
