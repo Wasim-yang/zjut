@@ -142,10 +142,10 @@ public class TaskService {
     @Transactional
     public Res update_user(String uid,int taward,int tid){
         //更新用户积分
-        int result =taskMapper.update_user(uid,taward);
+        taskMapper.update_user(uid,taward);
         //更新Usr_Task表
-        taskMapper.update_Usr_Task(uid,tid);
-//        String ucintegral = String.valueOf(usrMapper.selectUsrUcintegral(uid));
+        int result = taskMapper.update_Usr_Task(uid,tid);
+//  String ucintegral = String.valueOf(usrMapper.selectUsrUcintegral(uid));
         if (result == 1) {
             return new Res("领取成功", 200);
         } else {
