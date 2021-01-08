@@ -19,17 +19,17 @@ public class CalendarController {
     @Autowired
     CalendarService calendarService;
 
-    @RequestMapping("/cal/selectAll")
+    @RequestMapping("/usr/cal/selectAll")
     public ArrayList<Calendar> selectAll(String uid, int year, int month) {
         return calendarService.selectAll(uid, year, month);
     }
 
-    @RequestMapping("/cal/addCalendar")
+    @RequestMapping("/usr/cal/addCalendar")
     public Res selectAll(String uid, int year, int month, int day) {
         return calendarService.addCal(uid,year,month,day);
     }
 
-    @RequestMapping("/cal/selectMyform")
+    @RequestMapping("/usr/cal/selectMyform")
     public ArrayList<Calendar> selectMyform(String uid) {
         return calendarService.selectMyform(uid);
     }

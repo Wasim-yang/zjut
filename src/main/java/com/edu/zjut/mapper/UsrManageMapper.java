@@ -38,6 +38,6 @@ public interface UsrManageMapper {
     @Update("update Usr set uage=#{uage} where uid=#{uid}")
     int updateAge(@Param("uid") String uid, @Param("uage") String uage);
 
-    @Update("update Usr set uage=#{uage} where uid=#{uid}")
-    int updatePassword(String uid, String upasswd);
+    @Update("update Usr set upassword=#{upassword} where uid=#{uid}")
+    int updatePassword(@Param("uid") String uid,@Param("upassword") String upassword);
 }

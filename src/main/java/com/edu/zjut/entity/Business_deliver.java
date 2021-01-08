@@ -11,7 +11,7 @@ public class Business_deliver {
     int ugnumber;
     int gean;
     String uaddress;
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     Date gtime;
     int gstate;
     String bid;

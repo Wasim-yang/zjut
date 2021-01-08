@@ -69,8 +69,8 @@ public class UsrManageService {
         }
     }
 
-    public Res updatePassword(String uid, String upasswd) {
-        int result = usrManageMapper.updatePassword(uid, upasswd);
+    public Res updatePassword(String uid, String upassword) {
+        int result = usrManageMapper.updatePassword(uid, upassword);
         if (result == 1) {
             return new Res("修改成功！", 200);
         } else {

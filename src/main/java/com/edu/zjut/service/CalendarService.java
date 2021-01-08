@@ -18,8 +18,8 @@ public class CalendarService {
     @Autowired
     CalendarMapper calendarMapper;
 
-    public ArrayList<Calendar> selectAll(String uid, int cayear, int caday) {
-        return calendarMapper.selectAll(uid, cayear, caday);
+    public ArrayList<Calendar> selectAll(String uid, int cayear, int camonth) {
+        return calendarMapper.selectAll(uid, cayear, camonth);
     }
 
     public Res addCal(String uid, int year, int month, int day) {

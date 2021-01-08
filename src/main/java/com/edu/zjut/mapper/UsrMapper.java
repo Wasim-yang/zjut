@@ -14,6 +14,12 @@ public interface UsrMapper {
 //            "#{usrNoP.uage},#{usrNoP.uaddress},#{usrNoP.ucintegral})")
 //    int insert(UsrNoP usrNoP);
 
+    @Insert("insert into Usr(uid,upassword) VALUES (#{uid},#{upassword})")
+    int register(@Param("uid") String uid, @Param("upassword") String upassword);
+
+    @Select("select uid ,upassword, uname, usex ,uage ,uaddress ,ucintegral from Usr where uid=#{uid} and upassword=#{upassword}")
+    Userlogin selectlogin(@Param("uid") String uid,@Param("upassword") String upassword);
+
 //    @Select("select * from Usr")
 //    ArrayList<Usr> select();
 
@@ -47,6 +53,4 @@ public interface UsrMapper {
      */
     @Update("update usr set ucintegral = ucintegral + #{mileage} where uid=#{uid}")
     int updateAddCintegral(@Param("uid") String uid, @Param("mileage") int tmileage);
-
-
 }
