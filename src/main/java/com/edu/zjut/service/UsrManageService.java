@@ -15,11 +15,12 @@ import org.springframework.stereotype.Repository;
 public class UsrManageService {
     @Autowired
     UsrManageMapper usrManageMapper;
+
     public Res topupMoney(String uid) {
         int result = usrManageMapper.topupMoney(uid);
         if (result == 1) {
             return new Res("充值成功！", 200);
-        } else{
+        } else {
             return new Res("充值失败，请重试", 500);
         }
     }
@@ -30,5 +31,50 @@ public class UsrManageService {
 
     public int getCouponNum(String uid) {
         return usrManageMapper.getCouponNum(uid);
+    }
+
+    public Res updateName(String uid, String uname) {
+        int result = usrManageMapper.updateName(uid, uname);
+        if (result == 1) {
+            return new Res("修改成功！", 200);
+        } else {
+            return new Res("修改失败，请重试", 500);
+        }
+    }
+
+    public Res updateSex(String uid, String usex) {
+        int result = usrManageMapper.updateSex(uid, usex);
+        if (result == 1) {
+            return new Res("修改成功！", 200);
+        } else {
+            return new Res("修改失败，请重试", 500);
+        }
+    }
+
+    public Res updateAge(String uid, String uage) {
+        int result = usrManageMapper.updateAge(uid, uage);
+        if (result == 1) {
+            return new Res("修改成功！", 200);
+        } else {
+            return new Res("修改失败，请重试", 500);
+        }
+    }
+
+    public Res updateAddress(String uid, String uaddr) {
+        int result = usrManageMapper.updateAddress(uid, uaddr);
+        if (result == 1) {
+            return new Res("修改成功！", 200);
+        } else {
+            return new Res("修改失败，请重试", 500);
+        }
+    }
+
+    public Res updatePassword(String uid, String upasswd) {
+        int result = usrManageMapper.updatePassword(uid, upasswd);
+        if (result == 1) {
+            return new Res("修改成功！", 200);
+        } else {
+            return new Res("修改失败，请重试", 500);
+        }
     }
 }
