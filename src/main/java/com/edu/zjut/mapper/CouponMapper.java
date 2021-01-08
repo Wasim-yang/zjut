@@ -16,8 +16,27 @@ public interface CouponMapper {
     @Select("select * from Coupon")
     ArrayList<Coupon> selectall();
 
+    @Select("select cid,cname,cdiscount,cexpoints,cdescription from Coupon where not exists (select cid from Usr_Coupon where Coupon.cid=Usr_Coupon.cid and uid=1)")
+    ArrayList<Coupon> usr_selectall();
+
+    @Select("with t as (select row_number() over(order by cid) r, * from Usr_Coupon) "+
+            "select cname,cdiscount,cdescription,ctime from t "+ "where r between #{head} and #{tail}")
+    ArrayList<Coupon> usr_selectmypage(@Param("head") int head, @Param("tail") int tail);  //第head条到第tail条
+
+    @Select("select * from Usr_coupon where uid=#{uid}")
+    ArrayList<Coupon> usr_selectmycoupons(String uid);
+
     @Select("select cid,cname,cdiscount,cdescription,cexpoints from Coupon where cid=#{id}")
     Coupon selectid(int id);
+    /*用户优惠券用名字搜索*/
+    @Select("select cid,cname,cdiscount,cexpoints,cdescription from Coupon where not exists (select cid from Usr_Coupon where Coupon.cid=Usr_Coupon.cid and uid=1)and cname=$#{name}")
+    Coupon selectname(String name);
+
+    @Select("select cname,cdiscount,cexpoints,cdescription,ctime from Usr_Coupon where cname=#{name}")
+    Coupon selectmycname(String name);
+
+    @Select("select * from Usr_Coupon where uid=#{uid} and cid=#{cid}")
+    Coupon Usr_selectmycoupon(@Param("uid") String uid,@Param("cid") int cid);
 
     @Delete("delete from Coupon where cid=#{id}")
     int delete(int id);
@@ -93,4 +112,6 @@ public interface CouponMapper {
     @Select("select ucintegral from Usr where uid = #{uid}")
     int usr_selectpoints(String uid);
 
+    @Delete("delete from Usr_Coupon where uid=#{uid} and cid=#{cid}")
+    int usr_delete(@Param("uid") String uid,@Param("cid") int cid);
 }

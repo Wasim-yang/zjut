@@ -8,11 +8,13 @@ public class Goods {
     int gean;
     String gdescription;
     String gimage;
+    String bid;
 
     public Goods() {
     }
 
-    public Goods(int gid, String gname, float gcost, int gnumber, int gean, String gdescription, String gimage) {
+    public Goods(int gid, String gname, float gcost, int gnumber,
+                 int gean, String gdescription, String gimage, String bid) {
         this.gid = gid;
         this.gname = gname;
         this.gcost = gcost;
@@ -20,6 +22,7 @@ public class Goods {
         this.gean = gean;
         this.gdescription = gdescription;
         this.gimage = gimage;
+        this.bid = bid;
     }
 
     public int getGid() {
@@ -78,16 +81,11 @@ public class Goods {
         this.gimage = gimage;
     }
 
-    @Override
-    public String toString() {
-        return "Goods{" +
-                "gid=" + gid +
-                ", gname='" + gname + '\'' +
-                ", gcost=" + gcost +
-                ", gnumber=" + gnumber +
-                ", gean=" + gean +
-                ", gdescription='" + gdescription + '\'' +
-                ", gimage='" + gimage + '\'' +
-                '}';
+    public String getBid() {
+        return bid;
+    }
+
+    public void setBid(String bid) {
+        this.bid = bid;
     }
 }

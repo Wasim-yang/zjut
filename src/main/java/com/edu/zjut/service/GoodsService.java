@@ -3,6 +3,7 @@ package com.edu.zjut.service;
 import com.edu.zjut.entity.Goods;
 import com.edu.zjut.entity.Page;
 import com.edu.zjut.entity.Res;
+import com.edu.zjut.entity.UsrPage;
 import com.edu.zjut.mapper.GoodsMapper;
 import com.edu.zjut.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class GoodsService {
     /*按页查找*/
     public Page<Goods> selectpage(int currentPage) {
         Page<Goods> goodsPage = new Page<Goods>();
-        int head = currentPage * goodsPage.getPageSize() - 4;
+        int head = currentPage * goodsPage.getPageSize() - goodsPage.getPageSize()+1;
         int tail = currentPage * goodsPage.getPageSize();
         /*先整体查询，取数据表整体数据记录数量与页数*/
         ArrayList<Goods> goodsArrayList = goodsMapper.selectall();
@@ -49,13 +50,13 @@ public class GoodsService {
                 goodsPage.setCurrentPage(currentPage);
                 goodsPage.setDataList(goods);
                 goodsPage.setTotalRecord(goodsArrayList.size());
-                goodsPage.setTotalPage((goodsArrayList.size() + 4) / goodsPage.getPageSize());
+                goodsPage.setTotalPage((goodsArrayList.size() + goodsPage.getPageSize()-1) / goodsPage.getPageSize());
             } else {
-                goodsPage.setTotalPage((goodsArrayList.size() + 4) / goodsPage.getPageSize());
+                goodsPage.setTotalPage((goodsArrayList.size() + goodsPage.getPageSize()-1) / goodsPage.getPageSize());
                 goodsPage.setTotalRecord(goodsArrayList.size());
                 currentPage=currentPage-1;
                 goodsPage.setCurrentPage(currentPage);
-                head = currentPage * goodsPage.getPageSize() - 4;
+                head = currentPage * goodsPage.getPageSize() - goodsPage.getPageSize()-1;
                 tail = currentPage * goodsPage.getPageSize();
                 ArrayList<Goods> tempgoodsPage=goodsMapper.selectpage(head,tail);
                 goodsPage.setDataList(tempgoodsPage);
@@ -65,6 +66,37 @@ public class GoodsService {
             goodsPage.setTotalRecord(0);
         }
     return goodsPage;
+    }
+
+    public UsrPage<Goods> selectUsrpage(int currentPage) {
+        UsrPage<Goods> goodsPage = new UsrPage<Goods>();
+        int head = currentPage * goodsPage.getPageSize() - goodsPage.getPageSize()+1;
+        int tail = currentPage * goodsPage.getPageSize();
+        /*先整体查询，取数据表整体数据记录数量与页数*/
+        ArrayList<Goods> goodsArrayList = goodsMapper.selectall();
+        /*再按页查询，取该页数据*/
+        ArrayList<Goods> goods = goodsMapper.selectpage(head, tail);
+        if (!goodsArrayList.isEmpty()) {
+            if (!goods.isEmpty()) {
+                goodsPage.setCurrentPage(currentPage);
+                goodsPage.setDataList(goods);
+                goodsPage.setTotalRecord(goodsArrayList.size());
+                goodsPage.setTotalPage((goodsArrayList.size() + goodsPage.getPageSize()-1) / goodsPage.getPageSize());
+            } else {
+                goodsPage.setTotalPage((goodsArrayList.size() + goodsPage.getPageSize()-1) / goodsPage.getPageSize());
+                goodsPage.setTotalRecord(goodsArrayList.size());
+                currentPage=currentPage-1;
+                goodsPage.setCurrentPage(currentPage);
+                head = currentPage * goodsPage.getPageSize() - goodsPage.getPageSize()+1;
+                tail = currentPage * goodsPage.getPageSize();
+                ArrayList<Goods> tempgoodsPage=goodsMapper.selectpage(head,tail);
+                goodsPage.setDataList(tempgoodsPage);
+            }
+        } else {
+            goodsPage.setTotalPage(0);
+            goodsPage.setTotalRecord(0);
+        }
+        return goodsPage;
     }
 
     /*删除*/
@@ -89,5 +121,39 @@ public class GoodsService {
             return new Res("update success", 200);
         } else
             return new Res("update failed", 500);
+    }
+
+    /*按名字模糊查找*/
+    public UsrPage<Goods> selectnamepage(String name,int currentPage){
+        name="%"+name+"%";
+        UsrPage<Goods> goodsPage=new UsrPage();
+        int head = currentPage * goodsPage.getPageSize() - goodsPage.getPageSize()+1;
+        int tail = currentPage * goodsPage.getPageSize();
+        /*先整体查询，取数据表整体数据记录数量与页数*/
+        ArrayList<Goods> goodsArrayList = goodsMapper.selectnameall(name);
+        /*再按页查询，取该页数据*/
+        ArrayList<Goods> goods = goodsMapper.selectnamepage(head,tail,name);
+        if (!goodsArrayList.isEmpty()) {
+            if (!goods.isEmpty()) {
+                goodsPage.setCurrentPage(currentPage);
+                goodsPage.setDataList(goods);
+                goodsPage.setTotalRecord(goodsArrayList.size());
+                goodsPage.setTotalPage((goodsArrayList.size() + goodsPage.getPageSize()-1) / goodsPage.getPageSize());
+            } else {
+                goodsPage.setTotalPage((goodsArrayList.size() + goodsPage.getPageSize()-1) / goodsPage.getPageSize());
+                goodsPage.setTotalRecord(goodsArrayList.size());
+                currentPage=currentPage-1;
+                goodsPage.setCurrentPage(currentPage);
+                head = currentPage * goodsPage.getPageSize() - goodsPage.getPageSize()+1;
+                tail = currentPage * goodsPage.getPageSize();
+                ArrayList<Goods> tempgoodsPage=goodsMapper.selectnamepage(head,tail,name);
+                goodsPage.setDataList(tempgoodsPage);
+            }
+        } else {
+            goodsPage.setTotalPage(0);
+            goodsPage.setTotalRecord(0);
+        }
+        return goodsPage;
+
     }
 }
