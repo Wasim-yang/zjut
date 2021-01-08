@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 @RestController
@@ -84,7 +83,7 @@ public class UsrController {
     }
 
     /*用户——点击按钮获取用户碳积分信息*/
-    @RequestMapping(path = "/user/usr/selectUsrUcintegral")
+    @RequestMapping(path = "/usr/selectUsrUcintegral")
     public int selectUsrUcintegral(String uid){
         return usrService.selectUsrUcintegral(uid);
     }
@@ -94,17 +93,17 @@ public class UsrController {
         return usrService.selectUGC(uid, gid);
     }
 
-    @RequestMapping(path = "usr/goods/buy")
+    @RequestMapping(path = "/usr/goods/buy")
     public Res buygoods(String uid, int gid, int cid, int number) {
         return usrService.buygoods(uid, gid, cid, number);
     }
 
-    @RequestMapping(path = "usr/goods/selectmygoods")
+    @RequestMapping(path = "/usr/goods/selectmygoods")
     public Page<Usr_Goods> selectmygoods(String uid, int currentPage) {
         return usrService.selectmypagegoods(uid, currentPage);
     }
 
-    @RequestMapping(path = "usr/goods/rejected")
+    @RequestMapping(path = "/usr/goods/rejected")
     public Res rejectgoods(String uid, int gid, int number, String gtime, float gcost){
         return usrService.rejectgoods(uid,gid,number,gtime,gcost);
     }

@@ -27,7 +27,7 @@ public class TaskController {
     /**
      * 添加任务
      */
-    @RequestMapping(path = "/task/insert")
+    @RequestMapping(path = "/admin/task/insert")
     public Res insert(String tname, String tdescription, float trequirement, int taward, int ttype, Date tstartime,Date tdeadline) {
         return taskService.insert(tname, tdescription, trequirement, taward, ttype, tstartime,tdeadline);
     }
@@ -35,14 +35,14 @@ public class TaskController {
     /**
      * 管理员查询全部
      */
-    @RequestMapping(path = "/task/selectByPage")
+    @RequestMapping(path = "/admin/task/selectByPage")
     public Page<Task> selectByPage(int currentPage) {
         return taskService.selectByPage(currentPage);
     }
     /**
      * 用户查询全部
      */
-    @RequestMapping(path = "/task/selectByPageUser")
+    @RequestMapping(path = "/usr/task/selectByPageUser")
     public Page<Task> selectByPageUser(int currentPage) {
         return taskService.selectByPageUser(currentPage);
     }
@@ -50,7 +50,7 @@ public class TaskController {
     /**
      * 通过id查询
      */
-    @RequestMapping(path = "/task/selectOne")
+    @RequestMapping(path = "/admin/task/selectOne")
     public Task selectOne(int tid) {
         return taskService.selectOne(tid);
     }
@@ -58,7 +58,7 @@ public class TaskController {
     /**
      * 删除
      */
-    @RequestMapping(path = "/task/delete")
+    @RequestMapping(path = "/admin/task/delete")
     public Res delete(int tid) {
         return taskService.delete(tid);
     }
@@ -66,13 +66,13 @@ public class TaskController {
     /**
      * 更新
      */
-    @RequestMapping(path = "/task/update")
+    @RequestMapping(path = "/admin/task/update")
     public Res update(int tid, String tname, String tdescription, float trequirement, int taward, int ttype, Date tdeadline) {
         return taskService.update(tid, tname, tdescription, trequirement, taward, ttype, tdeadline);
     }
 
 //    用户领取任务奖励后，更新
-    @RequestMapping(path = "/task/update_user")
+    @RequestMapping(path = "/usr/task/update_user")
     public Res update_user(String uid,int taward,int tid){
         return taskService.update_user(uid,taward,tid);
     }

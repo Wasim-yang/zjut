@@ -4,17 +4,18 @@ public class Coupon {
     int cid;
     String cname;
     float cdiscount;
-    int cexpoints;
     String cdescription;
+    int cexpoint;
 
-    public Coupon() {}
+    public Coupon() {
+    }
 
-    public Coupon(int cid, String cname, float cdiscount, int cexpoints, String cdescription) {
+    public Coupon(int cid, String cname, float cdiscount, String cdescription, int cexpoint) {
         this.cid = cid;
         this.cname = cname;
         this.cdiscount = cdiscount;
-        this.cexpoints = cexpoints;
         this.cdescription = cdescription;
+        this.cexpoint = cexpoint;
     }
 
     public int getCid() {
@@ -41,14 +42,6 @@ public class Coupon {
         this.cdiscount = cdiscount;
     }
 
-    public int getCexpoints() {
-        return cexpoints;
-    }
-
-    public void setCexpoints(int cexpoints) {
-        this.cexpoints = cexpoints;
-    }
-
     public String getCdescription() {
         return cdescription;
     }
@@ -57,14 +50,22 @@ public class Coupon {
         this.cdescription = cdescription;
     }
 
+    public int getCexpoint() {
+        return cexpoint;
+    }
+
+    public void setCexpoint(int cexpoint) {
+        this.cexpoint = cexpoint;
+    }
+
     @Override
     public String toString() {
-        return "Coupons{" +
+        return "Coupon{" +
                 "cid=" + cid +
                 ", cname='" + cname + '\'' +
                 ", cdiscount=" + cdiscount +
-                ", cexpoints=" + cexpoints +
                 ", cdescription='" + cdescription + '\'' +
+                ", cexpoint=" + cexpoint +
                 '}';
     }
 }

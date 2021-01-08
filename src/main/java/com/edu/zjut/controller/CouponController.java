@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-
 @RestController
 public class CouponController {
     CouponService couponService;
@@ -18,13 +16,13 @@ public class CouponController {
     }
 
     /*添加*/
-    @RequestMapping(path = "/coupon/insert")
+    @RequestMapping(path = "/admin/coupon/insert")
     public Res insert(String name, float discount , int expoints ,  String description) {
         return couponService.insert(name, discount , expoints ,description);
     }
 
     /*查询*/
-    @RequestMapping(path = "/coupon/selectpage")
+    @RequestMapping(path = "/admin/coupon/selectpage")
     public Page<Coupon> select(int currentpage){ return couponService.selectpage(currentpage);}
 
    /* 用户兑换完后刷新*/
@@ -32,7 +30,7 @@ public class CouponController {
    public Page<Coupon> usr_select(int usrcurrentPage,String uid){ return couponService.usr_selectpage(usrcurrentPage,uid);}
 
     /*按id查询*/
-    @RequestMapping(path="/coupon/selectid")
+    @RequestMapping(path="/admin/coupon/selectid")
     public Coupon selectid(int id){return couponService.selectid(id);}
 
     /*按name查询*/
@@ -46,11 +44,11 @@ public class CouponController {
     }
 
     /*删除*/
-    @RequestMapping(path = "/coupon/delete")
+    @RequestMapping(path = "/admin/coupon/delete")
     public Res delete(int id){ return couponService.delete(id); }
 
     /*更新*/
-    @RequestMapping(path = "/coupon/update")
+    @RequestMapping(path = "/admin/coupon/update")
     public Res update(int id, String name, float discount , int expoints ,String description){
         return couponService.update(id, name, discount, expoints, description);
     }

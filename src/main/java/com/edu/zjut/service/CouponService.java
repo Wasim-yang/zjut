@@ -19,8 +19,8 @@ public class CouponService {
 
 
     /*添加*/
-    public Res insert(String name, float discount, int expoints, String description) {
-        int result = couponMapper.insert(name, discount, expoints, description);
+    public Res insert(String name, float discount, int expoint, String description) {
+        int result = couponMapper.insert(name, discount, expoint, description);
         if (result == 1) {
             return new Res("添加成功！",200);
         } else
@@ -30,15 +30,15 @@ public class CouponService {
 
     /*用户拥有优惠券兑换*/
     @Transactional
-    public Res usr_exchange(String uid, int cid, String cname,float cdiscount,String cdescription,int cexpoints, String ctime) {
+    public Res usr_exchange(String uid, int cid, String cname,float cdiscount,String cdescription,int cexpoint, String ctime) {
         int upoints = couponMapper.usr_selectpoints(uid); //获取用户碳积分
-        if (upoints < cexpoints) {
+        if (upoints < cexpoint) {
             return new Res("您的积分余额不足!", 500);
         }else {
             //将优惠券加入用户优惠券表
             int result1 = couponMapper.usr_insert(uid, cid,cname,cdiscount,cdescription,ctime);
             //减去用户碳积分
-            int result2 = couponMapper.usr_updatepoints(uid, cid, cexpoints);
+            int result2 = couponMapper.usr_updatepoints(uid, cid, cexpoint);
             if (result1 == 1 && result2 == 1) {
                 return new Res("兑换成功！", 200);
             } else
@@ -222,8 +222,8 @@ public class CouponService {
             return new Res("删除失败！", 500);
     }
     /*更新*/
-    public Res update(int id, String name, float discount, int expoints, String description) {
-        int result = couponMapper.update(id, name, discount, expoints, description);
+    public Res update(int id, String name, float discount, int expoint, String description) {
+        int result = couponMapper.update(id, name, discount, expoint, description);
         if (result == 1) {
             return new Res("更新成功！", 200);
         } else

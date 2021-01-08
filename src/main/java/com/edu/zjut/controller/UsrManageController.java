@@ -54,7 +54,7 @@ public class UsrManageController {
         return usrManageService.updateAddress(uid, uaddr);
     }
 
-    @RequestMapping(path = "usr/info/updatePassword")
+    @RequestMapping(path = "/usr/info/updatePassword")
     public Res updatePassword(String uid, String upassword) {
         return usrManageService.updatePassword(uid, upassword);
     }

@@ -6,8 +6,8 @@ import java.util.ArrayList;
 @Mapper
 @Repository
 public interface CouponMapper {
-    @Insert("insert into Coupon(cname,cdiscount,cdescription,cexpoints) VALUES (#{name},#{discount},#{description},#{expoints})")
-    int insert(@Param("name") String name,@Param("discount") float discount ,@Param("expoints") int expoints , @Param("description") String description);
+    @Insert("insert into Coupon(cname,cdiscount,cdescription,cexpoint) VALUES (#{name},#{discount},#{description},#{expoint})")
+    int insert(@Param("name") String name,@Param("discount") float discount ,@Param("expoint") int expoint , @Param("description") String description);
 
     @Select("with t as (select row_number() over(order by cid) r, * from Coupon) "+
             "select * from t where r between #{head} and #{tail}")
@@ -19,7 +19,7 @@ public interface CouponMapper {
     @Select("select * from Usr_coupon where uid=#{uid}")
     ArrayList<Coupon> usr_selectmycoupons(String uid);
 
-    @Select("select cid,cname,cdiscount,cdescription,cexpoints from Coupon where cid=#{id}")
+    @Select("select cid,cname,cdiscount,cdescription,cexpoint from Coupon where cid=#{id}")
     Coupon selectid(int id);
 
     @Select("select * from Usr_Coupon where uid=#{uid} and cid=#{cid}")
@@ -28,8 +28,8 @@ public interface CouponMapper {
     @Delete("delete from Coupon where cid=#{id}")
     int delete(int id);
 
-    @Update("update Coupon set cname=#{name}, cdiscount=#{discount}, cexpoints=#{expoints}, cdescription=#{description} where cid=#{id}")
-    int update(@Param("id") int id,@Param("name") String name,@Param("discount") float discount ,@Param("expoints") int expoints ,
+    @Update("update Coupon set cname=#{name}, cdiscount=#{discount}, cexpoint=#{expoint}, cdescription=#{description} where cid=#{id}")
+    int update(@Param("id") int id,@Param("name") String name,@Param("discount") float discount ,@Param("expoint") int expoint ,
                @Param("description") String description);
     /**
      * 用户插入用户优惠券表
@@ -90,8 +90,8 @@ public interface CouponMapper {
     /**
      * 用户表减去用于兑换的碳积分
      */
-    @Update("update Usr set ucintegral = ucintegral - (select Coupon.cexpoints from Coupon where cid=#{cid}) where uid=#{uid}")
-    int usr_updatepoints(@Param("uid") String uid,@Param("cid") int cid,@Param("cexpoints") int cexpoints);
+    @Update("update Usr set ucintegral = ucintegral - (select Coupon.cexpoint from Coupon where cid=#{cid}) where uid=#{uid}")
+    int usr_updatepoints(@Param("uid") String uid,@Param("cid") int cid,@Param("cexpoint") int cexpoint);
 
     /**
      * 获取用户碳积分
