@@ -75,8 +75,8 @@ public interface TaskMapper {
     ArrayList<Task> selectAllfinishtask(String uid);
 
     @Select("with t as (select row_number() over(order by tid) r, * from Task" +
-            " where tid in (select tid from Usr_Task where uid = '201806061106' and tstate=1 ))" +
-            " select * from t where r between 1 and 5")
+            " where tid in (select tid from Usr_Task where uid = #{uid} and tstate=1 ))" +
+            " select * from t where r between #{head} and #{tail}")
     ArrayList<Task> selectPagefinishtask(@Param("uid") String uid, @Param("head") int head, @Param("tail") int tail);
 
 }
