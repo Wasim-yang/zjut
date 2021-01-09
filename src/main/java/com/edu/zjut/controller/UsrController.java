@@ -58,6 +58,10 @@ public class UsrController {
             return new Res("登出失败",500);
     }
 
+    /*用户——注销*/
+    @RequestMapping(path = "/usr/delete")
+    public Res delete(String uid){ return usrService.delete(uid); }
+
     /*添加*/
 //    @RequestMapping(path = "/usr/insert")
 //    public Res insert(String id,String name, String password, int sex, int age, String address, int cintegral) {

@@ -21,8 +21,8 @@ public class GoodsController {
 
     /*添加*/
     @RequestMapping(path = "/admin/goods/insert")
-    public Res admin_insert(String name, float cost , int number , int ean , String description, String path) {
-        return goodsService.insert(name, cost , number , ean ,description ,path);
+    public Res admin_insert(String name, float cost , int number , int ean , String description, String path, String bid) {
+        return goodsService.insert(name, cost , number , ean ,description ,path,bid);
     }
 
     /*查询*/
