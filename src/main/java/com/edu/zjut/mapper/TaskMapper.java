@@ -40,6 +40,9 @@ public interface TaskMapper {
             "select * from t where r between #{head} and #{tail}")
     ArrayList<Task> selectByPageUser(@Param("head") int head, @Param("tail") int tail);
 
+
+
+
     /*查询一个*/
     @Select("select * from Task where tid=#{tid}")
     Task selectOne(int tid);

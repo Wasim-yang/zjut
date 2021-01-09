@@ -1,5 +1,6 @@
 package com.edu.zjut.mapper;
 
+import com.edu.zjut.entity.Task;
 import com.edu.zjut.entity.Usr_Welfare;
 import com.edu.zjut.entity.Welfare;
 import org.apache.ibatis.annotations.*;
@@ -14,6 +15,8 @@ public interface WelfareMapper {
     @Insert("insert into Welfare(wname,wdescription,wtotal) VALUES (#{wname},#{wdescription},#{wtotal})")
     int insert(@Param("wname") String wname, @Param("wdescription") String wdescription ,
                @Param("wtotal") int wtotal);
+
+
 
     @Select("with t as (select row_number() over(order by wid) r, * from Welfare) "+
         "select *  from t where r between #{head} and #{tail}")
@@ -72,4 +75,18 @@ public interface WelfareMapper {
     int update_Usr_Welfare(@Param("uid")String uid,
                            @Param("wid")int wid,
                            @Param("wdonate") int wdonate);
+
+    /*用户按页查询捐赠过的公益*/
+    @Select("select Welfare.wid,Welfare.wname,Welfare.wtotal,Welfare.wgain,Welfare.wdescription,Usr_Welfare.wcount from Welfare,Usr_Welfare where Welfare.wid=Usr_Welfare.wid and uid=#{uid}  ")
+    ArrayList<Welfare> selectAllUser_Welfare(String uid);
+    /*用户按页查询捐赠过的公益*/
+    @Select("with t as (select row_number() over(order by Welfare.wid) r, Welfare.wid,wname,wdescription,wtotal,wgain,wcount" +
+            " from Welfare, Usr_Welfare where Welfare.wid = Usr_Welfare.wid and uid = #{uid}) " +
+            "select * from t where r between #{head} and #{tail}")
+    ArrayList<Welfare> selectpageUser_Welfare(@Param("head") int head, @Param("tail") int tail,@Param("uid") String uid);
+
+    /*用户按id查询捐赠过的公益*/
+    @Select("select Welfare.wid,Welfare.wname,Welfare.wtotal,Welfare.wgain,Welfare.wdescription,Usr_Welfare.wcount from Welfare,Usr_Welfare where Welfare.wid=Usr_Welfare.wid and uid=#{uid} and wid=#{wid}")
+    Welfare selectmywelfareid(String uid,int wid);
+
 }
