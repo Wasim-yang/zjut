@@ -77,4 +77,13 @@ public class UsrManageService {
             return new Res("修改失败，请重试", 500);
         }
     }
+
+    public Res deleteUsr(String uid){
+        int result = usrManageMapper.deleteUsr(uid);
+        if (result == 1) {
+            return new Res("注销成功！", 200);
+        } else {
+            return new Res("注销失败，请重试", 500);
+        }
+    }
 }
