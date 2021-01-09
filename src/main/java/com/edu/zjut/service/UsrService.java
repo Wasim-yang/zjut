@@ -210,7 +210,7 @@ public class UsrService {
         String bid=goodsMapper.selectid(gid).getBid();
         //用户退货后删除购买记录
         goodsMapper.delete_Usr_Goods(uid,gid,gtime);
-        //用户退货后商品库存+1
+        //用户退货后商品库存增加
         goodsMapper.update_Goods_gnumber(gid,number);
         //用户退货后商家的钱返还
         goodsMapper.update_Business_bmoney(gcost,bid);

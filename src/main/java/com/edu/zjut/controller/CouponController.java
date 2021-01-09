@@ -54,8 +54,8 @@ public class CouponController {
     }
     /*用户兑换优惠券*/
     @RequestMapping(path = "/usr/coupon/exchange")
-    public Res exchange(String uid,int cid,String cname,float cdiscount,String cdescription,int cexpoints,String ctime){
-        return couponService.usr_exchange(uid,cid,cname,cdiscount,cdescription,cexpoints,ctime);
+    public Res exchange(String uid,int cid,String cname,float cdiscount,String cdescription,int cexpoint,String ctime){
+        return couponService.usr_exchange(uid,cid,cname,cdiscount,cdescription,cexpoint,ctime);
     }
     /*用户查询当前碳积分*/
     @RequestMapping(path = "/usr/coupon/selectpoints")
