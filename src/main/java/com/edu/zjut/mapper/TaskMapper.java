@@ -19,7 +19,7 @@ public interface TaskMapper {
     @Insert("insert into Task(tname,tdescription,trequirement,taward,ttype,tstartime,tdeadline) VALUES (#{tname},#{tdescription},#{trequirement},#{taward},#{ttype},#{tstartime},#{tdeadline})")
     int insert(@Param("tname") String tname, @Param("tdescription") String tdescription,
                @Param("trequirement") float trequirement, @Param("taward") int taward,
-               @Param("ttype") int ttype,@Param("tstartime") Date tstartime,
+               @Param("ttype") int ttype, @Param("tstartime") Date tstartime,
                @Param("tdeadline") Date tdeadline);
 
     /*管理员查询所有*/
@@ -52,19 +52,32 @@ public interface TaskMapper {
     @Update("update Task set tname=#{tname},tdescription=#{tdescription},trequirement=#{trequirement},taward=#{taward},ttype=#{ttype},tdeadline=#{tdeadline} where tid=#{tid}")
     int update(@Param("tname") String tname, @Param("tdescription") String tdescription, @Param("trequirement") float trequirement, @Param("taward") int taward, @Param("ttype") int ttype,
                @Param("tdeadline") Date tdeadline, @Param("tid") int tid);
+
     //更新Usr积分
     @Update("update Usr set ucintegral=ucintegral+#{taward} where uid=#{uid}")
     int update_user(@Param("uid") String uid,
                     @Param("taward") int taward);
+
     //查询Usr_Task
     @Select("select count(*) from Usr_Task where uid=#{uid} and tid=#{tid} and tstate =0")
-    int select_Usr_Task(@Param("uid") String uid,@Param("tid") int tid);
+    int select_Usr_Task(@Param("uid") String uid, @Param("tid") int tid);
+
     //将任务插入Usr_Task表并置tstate为1
     @Insert("insert into Usr_Task (uid,tid,tstate) VALUES(#{uid},#{tid},1)")
-    int insert_Usr_Task(@Param("uid") String uid,@Param("tid") int tid);
+    int insert_Usr_Task(@Param("uid") String uid, @Param("tid") int tid);
+
     //更新任务状态
     @Update("update Usr_Task set tstate = 1 where uid=#{uid} and tid=#{tid}")
-    int update_Usr_Task(@Param("uid") String uid,@Param("tid") int tid);
+    int update_Usr_Task(@Param("uid") String uid, @Param("tid") int tid);
+
+    //查询所有完成任务
+    @Select("select * from Usr_Task where uid=#{uid} and tstate=1")
+    ArrayList<Task> selectAllfinishtask(String uid);
+
+    @Select("with t as (select row_number() over(order by tid) r, * from Task" +
+            " where tid in (select tid from Usr_Task where uid = '201806061106' and tstate=1 ))" +
+            " select * from t where r between 1 and 5")
+    ArrayList<Task> selectPagefinishtask(@Param("uid") String uid, @Param("head") int head, @Param("tail") int tail);
 
 }
 

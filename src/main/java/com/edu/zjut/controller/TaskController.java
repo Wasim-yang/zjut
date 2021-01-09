@@ -76,4 +76,9 @@ public class TaskController {
     public Res update_user(String uid,int taward,int tid){
         return taskService.update_user(uid,taward,tid);
     }
+
+    @RequestMapping(path = "/usr/task/selectpage")
+    public Page<Task> selectpage(String uid,int currentPage){
+        return taskService.selectmytask(uid,currentPage);
+    }
 }
