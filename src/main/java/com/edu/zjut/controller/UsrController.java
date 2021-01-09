@@ -107,4 +107,9 @@ public class UsrController {
     public Res rejectgoods(String uid, int gid, int number, String gtime, float gcost){
         return usrService.rejectgoods(uid,gid,number,gtime,gcost);
     }
+
+    @RequestMapping(path ="/usr/selectNoPid")
+    public UsrNoP usr_selectNoP(String id){
+        return usrService.selectNoPid(id);
+    }
 }
