@@ -42,7 +42,7 @@ public interface UsrMapper {
     @Select("select * from Usr_Goods where uid=#{uid}")
     ArrayList<Usr_Goods> selectallmygoods(String uid);
 
-    @Select("with t as (select row_number() over(order by uid, gtime des) r, * from Usr_Goods where uid=#{uid}) " +
+    @Select("with t as (select row_number() over(order by uid) r, * from Usr_Goods where uid=#{uid}) " +
             "select * from t  where r between #{head} and #{tail} order by gtime desc")
     ArrayList<Usr_Goods> selectmypagegoods(@Param("uid") String uid, @Param("head") int head, @Param("tail") int tail);
 
