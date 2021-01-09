@@ -34,7 +34,7 @@ public interface CouponMapper {
     /**
      * 用户插入用户优惠券表
      */
-    @Insert("insert into Usr_Coupon VALUES (#{uid},#{cid},#{cname},#{cdiscount},#{cdescription},#{ctime})")
+    @Insert("insert into Usr_Coupon VALUES (#{uid},#{cid},#{ctime},#{cname},#{cdiscount},#{cdescription})")
     int usr_insert(@Param("uid") String uid,@Param("cid") int cid ,@Param("cname") String cname,@Param("cdiscount") float cdiscount,@Param("cdescription") String cdescription,@Param("ctime") String ctime);
 
     /**
