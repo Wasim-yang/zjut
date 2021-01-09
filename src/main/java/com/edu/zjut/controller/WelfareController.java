@@ -47,9 +47,17 @@ public class WelfareController {
     @RequestMapping(path="/usr/welfare/selectid")
     public Welfare usr_selectid(int wid){return welfareService.selectid(wid);}
 
+    /*用户按id查询我的公益*/
+    @RequestMapping(path="/usr/welfare/selectmywelfareid")
+    public Welfare usr_selectmywelfareid(String uid,int wid){return welfareService.selectmywelfareid(uid,wid);}
+
     /*用户查询公益项目*/
     @RequestMapping(path = "/usr/welfare/selectpage")
     public Page<Welfare> usr_select(int currentPage){ return welfareService.selectpage(currentPage); }
+
+    /*用户查询以及捐赠过的公益项目*/
+    @RequestMapping(path = "/usr/welfare/selectpageUser_Welfare")
+    public Page<Welfare> usr_select_Welfare(int currentPage,String uid){ return welfareService.selectpageUser_Welfare(currentPage,uid); }
 
     /* 用户捐赠积分的更新*/
     @RequestMapping(path = "/usr/welfare/update_user")

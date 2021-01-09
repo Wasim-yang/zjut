@@ -33,6 +33,7 @@ public class WelfareService {
         return (welfareMapper.selectid(wid));
     }
 
+
     //    /*查找*/
 //    public ArrayList<Welfare> select() { return (welfareMapper.select()); }
     /*按页查找*/
@@ -56,6 +57,41 @@ public class WelfareService {
                 head = currentPage * welfarePage.getPageSize() - 4;
                 tail = currentPage * welfarePage.getPageSize();
                 ArrayList<Welfare> tempwelfarePage=welfareMapper.selectpage(head,tail);
+                welfarePage.setDataList(tempwelfarePage);
+            }
+        } else {
+            welfarePage.setTotalPage(0);
+            welfarePage.setTotalRecord(0);
+        }
+        return welfarePage;
+    }
+
+    /*用户按id查找捐赠过的公益*/
+    public Welfare selectmywelfareid(String uid,int wid) {
+        return (welfareMapper.selectmywelfareid(uid,wid));
+    }
+
+    /*用后按页查询捐赠过的公益*/
+    public Page<Welfare> selectpageUser_Welfare(int currentPage,String uid) {
+        Page<Welfare> welfarePage = new Page<Welfare>();
+        int head=currentPage*welfarePage.getPageSize()-4;
+        int tail=currentPage*welfarePage.getPageSize();
+        ArrayList<Welfare> welfareArrayList=welfareMapper.selectAllUser_Welfare(uid);
+        ArrayList<Welfare> welfare = welfareMapper.selectpageUser_Welfare(head,tail,uid);
+        if (!welfareArrayList.isEmpty()) {
+            if (!welfare.isEmpty()) {
+                welfarePage.setCurrentPage(currentPage);
+                welfarePage.setDataList(welfare);
+                welfarePage.setTotalRecord(welfareArrayList.size());
+                welfarePage.setTotalPage((welfareArrayList.size() + 4) / welfarePage.getPageSize());
+            } else {
+                welfarePage.setTotalPage((welfareArrayList.size() + 4) / welfarePage.getPageSize());
+                welfarePage.setTotalRecord(welfareArrayList.size());
+                currentPage=currentPage-1;
+                welfarePage.setCurrentPage(currentPage);
+                head = currentPage * welfarePage.getPageSize() - 4;
+                tail = currentPage * welfarePage.getPageSize();
+                ArrayList<Welfare> tempwelfarePage=welfareMapper.selectpageUser_Welfare(head,tail,uid);
                 welfarePage.setDataList(tempwelfarePage);
             }
         } else {

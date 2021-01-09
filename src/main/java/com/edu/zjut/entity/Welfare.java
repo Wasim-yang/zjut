@@ -6,15 +6,35 @@ public class Welfare {
     int wtotal;
     int wgain;
     String wdescription;
+    int wcount;
+    String uid;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public int getWcount() {
+        return wcount;
+    }
+
+    public void setWcount(int wcount) {
+        this.wcount = wcount;
+    }
 
     public Welfare(){}
 
-    public Welfare( int wid, String wname, int wtotal, int wgain, String wdescription) {
+    public Welfare( int wid, String wname, int wtotal, int wgain, String wdescription,int wcount,String uid) {
         this.wid = wid;
         this.wname = wname;
         this.wtotal =wtotal;
         this.wgain =wgain;
         this.wdescription = wdescription;
+        this.wcount=wcount;
+        this.uid=uid;
     }
 
     public int getwid() {
@@ -65,6 +85,8 @@ public class Welfare {
                 ", wtotal=" + wtotal +
                 ", wgain=" + wgain +
                 ", wdescription='" + wdescription + '\'' +
+                ", wcount=" + wcount +
+                ", uid=" + uid +
                 '}';
     }
 }
