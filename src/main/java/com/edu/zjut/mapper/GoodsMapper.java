@@ -13,9 +13,9 @@ import java.util.Date;
 public interface GoodsMapper {
 
     //添加货物接口
-    @Insert("insert into Goods(gname,gcost,gnumber,gean,gdescription,gimage,bid) VALUES (#{gname},#{gcost},#{gnumber},#{gean},#{gdescription},#{gimage},8888)")
+    @Insert("insert into Goods(gname,gcost,gnumber,gean,gdescription,gimage,bid) VALUES (#{gname},#{gcost},#{gnumber},#{gean},#{gdescription},#{gimage},#{bid})")
     int insert(@Param("gname") String gname, @Param("gcost") float gcost, @Param("gnumber") int gnumber, @Param("gean") int gean,
-               @Param("gdescription") String gdescription, @Param("gimage") String Filepath);
+               @Param("gdescription") String gdescription, @Param("gimage") String Filepath,@Param("bid") String bid);
 
     //添加用户购买记录接口
     @Insert("insert into Usr_Goods(uid,gid,gtime,ugnumber,ugcost,gimage,gname,gdescription,gstate)" +
@@ -68,7 +68,7 @@ public interface GoodsMapper {
     @Delete("delete from Usr_Goods where uid=#{uid} and gid=#{gid} and gtime=#{gtime}")
     int delete_Usr_Goods(@Param("uid") String uid, @Param("gid") int gid, @Param("gtime") String gtime);
 
-    //用户退货后商品库存+1
+    //用户退货后商品库存增加用户购买数量
     @Update("update Goods set gnumber=gnumber+#{number} where gid=#{gid}")
     int update_Goods_gnumber(@Param("gid") int gid, @Param("number") int nummber);
 

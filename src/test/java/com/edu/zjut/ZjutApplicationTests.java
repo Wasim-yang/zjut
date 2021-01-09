@@ -19,10 +19,10 @@ class ZjutApplicationTests {
     @Autowired
     public void setUsrMapper(UsrMapper usrMapper){this.usrMapper=usrMapper;}
 
-    @Test
-    public void insertgoods(){
-        goodsMapper.insert("ywx",12,12,3213,"123","123");
-    }
+//    @Test
+//    public void insertgoods(){
+//        goodsMapper.insert("ywx",12,12,3213,"123","123");
+//    }
 
     @Test
     public void selectpage(){

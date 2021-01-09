@@ -23,8 +23,8 @@ public class GoodsService {
     }
 
     /*添加*/
-    public Res insert(String name, float cost, int number, int ean, String description, String path) {
-        int result = goodsMapper.insert(name, cost, number, ean, description, path);
+    public Res insert(String name, float cost, int number, int ean, String description, String path,String bid) {
+        int result = goodsMapper.insert(name, cost, number, ean, description, path,bid);
         if (result == 1) {
             return new Res("insert success", 200);
         } else
