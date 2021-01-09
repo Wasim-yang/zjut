@@ -86,7 +86,8 @@ public interface WelfareMapper {
     ArrayList<Welfare> selectpageUser_Welfare(@Param("head") int head, @Param("tail") int tail,@Param("uid") String uid);
 
     /*用户按id查询捐赠过的公益*/
-    @Select("select Welfare.wid,Welfare.wname,Welfare.wtotal,Welfare.wgain,Welfare.wdescription,Usr_Welfare.wcount from Welfare,Usr_Welfare where Welfare.wid=Usr_Welfare.wid and uid=#{uid} and wid=#{wid}")
-    Welfare selectmywelfareid(String uid,int wid);
+    @Select("select Welfare.wid,Welfare.wname,Welfare.wtotal,Welfare.wgain,Welfare.wdescription,Usr_Welfare.wcount from" +
+            " Welfare,Usr_Welfare where Welfare.wid=Usr_Welfare.wid and uid=#{uid} and Welfare.wid=#{wid}")
+    Welfare selectmywelfareid(@Param("uid") String uid,@Param("wid")int wid);
 
 }
