@@ -59,4 +59,9 @@ public class UsrManageController {
         return usrManageService.updatePassword(uid, upassword);
     }
 
+    @RequestMapping(path = "/usr/deleteUsr")
+    public Res updatePassword(String uid) {
+        return usrManageService.deleteUsr(uid);
+    }
+
 }

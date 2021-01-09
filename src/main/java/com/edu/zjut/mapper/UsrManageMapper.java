@@ -1,10 +1,7 @@
 package com.edu.zjut.mapper;
 
 import com.edu.zjut.entity.Userlogin;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,7 +14,7 @@ import org.springframework.stereotype.Repository;
 public interface UsrManageMapper {
     /*个人中心*/
 
-    @Update("update Usr set umoney = umoney+10 where uid=#{uid}")
+    @Update("update Usr set umoney = umoney+1000 where uid=#{uid}")
     int topupMoney(String uid);
 
     @Select("select * from Usr where uid=#{uid} ")
@@ -40,4 +37,7 @@ public interface UsrManageMapper {
 
     @Update("update Usr set upassword=#{upassword} where uid=#{uid}")
     int updatePassword(@Param("uid") String uid,@Param("upassword") String upassword);
+
+    @Delete("delete from Usr where uid=#{uid}")
+    int deleteUsr(@Param("uid") String uid);
 }
