@@ -156,4 +156,7 @@ public interface BusinessMapper {
     ArrayList<Goods> selectGoodsByNamePage(@Param("head") int head, @Param("tail") int tail,
                                            @Param("bid")String bid,@Param("gname")String gname);
 
+    @Update(("update Business set bmoney=bmoney+#{ugcost} where bid=#{bid}"))
+    int uodatebmoney(@Param("ugcost") float ugcost,@Param("bid") String bid);
+
 }

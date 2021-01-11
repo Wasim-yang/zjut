@@ -1,6 +1,7 @@
 package com.edu.zjut.service;
 
 import com.edu.zjut.entity.*;
+import com.edu.zjut.mapper.BusinessMapper;
 import com.edu.zjut.mapper.CouponMapper;
 import com.edu.zjut.mapper.GoodsMapper;
 import com.edu.zjut.mapper.UsrMapper;
@@ -18,6 +19,7 @@ public class UsrService {
     UsrMapper usrMapper;
     GoodsMapper goodsMapper;
     CouponMapper couponMapper;
+    BusinessMapper businessMapper;
 
     @Autowired
     public void setUsrMapper(UsrMapper usrMapper) {
@@ -33,6 +35,9 @@ public class UsrService {
     public void setCouponMapper(CouponMapper couponMapper) {
         this.couponMapper = couponMapper;
     }
+
+    @Autowired
+    public void setBusinessMapper(BusinessMapper businessMapper){this.businessMapper=businessMapper;}
 
     /*用户登录*/
     public ResUsr login(String id,String password){
@@ -153,6 +158,8 @@ public class UsrService {
                     goodsMapper.insertUG(uid, gid, date, number, cost,goods.getGimage(),goods.getGname(),
                             goods.getGdescription(),0);
                     usrNoP.setUmoney(usrNoP.getUmoney() - cost);
+                    String bid=goodsMapper.selectid(gid).getBid();
+                    businessMapper.uodatebmoney(cost,bid);
                     usrMapper.updateNopmoney(uid, usrNoP.getUmoney());
                     goodsMapper.updatenumber(number, gid);
                     couponMapper.usr_delete(uid, cid);
@@ -166,6 +173,8 @@ public class UsrService {
                     goodsMapper.insertUG(uid, gid, date, number, cost, goods.getGimage(), goods.getGname(),
                             goods.getGdescription(),0);
                     usrNoP.setUmoney(usrNoP.getUmoney() - cost);
+                    String bid=goodsMapper.selectid(gid).getBid();
+                    businessMapper.uodatebmoney(cost,bid);
                     usrMapper.updateNopmoney(uid, usrNoP.getUmoney());
                     goodsMapper.updatenumber(number, gid);
                     return new Res("购买成功", 200);
