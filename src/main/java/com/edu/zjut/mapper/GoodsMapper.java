@@ -45,9 +45,9 @@ public interface GoodsMapper {
 
 
     //通过名字分页查找
-    @Select("with t as (select row_number() over(order by gid) r, * from Goods) " +
+    @Select("with t as (select row_number() over(order by gid) r, * from Goods where gname like #{name}) " +
             "select gid, gname, gcost, gnumber, gean, gdescription, gimage from t " +
-            "where r between #{head} and #{tail} and gname like #{name}")
+            "where r between #{head} and #{tail}")
     ArrayList<Goods> selectnamepage(@Param("head") int head, @Param("tail") int tail, @Param("name") String name);
 
     //删除货物

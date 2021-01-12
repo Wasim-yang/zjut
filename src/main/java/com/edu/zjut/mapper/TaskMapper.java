@@ -29,8 +29,8 @@ public interface TaskMapper {
     /*用户查询所有*/
     @Select("select Task.*,sum(tmileage) tgain from Task  left join Travellog " +
             "on Task.ttype=Travellog.ttype and Travellog.utime>Task.tstartime and Travellog.utime < Task.tdeadline and uid =#{uid} " +
-            "where not exists (select * from Usr_Task where Task.tid = Usr_Task.tid and Usr_Task.tstate=1 and Usr_Task.uid =#{uid} " +
-            "or (#{time} <= Task.tstartime or #{time} >= Task.tdeadline)) " +
+            "where not exists (select * from Usr_Task where Task.tid = Usr_Task.tid and Usr_Task.tstate=1 and Usr_Task.uid =#{uid}) " +
+            "and #{time} > Task.tstartime and #{time} < Task.tdeadline " +
             "Group by Task.tid,Task.tname,Task.tname,Task.tdescription," +
             "Task.trequirement,Task.taward,Task.tdeadline,Task.tstartime,Task.ttype,Travellog.uid")
     ArrayList<Task> selectAllUser(@Param("uid") String uid,@Param("time") Date time);
@@ -44,8 +44,8 @@ public interface TaskMapper {
     @Select("with t as (select row_number() over(order by tid) r," +
             " Task.*,sum(tmileage) tgain from Task  left join Travellog " +
             " on Task.ttype=Travellog.ttype and Travellog.utime>Task.tstartime and Travellog.utime < Task.tdeadline and uid =#{uid} " +
-            " where not exists (select * from Usr_Task where Task.tid = Usr_Task.tid and Usr_Task.tstate=1 and Usr_Task.uid =#{uid} " +
-            " or (#{time} <= Task.tstartime or #{time} >= Task.tdeadline)) " +
+            " where not exists (select * from Usr_Task where Task.tid = Usr_Task.tid and Usr_Task.tstate=1 and Usr_Task.uid =#{uid}) " +
+            " and #{time} > Task.tstartime and #{time} < Task.tdeadline " +
             " Group by Task.tid,Task.tname,Task.tname,Task.tdescription, " +
             " Task.trequirement,Task.taward,Task.tdeadline,Task.tstartime,Task.ttype,Travellog.uid) " +
             " select * from t where r between #{head} and #{tail}")

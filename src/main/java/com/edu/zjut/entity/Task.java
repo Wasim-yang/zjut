@@ -17,9 +17,9 @@ public class Task {
     Float trequirement;
     int taward;
     int ttype;
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm",timezone = "GMT+8")
     Date tdeadline;
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm",timezone = "GMT+8")
     Date tstartime;
     float tgain;
 
