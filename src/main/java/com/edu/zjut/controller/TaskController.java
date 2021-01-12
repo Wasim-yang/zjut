@@ -43,8 +43,8 @@ public class TaskController {
      * 用户查询全部
      */
     @RequestMapping(path = "/usr/task/selectByPageUser")
-    public Page<Task> selectByPageUser(int currentPage) {
-        return taskService.selectByPageUser(currentPage);
+    public Page<Task> selectByPageUser(int currentPage,String uid) {
+        return taskService.selectByPageUser(currentPage,uid);
     }
 
     /**

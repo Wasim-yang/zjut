@@ -49,12 +49,12 @@ public class TaskService {
 
     }
 
-    /*用户查找全部*/
-    public ArrayList<Task> selectAllUser() {
-        ArrayList<Task> tasks = taskMapper.selectAllUser();
-        return taskMapper.selectAllUser();
-
-    }
+//    /*用户查找全部*/
+//    public ArrayList<Task> selectAllUser(String uid) {
+//        ArrayList<Task> tasks = taskMapper.selectAllUser(uid);
+//        return tasks;
+//
+//    }
 
     /*按页查找*/
     public Page<Task> selectByPage(int currentPage) {
@@ -89,14 +89,16 @@ public class TaskService {
     }
 
     /*用户按页查找*/
-    public Page<Task> selectByPageUser(int currentPage) {
+    public Page<Task> selectByPageUser(int currentPage,String uid) {
         Page<Task> taskPage = new Page<Task>();
         int head = currentPage * taskPage.getPageSize() - 4;
         int tail = currentPage * taskPage.getPageSize();
+        //获取当前时间
+        Date time =new Date();
         /*先整体查询，取数据表整体数据记录数量与页数*/
-        ArrayList<Task> taskArrayList = taskMapper.selectAllUser();
+        ArrayList<Task> taskArrayList = taskMapper.selectAllUser(uid,time);
         /*再按页查询，取该页数据*/
-        ArrayList<Task> task = taskMapper.selectByPageUser(head, tail);
+       ArrayList<Task> task = taskMapper.selectByPageUser(head, tail, uid, time);
         if (!taskArrayList.isEmpty()) {
             if (!task.isEmpty()) {
                 taskPage.setCurrentPage(currentPage);
@@ -110,7 +112,7 @@ public class TaskService {
                 taskPage.setCurrentPage(currentPage);
                 head = currentPage * taskPage.getPageSize() - 4;
                 tail = currentPage * taskPage.getPageSize();
-                ArrayList<Task> temptaskPage = taskMapper.selectByPageUser(head, tail);
+                ArrayList<Task> temptaskPage = taskMapper.selectByPageUser(head, tail, uid,time);
                 taskPage.setDataList(temptaskPage);
             }
         } else {
